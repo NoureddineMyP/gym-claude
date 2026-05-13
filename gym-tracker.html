@@ -74,14 +74,12 @@
       font-family: 'Syne', sans-serif;
     }
 
-    /* ── LAYOUT ── */
     .app {
       display: grid;
       grid-template-rows: auto 1fr auto;
       min-height: 100vh;
     }
 
-    /* TOP BAR (mobile) */
     .topbar {
       display: none;
       background: var(--bg2);
@@ -116,14 +114,12 @@
       color: var(--t2);
     }
 
-    /* DESKTOP SHELL */
     .shell {
       display: grid;
       grid-template-columns: 200px 1fr;
       flex: 1;
     }
 
-    /* SIDEBAR */
     .sidebar {
       background: var(--bg2);
       border-right: 1px solid var(--b1);
@@ -315,7 +311,6 @@
       color: var(--t3);
     }
 
-    /* MAIN */
     .main {
       overflow-y: auto;
       min-width: 0;
@@ -326,7 +321,6 @@
       max-width: 840px;
     }
 
-    /* BOTTOM NAV (mobile) */
     .bottom-nav {
       display: none;
       background: var(--bg2);
@@ -366,7 +360,6 @@
       color: var(--t1);
     }
 
-    /* ── PAGE HEADERS ── */
     .page-header {
       margin-bottom: 24px;
     }
@@ -384,7 +377,6 @@
       margin-top: 5px;
     }
 
-    /* ── SESSION SELECTOR ── */
     .session-selector {
       display: flex;
       gap: 8px;
@@ -429,7 +421,6 @@
       color: var(--legs);
     }
 
-    /* ── SESSION TYPE BAR ── */
     .session-type-bar {
       display: flex;
       align-items: center;
@@ -516,7 +507,6 @@
       font-weight: 500;
     }
 
-    /* ── TIMER ── */
     .timer-widget {
       background: var(--bg2);
       border: 1px solid var(--b1);
@@ -617,7 +607,6 @@
       border-color: var(--b2);
     }
 
-    /* ── EXERCISE CARDS ── */
     .ex-group {
       margin-bottom: 18px;
     }
@@ -791,7 +780,6 @@
       color: var(--push);
     }
 
-    /* SWAP BUTTON */
     .ex-actions {
       padding: 0 14px 11px;
       display: flex;
@@ -830,7 +818,6 @@
       stroke-linecap: round;
     }
 
-    /* ALTERNATIVES PANEL */
     .alts-panel {
       background: var(--bg3);
       border-top: 1px solid var(--b1);
@@ -918,7 +905,6 @@
       color: var(--t2);
     }
 
-    /* CARDIO ROW */
     .cardio-row {
       display: flex;
       align-items: center;
@@ -940,7 +926,6 @@
       flex-shrink: 0;
     }
 
-    /* COMPLETE ZONE */
     .complete-zone {
       display: flex;
       align-items: center;
@@ -983,7 +968,6 @@
       color: var(--t3);
     }
 
-    /* REST */
     .rest-card {
       background: var(--bg2);
       border: 1px solid var(--b1);
@@ -1021,7 +1005,6 @@
       margin-right: auto;
     }
 
-    /* SCHEDULE PICKER */
     .sched-pick {
       margin-top: 20px;
     }
@@ -1067,7 +1050,6 @@
       color: var(--legs);
     }
 
-    /* PROGRESS */
     .prog-filter {
       display: flex;
       gap: 7px;
@@ -1242,7 +1224,6 @@
       font-size: 11px;
     }
 
-    /* HISTORY */
     .hist-list {
       display: flex;
       flex-direction: column;
@@ -1299,7 +1280,6 @@
       margin-top: 2px;
     }
 
-    /* EMPTY */
     .empty {
       text-align: center;
       padding: 56px 20px;
@@ -1323,7 +1303,6 @@
       font-size: 12px;
     }
 
-    /* SECTION HEADER */
     .section-header {
       display: flex;
       align-items: center;
@@ -1373,7 +1352,6 @@
       }
     }
 
-    /* ── RESPONSIVE ── */
     @media(max-width:720px) {
       .topbar {
         display: flex;
@@ -1455,9 +1433,31 @@
 </head>
 
 <body>
-  <div class="app">
+  <div id="pin-screen"
+    style="display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+    <div style="text-align:center;max-width:300px;width:90%;">
+      <div style="font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;">PPL<span
+          style="color:var(--acc);">.</span></div>
+      <div
+        style="font-size:11px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:40px;">
+        tracker privato</div>
+      <div style="font-size:13px;color:var(--t2);margin-bottom:16px;font-weight:600;">Inserisci il PIN</div>
+      <input id="pin-input" type="password" inputmode="numeric" maxlength="8"
+        style="width:100%;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--rl);color:var(--t1);font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.3em;padding:14px 16px;text-align:center;outline:none;transition:border-color .2s;"
+        onkeydown="if(event.key==='Enter')checkPin()" placeholder="••••">
+      <div id="pin-err"
+        style="height:18px;font-size:11px;color:var(--push);margin-top:10px;font-family:'JetBrains Mono',monospace;">
+      </div>
+      <button onclick="checkPin()"
+        style="width:100%;margin-top:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r);padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:opacity .15s;"
+        onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        Entra
+      </button>
+      <div style="margin-top:24px;font-size:10px;color:var(--t3);">Accesso privato · PIN modificabile nel codice</div>
+    </div>
+  </div>
+  <div id="main-app" style="display:none;" class="app">
 
-    <!-- TOPBAR (mobile only) -->
     <header class="topbar">
       <div class="topbar-logo">PPL<span>.</span></div>
       <div class="topbar-right">
@@ -1465,10 +1465,8 @@
       </div>
     </header>
 
-    <!-- SHELL -->
     <div class="shell">
 
-      <!-- SIDEBAR (desktop) -->
       <aside class="sidebar">
         <div class="sb-logo">
           <div class="sb-logo-text">PPL<span>.</span></div>
@@ -1516,10 +1514,13 @@
         </div>
         <div class="sb-footer">
           <div class="sb-date" id="sb-fulldate"></div>
+          <button onclick="logout()"
+            style="margin-top:10px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:5px 10px;cursor:pointer;letter-spacing:.05em;width:100%;transition:all .15s;"
+            onmouseover="this.style.borderColor='var(--push)';this.style.color='var(--push)'"
+            onmouseout="this.style.borderColor='var(--b1)';this.style.color='var(--t3)'">ESCI / BLOCCA</button>
         </div>
       </aside>
 
-      <!-- MAIN -->
       <main class="main">
         <div class="main-inner">
           <div id="view-today" class="fade-in"></div>
@@ -1529,7 +1530,6 @@
       </main>
     </div>
 
-    <!-- BOTTOM NAV (mobile) -->
     <nav class="bottom-nav">
       <div class="bn-item active" id="bn-today" onclick="nav('today')">
         <svg viewBox="0 0 24 24">
@@ -1555,11 +1555,9 @@
       </div>
     </nav>
   </div>
+  </div>
 
   <script>
-    /* ═══════════════════════════════════════════
-       PROGRAM DATA
-    ═══════════════════════════════════════════ */
     const PROG = {
       colors: { push: '#ff5c35', pull: '#2dcc7a', legs: '#f5a623' },
       sessions: {
@@ -1741,15 +1739,10 @@
 
     const DAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
 
-    /* ═══════════════════════════════════════════
-       STATE
-    ═══════════════════════════════════════════ */
-    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v5') || '{}'); } catch (e) { return {}; } }
-    function ss(s) { localStorage.setItem('ppl_v5', JSON.stringify(s)); }
 
-    /* ═══════════════════════════════════════════
-       DATE
-    ═══════════════════════════════════════════ */
+    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v6') || '{}'); } catch (e) { return {}; } }
+    function ss(s) { localStorage.setItem('ppl_v6', JSON.stringify(s)); }
+
     function today() { return new Date().toISOString().slice(0, 10); }
     function weekStart() {
       const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day);
@@ -1760,14 +1753,14 @@
     function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10); }
     function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }); }
 
-    /* ═══════════════════════════════════════════
-       TIMER
-    ═══════════════════════════════════════════ */
-    let timerInt = null, timerSec = 0, timerRunning = false;
-    function timerTick() { timerSec++; updateTimerDisplay(); }
-    function startTimer() { if (timerRunning) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay(); }
+    let timerInt = null, timerSec = 0, timerTotal = 0, timerRunning = false;
+    function timerTick() {
+      if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; timerSec = 0; updateTimerDisplay(); playBeep(); return; }
+      timerSec--; updateTimerDisplay();
+    }
+    function startTimer() { if (timerRunning || timerSec <= 0) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay(); }
     function pauseTimer() { clearInterval(timerInt); timerRunning = false; updateTimerDisplay(); }
-    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; updateTimerDisplay(); if (preset > 0) startTimer(); }
+    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; timerTotal = timerSec; updateTimerDisplay(); if (preset > 0) startTimer(); }
     function updateTimerDisplay() {
       const el = document.getElementById('timer-display');
       if (!el) return;
@@ -1775,10 +1768,19 @@
       el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
       el.className = 'timer-display' + (timerRunning ? ' running' : timerSec > 0 ? ' paused' : '');
     }
+    function playBeep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [0, 0.15, 0.3].forEach(t => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.connect(g); g.connect(ctx.destination);
+          o.frequency.value = 880; g.gain.setValueAtTime(0.3, ctx.currentTime + t);
+          g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.12);
+          o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.12);
+        });
+      } catch (e) { }
+    }
 
-    /* ═══════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════ */
     let currentView = 'today';
     function nav(v) {
       currentView = v;
@@ -1794,9 +1796,6 @@
       if (v === 'history') renderHistory();
     }
 
-    /* ═══════════════════════════════════════════
-       SIDEBAR UPDATE
-    ═══════════════════════════════════════════ */
     function updateSidebar() {
       const state = gs(), logs = state.logs || {}, ws = weekStart(), all = Object.values(logs);
       const total = all.length, week = all.filter(l => l.date >= ws).length, streak = calcStreak(state);
@@ -1834,29 +1833,27 @@
       return streak;
     }
 
-    /* ═══════════════════════════════════════════
-       FLEXIBLE SCHEDULE
-       Giorno sì / giorno no = 4 sessioni max
-       L'utente può manualmente scegliere la sessione
-    ═══════════════════════════════════════════ */
-    const DEFAULT_SCHEDULE = ['push', 'pull', 'legs', 'rest', 'push', 'pull', 'rest'];
+    const WEEKEND_PUSH = ['push', 'push']; 
+    const BASE_WEEK = ['pull', 'rest', 'legs', 'rest', 'pull', 'push', 'push'];
+
+    function getDefaultForDay(dayIdx) {
+      return BASE_WEEK[dayIdx] || 'rest';
+    }
 
     function getScheduledType(dayIdx, state) {
-      const custom = (state.customSchedule || {})[dayIdx];
-      return custom || DEFAULT_SCHEDULE[dayIdx];
+      const dkey = dateOffset(dayIdx - dayOfWeek());
+      const log = (state.logs || {})[dkey];
+      if (log && log.type) return log.type;
+      return getDefaultForDay(dayIdx);
     }
 
     function getTodaySession() {
       const state = gs();
       const log = (state.logs || {})[today()];
       if (log && log.type) return log.type;
-      const dayIdx = dayOfWeek();
-      return getScheduledType(dayIdx, state);
+      return getDefaultForDay(dayOfWeek());
     }
 
-    /* ═══════════════════════════════════════════
-       OPEN/CLOSE ALTERNATIVES
-    ═══════════════════════════════════════════ */
     function toggleAlts(exId) {
       const panel = document.getElementById('alts-' + exId);
       if (!panel) return;
@@ -1882,9 +1879,6 @@
       }
     }
 
-    /* ═══════════════════════════════════════════
-       RENDER TODAY
-    ═══════════════════════════════════════════ */
     function renderToday() {
       updateSidebar();
       const state = gs();
@@ -1901,7 +1895,6 @@
     <div class="page-sub">${dateStr}</div>
   </div>`;
 
-      // Session selector (always visible — giorno sì/no)
       html += `<div class="session-selector">
     <span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>
     ${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}
@@ -1930,7 +1923,7 @@
       const offset = circ - (pct / 100) * circ;
       const colorVar = `var(--${session.color})`;
 
-      // Timer
+
       html += `<div class="timer-widget">
     <div class="timer-top">
       <div>
@@ -1951,7 +1944,7 @@
     </div>
   </div>`;
 
-      // Session bar
+
       html += `<div class="session-type-bar">
     <span class="stype-badge badge-${stype}">${stype}</span>
     <span class="stype-name">${session.label}</span>
@@ -1968,7 +1961,6 @@
     </div>
   </div>`;
 
-      // Exercises
       for (const group of session.groups) {
         html += `<div class="ex-group"><div class="ex-group-label">${group.label}</div>`;
         for (const ex of group.exercises) {
@@ -2034,10 +2026,8 @@
         html += `</div>`;
       }
 
-      // Cardio
       html += `<div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>`;
 
-      // Complete
       if (!isDone) {
         html += `<div class="complete-zone">
       <button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>
@@ -2093,9 +2083,7 @@
       ss(state); renderToday();
     }
 
-    /* ═══════════════════════════════════════════
-       PROGRESS
-    ═══════════════════════════════════════════ */
+
     let progFilter = 'push';
     function renderProgress(f) {
       if (f) progFilter = f;
@@ -2113,7 +2101,6 @@
     </div>
   </div>`;
 
-      // Charts
       html += `<div class="prog-grid">`;
       for (const ex of allEx.slice(0, 4)) {
         const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
@@ -2132,7 +2119,6 @@
       }
       html += `</div>`;
 
-      // Table
       if (allLogs.length === 0) {
         html += `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div><div class="empty-sub">Completa alcune sessioni ${progFilter.toUpperCase()}</div></div>`;
       } else {
@@ -2172,9 +2158,6 @@
   </svg>`;
     }
 
-    /* ═══════════════════════════════════════════
-       HISTORY
-    ═══════════════════════════════════════════ */
     function renderHistory() {
       const state = gs();
       const logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
@@ -2211,11 +2194,47 @@
     }
 
     function clearAll() {
-      if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v5'); renderHistory(); updateSidebar(); }
+      if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v6'); renderHistory(); updateSidebar(); }
+    }
+    function logout() {
+      localStorage.removeItem('ppl_auth');
+      document.getElementById('pin-screen').style.display = 'flex';
+      document.getElementById('main-app').style.display = 'none';
+      setTimeout(() => { const i = document.getElementById('pin-input'); if (i) { i.value = ''; i.focus(); } }, 100);
     }
 
-    /* INIT */
-    renderToday();
+    const CORRECT_PIN = '3520';
+
+    function checkPin() {
+      const input = document.getElementById('pin-input');
+      const err = document.getElementById('pin-err');
+      if (!input) return;
+      if (input.value === CORRECT_PIN) {
+        localStorage.setItem('ppl_auth', '1');
+        document.getElementById('pin-screen').style.display = 'none';
+        document.getElementById('main-app').style.display = 'grid';
+        renderToday();
+      } else {
+        err.textContent = 'PIN errato — riprova';
+        input.value = '';
+        input.focus();
+        input.style.borderColor = 'var(--push)';
+        setTimeout(() => { input.style.borderColor = ''; err.textContent = ''; }, 1500);
+      }
+    }
+
+    (function init() {
+      const authed = localStorage.getItem('ppl_auth') === '1';
+      if (authed) {
+        document.getElementById('pin-screen').style.display = 'none';
+        document.getElementById('main-app').style.display = 'grid';
+        renderToday();
+      } else {
+        document.getElementById('pin-screen').style.display = 'flex';
+        document.getElementById('main-app').style.display = 'none';
+        setTimeout(() => { const i = document.getElementById('pin-input'); if (i) i.focus(); }, 100);
+      }
+    })();
   </script>
 </body>
 
