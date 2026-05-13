@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>PPL Tracker</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
@@ -11,17 +11,17 @@
   <style>
     :root {
       --bg: #080808;
-      --bg2: #101010;
-      --bg3: #181818;
-      --bg4: #202020;
-      --bg5: #282828;
-      --b1: #2a2a2a;
-      --b2: #383838;
-      --b3: #505050;
+      --bg2: #111;
+      --bg3: #191919;
+      --bg4: #222;
+      --bg5: #2a2a2a;
+      --b1: #252525;
+      --b2: #353535;
+      --b3: #484848;
       --t1: #f0ede6;
       --t2: #9e9b94;
-      --t3: #5a5754;
-      --t4: #3a3835;
+      --t3: #555250;
+      --t4: #333;
       --push: #ff5c35;
       --pull: #2dcc7a;
       --legs: #f5a623;
@@ -51,17 +51,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .mono {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* SCROLLBAR */
     ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
+      width: 3px;
+      height: 3px;
     }
 
     ::-webkit-scrollbar-thumb {
@@ -69,11 +61,66 @@
       border-radius: 2px;
     }
 
-    /* LAYOUT */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    button {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── LAYOUT ── */
+    .app {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
+    }
+
+    /* TOP BAR (mobile) */
+    .topbar {
+      display: none;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--b1);
+      padding: 14px 16px;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .topbar-logo span {
+      color: var(--acc);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-streak {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--t2);
+    }
+
+    /* DESKTOP SHELL */
     .shell {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      min-height: 100vh;
+      grid-template-columns: 200px 1fr;
+      flex: 1;
     }
 
     /* SIDEBAR */
@@ -82,7 +129,6 @@
       border-right: 1px solid var(--b1);
       display: flex;
       flex-direction: column;
-      padding: 0;
       position: sticky;
       top: 0;
       height: 100vh;
@@ -90,32 +136,35 @@
     }
 
     .sb-logo {
-      padding: 24px 20px 20px;
+      padding: 22px 18px 18px;
       border-bottom: 1px solid var(--b1);
     }
 
     .sb-logo-text {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1;
+      letter-spacing: -.5px;
+    }
+
+    .sb-logo-text span {
+      color: var(--acc);
     }
 
     .sb-logo-sub {
       font-size: 10px;
       color: var(--t3);
-      letter-spacing: .12em;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 3px;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .sb-stats {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--b1);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     .sb-stat {
@@ -128,7 +177,7 @@
       font-size: 10px;
       color: var(--t3);
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .07em;
     }
 
     .sb-stat-val {
@@ -138,37 +187,32 @@
     }
 
     .sb-week {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--b1);
     }
 
-    .sb-week-title {
+    .sb-section-title {
       font-size: 10px;
       color: var(--t3);
       text-transform: uppercase;
       letter-spacing: .08em;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
     }
 
     .week-days {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
     }
 
     .wd {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 7px 10px;
+      padding: 6px 8px;
       border-radius: var(--r);
       border: 1px solid transparent;
-      cursor: pointer;
       transition: all .15s;
-    }
-
-    .wd:hover {
-      background: var(--bg3);
     }
 
     .wd.today {
@@ -180,20 +224,22 @@
       font-size: 11px;
       color: var(--t2);
       font-family: 'JetBrains Mono', monospace;
+      width: 28px;
     }
 
     .wd-type {
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .04em;
+      font-weight: 700;
+      letter-spacing: .03em;
     }
 
     .wd-done {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--pull);
       opacity: 0;
+      transition: opacity .2s;
     }
 
     .wd.done .wd-done {
@@ -217,29 +263,21 @@
     }
 
     .sb-nav {
-      padding: 16px 20px;
+      padding: 14px 18px;
       flex: 1;
-    }
-
-    .sb-nav-title {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 10px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 9px 10px;
+      gap: 9px;
+      padding: 8px 9px;
       border-radius: var(--r);
       cursor: pointer;
       transition: all .15s;
       color: var(--t3);
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       border: 1px solid transparent;
       margin-bottom: 2px;
     }
@@ -256,10 +294,10 @@
     }
 
     .nav-icon {
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
       flex-shrink: 0;
-      opacity: .6;
+      opacity: .5;
     }
 
     .nav-item.active .nav-icon {
@@ -267,7 +305,7 @@
     }
 
     .sb-footer {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-top: 1px solid var(--b1);
     }
 
@@ -280,49 +318,139 @@
     /* MAIN */
     .main {
       overflow-y: auto;
+      min-width: 0;
     }
 
     .main-inner {
-      padding: 32px 36px 80px;
-      max-width: 900px;
+      padding: 28px 32px 80px;
+      max-width: 840px;
     }
 
+    /* BOTTOM NAV (mobile) */
+    .bottom-nav {
+      display: none;
+      background: var(--bg2);
+      border-top: 1px solid var(--b1);
+      grid-template-columns: repeat(3, 1fr);
+      position: sticky;
+      bottom: 0;
+      z-index: 100;
+    }
+
+    .bn-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 8px;
+      cursor: pointer;
+      color: var(--t3);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .15s;
+    }
+
+    .bn-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bn-item.active {
+      color: var(--t1);
+    }
+
+    /* ── PAGE HEADERS ── */
     .page-header {
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .page-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: -.5px;
       line-height: 1.1;
     }
 
     .page-sub {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--t2);
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
-    /* SESSION CARD */
+    /* ── SESSION SELECTOR ── */
+    .session-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .ss-btn {
+      padding: 9px 18px;
+      border-radius: 99px;
+      border: 1px solid var(--b1);
+      background: transparent;
+      color: var(--t3);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: all .18s;
+      text-transform: uppercase;
+    }
+
+    .ss-btn:hover {
+      background: var(--bg3);
+      border-color: var(--b2);
+    }
+
+    .ss-btn.active-push {
+      background: rgba(255, 92, 53, .12);
+      border-color: rgba(255, 92, 53, .4);
+      color: var(--push);
+    }
+
+    .ss-btn.active-pull {
+      background: rgba(45, 204, 122, .12);
+      border-color: rgba(45, 204, 122, .4);
+      color: var(--pull);
+    }
+
+    .ss-btn.active-legs {
+      background: rgba(245, 166, 35, .12);
+      border-color: rgba(245, 166, 35, .4);
+      color: var(--legs);
+    }
+
+    /* ── SESSION TYPE BAR ── */
     .session-type-bar {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 20px 24px;
+      gap: 14px;
+      padding: 16px 20px;
       background: var(--bg2);
       border: 1px solid var(--b1);
       border-radius: var(--rl);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .stype-badge {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: .1em;
-      padding: 4px 12px;
+      padding: 4px 11px;
       border-radius: 99px;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .badge-push {
@@ -341,21 +469,23 @@
     }
 
     .stype-name {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
+      flex: 1;
+      min-width: 120px;
     }
 
     .stype-right {
-      margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      margin-left: auto;
     }
 
     .progress-ring-wrap {
       position: relative;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
     }
 
     .progress-ring-wrap svg {
@@ -382,13 +512,114 @@
       align-items: center;
       justify-content: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 500;
     }
 
-    /* EXERCISE GROUP */
+    /* ── TIMER ── */
+    .timer-widget {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--rl);
+      padding: 16px 20px;
+      margin-bottom: 18px;
+    }
+
+    .timer-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .timer-label {
+      font-size: 10px;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 5px;
+    }
+
+    .timer-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -.02em;
+      min-width: 80px;
+    }
+
+    .timer-display.running {
+      color: var(--pull);
+    }
+
+    .timer-display.paused {
+      color: var(--legs);
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tbtn {
+      background: var(--bg3);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 7px 12px;
+      color: var(--t1);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em;
+    }
+
+    .tbtn:hover {
+      background: var(--bg4);
+      border-color: var(--b2);
+    }
+
+    .tbtn.tstart {
+      background: rgba(45, 204, 122, .1);
+      border-color: rgba(45, 204, 122, .25);
+      color: var(--pull);
+    }
+
+    .tbtn.tstop {
+      background: rgba(255, 92, 53, .08);
+      border-color: rgba(255, 92, 53, .25);
+      color: var(--push);
+    }
+
+    .timer-presets {
+      display: flex;
+      gap: 5px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preset {
+      background: transparent;
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 5px 9px;
+      color: var(--t3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .preset:hover {
+      background: var(--bg3);
+      color: var(--t2);
+      border-color: var(--b2);
+    }
+
+    /* ── EXERCISE CARDS ── */
     .ex-group {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .ex-group-label {
@@ -396,8 +627,8 @@
       color: var(--t3);
       text-transform: uppercase;
       letter-spacing: .1em;
-      margin-bottom: 8px;
-      padding-left: 2px;
+      margin-bottom: 7px;
+      padding-left: 1px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -424,7 +655,7 @@
     }
 
     .ex-card.done {
-      opacity: .55;
+      opacity: .5;
     }
 
     .ex-card.done .ex-name {
@@ -434,15 +665,15 @@
 
     .ex-main {
       display: grid;
-      grid-template-columns: 40px 1fr auto auto;
+      grid-template-columns: 36px 1fr auto;
       align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
+      gap: 10px;
+      padding: 13px 14px;
     }
 
     .ex-check {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       border: 1.5px solid var(--b2);
       background: transparent;
@@ -463,12 +694,12 @@
     .ex-check.checked {
       background: var(--pull);
       border-color: var(--pull);
-      color: #fff;
+      color: #000;
     }
 
     .ex-check svg {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
     }
 
     .ex-body {
@@ -478,16 +709,17 @@
     .ex-name {
       font-size: 13px;
       font-weight: 600;
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .ex-meta {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       margin-top: 3px;
+      flex-wrap: wrap;
     }
 
     .ex-sets {
@@ -499,16 +731,24 @@
     .ex-note-inline {
       font-size: 11px;
       color: var(--t3);
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 260px;
+      white-space: nowrap;
+      max-width: 200px;
+    }
+
+    .ex-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
     .ex-kg-wrap {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .ex-kg {
@@ -519,17 +759,11 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      width: 68px;
-      padding: 7px 10px;
+      width: 62px;
+      padding: 6px 8px;
       text-align: center;
       outline: none;
       transition: border-color .15s;
-      -moz-appearance: textfield;
-    }
-
-    .ex-kg::-webkit-outer-spin-button,
-    .ex-kg::-webkit-inner-spin-button {
-      -webkit-appearance: none;
     }
 
     .ex-kg:focus {
@@ -538,7 +772,7 @@
     }
 
     .kg-unit {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--t3);
       font-family: 'JetBrains Mono', monospace;
     }
@@ -547,8 +781,6 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       color: var(--t3);
-      min-width: 36px;
-      text-align: right;
     }
 
     .trend-up {
@@ -559,14 +791,143 @@
       color: var(--push);
     }
 
+    /* SWAP BUTTON */
+    .ex-actions {
+      padding: 0 14px 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swap-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 5px 10px;
+      color: var(--t3);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .03em;
+    }
+
+    .swap-btn:hover {
+      background: var(--bg3);
+      border-color: var(--b2);
+      color: var(--t2);
+    }
+
+    .swap-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    /* ALTERNATIVES PANEL */
+    .alts-panel {
+      background: var(--bg3);
+      border-top: 1px solid var(--b1);
+      padding: 12px 14px;
+    }
+
+    .alts-title {
+      font-size: 10px;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    .alt-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .alt-opt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: all .15s;
+      gap: 10px;
+    }
+
+    .alt-opt:hover {
+      border-color: var(--b2);
+      background: var(--bg4);
+    }
+
+    .alt-opt-info {
+      min-width: 0;
+    }
+
+    .alt-opt-name {
+      font-size: 12px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .alt-opt-meta {
+      font-size: 10px;
+      color: var(--t3);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .use-btn {
+      background: var(--acc);
+      color: #fff;
+      border: none;
+      border-radius: var(--r);
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: opacity .15s;
+      letter-spacing: .03em;
+    }
+
+    .use-btn:hover {
+      opacity: .85;
+    }
+
+    .alts-close {
+      font-size: 11px;
+      color: var(--t3);
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-block;
+    }
+
+    .alts-close:hover {
+      color: var(--t2);
+    }
+
     /* CARDIO ROW */
     .cardio-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
+      gap: 10px;
+      padding: 11px 16px;
       background: var(--bg3);
-      border-top: 1px solid var(--b1);
+      border: 1px solid var(--b1);
+      border-radius: var(--rl);
+      margin-bottom: 16px;
       font-size: 12px;
       color: var(--t2);
     }
@@ -579,13 +940,12 @@
       flex-shrink: 0;
     }
 
-    /* COMPLETE BUTTON */
+    /* COMPLETE ZONE */
     .complete-zone {
-      padding: 16px;
-      border-top: 1px solid var(--b1);
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .complete-btn {
@@ -593,8 +953,7 @@
       color: #000;
       border: none;
       border-radius: var(--r);
-      padding: 10px 20px;
-      font-family: 'Syne', sans-serif;
+      padding: 11px 22px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -608,13 +967,6 @@
 
     .complete-btn:active {
       transform: scale(.97);
-    }
-
-    .complete-btn:disabled {
-      background: var(--bg4);
-      color: var(--t3);
-      cursor: default;
-      filter: none;
     }
 
     .completed-badge {
@@ -631,24 +983,24 @@
       color: var(--t3);
     }
 
-    /* REST DAY */
+    /* REST */
     .rest-card {
       background: var(--bg2);
       border: 1px solid var(--b1);
       border-radius: var(--rl);
-      padding: 48px;
+      padding: 48px 32px;
       text-align: center;
     }
 
     .rest-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
+      font-size: 36px;
+      margin-bottom: 14px;
     }
 
     .rest-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .rest-sub {
@@ -656,172 +1008,71 @@
       font-size: 13px;
     }
 
-    /* TIMER */
-    .timer-widget {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 20px 24px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .timer-display {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: -.02em;
-      color: var(--t1);
-      min-width: 90px;
-    }
-
-    .timer-display.running {
-      color: var(--pull);
-    }
-
-    .timer-display.paused {
-      color: var(--legs);
-    }
-
-    .timer-controls {
-      display: flex;
-      gap: 8px;
-    }
-
-    .timer-btn {
+    .rest-tip {
+      margin-top: 20px;
       background: var(--bg3);
       border: 1px solid var(--b1);
       border-radius: var(--r);
-      padding: 8px 14px;
-      color: var(--t1);
-      font-family: 'Syne', sans-serif;
+      padding: 14px;
       font-size: 12px;
-      font-weight: 600;
+      color: var(--t2);
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* SCHEDULE PICKER */
+    .sched-pick {
+      margin-top: 20px;
+    }
+
+    .sched-pick-title {
+      font-size: 12px;
+      color: var(--t2);
+      margin-bottom: 12px;
+    }
+
+    .sched-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sched-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 1px solid var(--b1);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all .15s;
+      transition: all .18s;
       letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
-    .timer-btn:hover {
-      background: var(--bg4);
-      border-color: var(--b2);
+    .sched-btn:hover {
+      background: var(--bg3);
     }
 
-    .timer-btn.start {
-      background: rgba(45, 204, 122, .12);
-      border-color: rgba(45, 204, 122, .3);
-      color: var(--pull);
-    }
-
-    .timer-btn.stop {
-      background: rgba(255, 92, 53, .1);
-      border-color: rgba(255, 92, 53, .3);
+    .sched-btn-push {
       color: var(--push);
     }
 
-    .timer-presets {
-      display: flex;
-      gap: 6px;
-      margin-left: auto;
+    .sched-btn-pull {
+      color: var(--pull);
     }
 
-    .preset-btn {
-      background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 6px 10px;
-      color: var(--t3);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      cursor: pointer;
-      transition: all .15s;
+    .sched-btn-legs {
+      color: var(--legs);
     }
 
-    .preset-btn:hover {
-      background: var(--bg3);
-      color: var(--t2);
-      border-color: var(--b2);
-    }
-
-    .timer-label {
-      font-size: 11px;
-      color: var(--t3);
-    }
-
-    /* PROGRESS CHARTS */
-    .prog-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .prog-card {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .prog-card-title {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: .02em;
-    }
-
-    .prog-card-sub {
-      font-size: 11px;
-      color: var(--t3);
-      margin-bottom: 16px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .chart-wrap {
-      height: 80px;
-      position: relative;
-    }
-
-    .sparkline {
-      width: 100%;
-      height: 80px;
-    }
-
-    .no-data {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 80px;
-      font-size: 11px;
-      color: var(--t3);
-    }
-
-    .prog-delta {
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .delta-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 20px;
-      font-weight: 500;
-    }
-
-    .delta-label {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
+    /* PROGRESS */
     .prog-filter {
       display: flex;
-      gap: 8px;
-      margin-bottom: 24px;
+      gap: 7px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
     }
 
     .pf-btn {
@@ -830,9 +1081,8 @@
       border: 1px solid var(--b1);
       background: transparent;
       color: var(--t3);
-      font-family: 'Syne', sans-serif;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all .15s;
       letter-spacing: .04em;
@@ -849,83 +1099,86 @@
       border-color: var(--b2);
     }
 
-    /* HISTORY */
-    .hist-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .prog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
     }
 
-    .hist-item {
+    .prog-card {
       background: var(--bg2);
       border: 1px solid var(--b1);
       border-radius: var(--rl);
-      padding: 16px 20px;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .prog-card-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .prog-card-sub {
+      font-size: 10px;
+      color: var(--t3);
+      margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .chart-wrap {
+      height: 70px;
+    }
+
+    .sparkline {
+      width: 100%;
+      height: 70px;
+    }
+
+    .no-data-spark {
+      display: flex;
       align-items: center;
-      gap: 16px;
-      transition: border-color .15s;
-    }
-
-    .hist-item:hover {
-      border-color: var(--b2);
-    }
-
-    .hist-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .hist-info {
-      min-width: 0;
-    }
-
-    .hist-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .hist-date {
+      justify-content: center;
+      height: 70px;
       font-size: 11px;
       color: var(--t3);
+    }
+
+    .prog-delta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .delta-val {
       font-family: 'JetBrains Mono', monospace;
-      margin-top: 2px;
+      font-size: 18px;
+      font-weight: 500;
     }
 
-    .hist-right {
-      text-align: right;
-    }
-
-    .hist-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--t2);
-    }
-
-    .hist-done-tag {
+    .delta-label {
       font-size: 10px;
-      color: var(--pull);
-      font-weight: 700;
-      letter-spacing: .05em;
-      margin-top: 2px;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .07em;
     }
 
-    /* VOLUME TABLE */
     .vol-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 8px;
     }
 
     .vol-table th {
       font-size: 10px;
       color: var(--t3);
       text-transform: uppercase;
-      letter-spacing: .08em;
-      padding: 8px 0;
+      letter-spacing: .07em;
+      padding: 7px 0;
       border-bottom: 1px solid var(--b1);
       text-align: left;
       font-weight: 400;
@@ -989,49 +1242,101 @@
       font-size: 11px;
     }
 
+    /* HISTORY */
+    .hist-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .hist-item {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--rl);
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      transition: border-color .15s;
+    }
+
+    .hist-item:hover {
+      border-color: var(--b2);
+    }
+
+    .hist-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hist-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hist-date {
+      font-size: 11px;
+      color: var(--t3);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+
+    .hist-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--t2);
+      text-align: right;
+    }
+
+    .hist-done-tag {
+      font-size: 10px;
+      color: var(--pull);
+      font-weight: 700;
+      letter-spacing: .04em;
+      margin-top: 2px;
+    }
+
     /* EMPTY */
     .empty {
       text-align: center;
-      padding: 60px 20px;
+      padding: 56px 20px;
       color: var(--t3);
     }
 
     .empty-icon {
-      font-size: 36px;
-      margin-bottom: 16px;
+      font-size: 32px;
+      margin-bottom: 14px;
       opacity: .5;
     }
 
     .empty-text {
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 6px;
       color: var(--t2);
+      margin-bottom: 5px;
     }
 
     .empty-sub {
       font-size: 12px;
     }
 
-    /* UTIL */
-    .flex {
+    /* SECTION HEADER */
+    .section-header {
       display: flex;
-    }
-
-    .items-center {
       align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .gap-8 {
-      gap: 8px;
-    }
-
-    .gap-12 {
-      gap: 12px;
-    }
-
-    .ml-auto {
-      margin-left: auto;
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.4px;
     }
 
     .clear-btn {
@@ -1039,9 +1344,8 @@
       border: 1px solid var(--b1);
       border-radius: var(--r);
       color: var(--t3);
-      font-family: 'Syne', sans-serif;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 6px 12px;
       cursor: pointer;
       transition: all .15s;
@@ -1053,27 +1357,14 @@
       color: var(--push);
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -.3px;
-    }
-
     .fade-in {
-      animation: fadeIn .3s ease;
+      animation: fadeIn .25s ease;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(5px);
       }
 
       to {
@@ -1082,159 +1373,194 @@
       }
     }
 
-    /* WEIGHT CHANGE TOAST */
-    .save-indicator {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 10px;
-      color: var(--pull);
-      font-family: 'JetBrains Mono', monospace;
-      opacity: 0;
-      transition: opacity .3s;
-      pointer-events: none;
-    }
+    /* ── RESPONSIVE ── */
+    @media(max-width:720px) {
+      .topbar {
+        display: flex;
+      }
 
-    .save-indicator.show {
-      opacity: 1;
-    }
+      .bottom-nav {
+        display: grid;
+      }
 
-    /* MOBILE */
-    @media (max-width: 700px) {
       .shell {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        position: static;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--b1);
-      }
-
-      .sb-week,
-      .sb-nav,
-      .sb-footer {
         display: none;
       }
 
+      .app {
+        grid-template-rows: auto 1fr auto;
+      }
+
       .main-inner {
-        padding: 20px 16px 60px;
+        padding: 16px 14px 16px;
+      }
+
+      .page-title {
+        font-size: 20px;
+      }
+
+      .session-type-bar {
+        padding: 12px 14px;
+      }
+
+      .stype-name {
+        font-size: 14px;
+      }
+
+      .timer-widget {
+        padding: 13px 14px;
+      }
+
+      .timer-display {
+        font-size: 24px;
       }
 
       .prog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ex-note-inline {
+        display: none;
+      }
+
+      .ex-main {
+        gap: 8px;
+        padding: 11px 12px;
+      }
+
+      .ex-kg {
+        width: 56px;
+      }
+    }
+
+    @media(max-width:400px) {
+      .prog-grid {
         grid-template-columns: 1fr;
+      }
+
+      .session-selector {
+        gap: 6px;
+      }
+
+      .ss-btn {
+        padding: 7px 13px;
+        font-size: 11px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="shell">
+  <div class="app">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sb-logo">
-        <div class="sb-logo-text">PPL<span style="color:var(--acc)">.</span></div>
-        <div class="sb-logo-sub" id="sb-date-label">tracker</div>
+    <!-- TOPBAR (mobile only) -->
+    <header class="topbar">
+      <div class="topbar-logo">PPL<span>.</span></div>
+      <div class="topbar-right">
+        <span class="topbar-streak" id="mob-streak">0 🔥</span>
       </div>
+    </header>
 
-      <div class="sb-stats">
-        <div class="sb-stat">
-          <span class="sb-stat-label">Sessioni tot.</span>
-          <span class="sb-stat-val" id="sb-total">0</span>
+    <!-- SHELL -->
+    <div class="shell">
+
+      <!-- SIDEBAR (desktop) -->
+      <aside class="sidebar">
+        <div class="sb-logo">
+          <div class="sb-logo-text">PPL<span>.</span></div>
+          <div class="sb-logo-sub" id="sb-dayname">tracker</div>
         </div>
-        <div class="sb-stat">
-          <span class="sb-stat-label">Questa sett.</span>
-          <span class="sb-stat-val" id="sb-week-count">0</span>
+        <div class="sb-stats">
+          <div class="sb-stat"><span class="sb-stat-label">Sessioni</span><span class="sb-stat-val"
+              id="sb-total">0</span></div>
+          <div class="sb-stat"><span class="sb-stat-label">Questa sett.</span><span class="sb-stat-val"
+              id="sb-week-count">0</span></div>
+          <div class="sb-stat"><span class="sb-stat-label">Streak</span><span class="sb-stat-val"
+              id="sb-streak">0</span></div>
         </div>
-        <div class="sb-stat">
-          <span class="sb-stat-label">Streak</span>
-          <span class="sb-stat-val" id="sb-streak">0</span>
+        <div class="sb-week">
+          <div class="sb-section-title">Piano settimana</div>
+          <div class="week-days" id="week-days"></div>
         </div>
-      </div>
-
-      <div class="sb-week">
-        <div class="sb-week-title">Settimana</div>
-        <div class="week-days" id="week-days"></div>
-      </div>
-
-      <div class="sb-nav">
-        <div class="sb-nav-title">Navigazione</div>
-        <div class="nav-item active" onclick="nav('today')">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
-          Oggi
-        </div>
-        <div class="nav-item" onclick="nav('progress')">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-          Progressi
-        </div>
-        <div class="nav-item" onclick="nav('history')">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          Storico
-        </div>
-      </div>
-
-      <div class="sb-footer">
-        <div class="sb-date mono" id="sb-full-date"></div>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <div class="main-inner">
-
-        <!-- TODAY -->
-        <div id="view-today" class="fade-in"></div>
-
-        <!-- PROGRESS -->
-        <div id="view-progress" style="display:none" class="fade-in">
-          <div class="section-header">
-            <div class="section-title">Progressi</div>
-            <div class="prog-filter" id="prog-filter">
-              <button class="pf-btn active" onclick="setPFilter('push',this)">Push</button>
-              <button class="pf-btn" onclick="setPFilter('pull',this)">Pull</button>
-              <button class="pf-btn" onclick="setPFilter('legs',this)">Legs</button>
-            </div>
+        <div class="sb-nav">
+          <div class="sb-section-title">Navigazione</div>
+          <div class="nav-item active" onclick="nav('today')">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Oggi
           </div>
-          <div id="prog-charts" class="prog-grid"></div>
-          <div style="margin-top:28px">
-            <div class="section-title" style="font-size:16px;margin-bottom:16px">Tabella carichi</div>
-            <div id="vol-table-wrap"></div>
+          <div class="nav-item" onclick="nav('progress')">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            Progressi
+          </div>
+          <div class="nav-item" onclick="nav('history')">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Storico
           </div>
         </div>
-
-        <!-- HISTORY -->
-        <div id="view-history" style="display:none" class="fade-in">
-          <div class="section-header">
-            <div class="section-title">Storico sessioni</div>
-            <button class="clear-btn" onclick="clearAll()">Cancella tutto</button>
-          </div>
-          <div id="hist-list"></div>
+        <div class="sb-footer">
+          <div class="sb-date" id="sb-fulldate"></div>
         </div>
+      </aside>
 
+      <!-- MAIN -->
+      <main class="main">
+        <div class="main-inner">
+          <div id="view-today" class="fade-in"></div>
+          <div id="view-progress" style="display:none" class="fade-in"></div>
+          <div id="view-history" style="display:none" class="fade-in"></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- BOTTOM NAV (mobile) -->
+    <nav class="bottom-nav">
+      <div class="bn-item active" id="bn-today" onclick="nav('today')">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        Oggi
       </div>
-    </main>
+      <div class="bn-item" id="bn-progress" onclick="nav('progress')">
+        <svg viewBox="0 0 24 24">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        Progressi
+      </div>
+      <div class="bn-item" id="bn-history" onclick="nav('history')">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        Storico
+      </div>
+    </nav>
   </div>
 
   <script>
+    /* ═══════════════════════════════════════════
+       PROGRAM DATA
+    ═══════════════════════════════════════════ */
     const PROG = {
-      schedule: ['push', 'pull', 'legs', 'rest', 'push', 'pull', 'rest'],
-      dayNames: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
       colors: { push: '#ff5c35', pull: '#2dcc7a', legs: '#f5a623' },
       sessions: {
         push: {
@@ -1242,20 +1568,56 @@
           groups: [
             {
               label: 'Petto', exercises: [
-                { id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34, note: 'Priorità assoluta — cedimento -1' },
-                { id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19, note: 'Prima delle croci' },
-                { id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36, note: 'Stira a fine movimento' },
+                {
+                  id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34, note: 'Priorità — vai a cedimento -1',
+                  alts: [
+                    { name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Se la macchina è occupata — carico -10%' },
+                    { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM, ottima alternativa' }
+                  ]
+                },
+                {
+                  id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19, note: 'Petto alto — prima delle croci',
+                  alts: [
+                    { name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Libera quasi sempre' },
+                    { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con cavi' }
+                  ]
+                },
+                {
+                  id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36, note: 'Stira bene a fine movimento',
+                  alts: [
+                    { name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Stessa funzione, più controllo' },
+                    { name: 'Croci manubri su panca piatta', sets: '3×12-15', note: 'Classico, funziona sempre' }
+                  ]
+                },
               ]
             },
             {
               label: 'Spalle', exercises: [
-                { id: 'p4', name: 'Shoulder press macchina', sets: '3×10-12', defaultKg: 29, note: 'Dopo il petto' },
-                { id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8, note: 'Obiettivo 8 kg' },
+                {
+                  id: 'p4', name: 'Shoulder press macchina', sets: '3×10-12', defaultKg: 29, note: 'Dopo il petto',
+                  alts: [
+                    { name: 'Military press manubri seduto', sets: '3×10-12', note: 'Stessa funzione, più stabilizzatori' },
+                    { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM, più volume totale spalla' }
+                  ]
+                },
+                {
+                  id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8, note: 'Target: 8 kg',
+                  alts: [
+                    { name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' },
+                    { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Se disponibile — facile da caricare' }
+                  ]
+                },
               ]
             },
             {
               label: 'Tricipiti', exercises: [
-                { id: 'p6', name: 'Pushdown cavi / macchina', sets: '3×12-15', defaultKg: 20, note: 'Fisso — non saltare' },
+                {
+                  id: 'p6', name: 'Pushdown cavi', sets: '3×12-15', defaultKg: 20, note: 'Fisso — non saltare',
+                  alts: [
+                    { name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite' },
+                    { name: 'Dips parallele (assistite)', sets: '3×10-12', note: 'Peso corpo — sempre disponibile' }
+                  ]
+                },
               ]
             },
           ],
@@ -1266,19 +1628,49 @@
           groups: [
             {
               label: 'Dorsali', exercises: [
-                { id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40, note: 'Max ampiezza, scapole giù' },
-                { id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30, note: 'Gomiti vicino, pausa' },
-                { id: 'l3', name: 'Straight arm pulldown', sets: '3×12-15', defaultKg: 20, note: 'Isolamento dorsale puro' },
+                {
+                  id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40, note: 'Max ampiezza, scapole giù',
+                  alts: [
+                    { name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stesso attrezzo, diversa angolazione' },
+                    { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se la macchina è disponibile' }
+                  ]
+                },
+                {
+                  id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30, note: 'Gomiti vicino, pausa',
+                  alts: [
+                    { name: 'Rematore T-bar', sets: '4×10-12', note: 'Se il cavo basso è occupato' },
+                    { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }
+                  ]
+                },
+                {
+                  id: 'l3', name: 'Straight arm pulldown', sets: '3×12-15', defaultKg: 20, note: 'Isolamento dorsale puro',
+                  alts: [
+                    { name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' },
+                    { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
+                  ]
+                },
               ]
             },
             {
               label: 'Spalla posteriore', exercises: [
-                { id: 'l4', name: 'Alzata a Y (face pull)', sets: '3×12-15', defaultKg: 6, note: 'Salute spalla' },
+                {
+                  id: 'l4', name: 'Alzata a Y / face pull', sets: '3×12-15', defaultKg: 6, note: 'Salute spalla — mai saltare',
+                  alts: [
+                    { name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottima alternativa con cavo alto' },
+                    { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo, più isolamento' }
+                  ]
+                },
               ]
             },
             {
               label: 'Bicipiti', exercises: [
-                { id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22, note: 'Eccentric 3 sec' },
+                {
+                  id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22, note: 'Eccentric 3 sec',
+                  alts: [
+                    { name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' },
+                    { name: 'Curl cavo basso (presa supina)', sets: '3×12-15', note: 'Tensione costante — ottimo' }
+                  ]
+                },
               ]
             },
           ],
@@ -1289,33 +1681,75 @@
           groups: [
             {
               label: 'Quadricipiti', exercises: [
-                { id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75, note: 'Obiettivo 80-90 kg' },
-                { id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59, note: 'Pausa 1 sec in cima' },
+                {
+                  id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75, note: 'Obiettivo 80-90 kg ad agosto',
+                  alts: [
+                    { name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM, ottimo per quads' },
+                    { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }
+                  ]
+                },
+                {
+                  id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59, note: 'Pausa 1 sec in cima',
+                  alts: [
+                    { name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' },
+                    { name: 'Hack squat con ROM corto', sets: '3×15', note: 'Enfatizza quads se la macchina è occupata' }
+                  ]
+                },
               ]
             },
             {
               label: 'Ischiocrurali', exercises: [
-                { id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45, note: 'Eccentric 3 sec' },
+                {
+                  id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45, note: 'Eccentric 3 sec, piede neutro',
+                  alts: [
+                    { name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina diversa posizione' },
+                    { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Sempre disponibile — ottimo stretch' }
+                  ]
+                },
               ]
             },
             {
               label: 'Polpacci & accessori', exercises: [
-                { id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40, note: 'Pausa 2 sec in basso' },
-                { id: 'g5', name: 'Adduttori', sets: '2×12', defaultKg: 36, note: '' },
-                { id: 'g6', name: 'Abduttori', sets: '2×12', defaultKg: 36, note: '' },
+                {
+                  id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40, note: 'Pausa 2 sec in basso',
+                  alts: [
+                    { name: 'Calf raise leg press', sets: '4×15-20', note: 'Sulla leg press — sempre disponibile' },
+                    { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }
+                  ]
+                },
+                {
+                  id: 'g5', name: 'Adduttori', sets: '2×12', defaultKg: 36, note: '',
+                  alts: [
+                    { name: 'Sumo squat con manubrio', sets: '3×12', note: 'Allena adduttori + glutei' },
+                    { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero — sempre disponibile' }
+                  ]
+                },
+                {
+                  id: 'g6', name: 'Abduttori', sets: '2×12', defaultKg: 36, note: '',
+                  alts: [
+                    { name: 'Hip abduction con fascia', sets: '3×15', note: 'Con elastico — sempre disponibile' },
+                    { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }
+                  ]
+                },
               ]
             },
           ],
-          cardio: '10-12 min spinning (opzionale)'
+          cardio: '10-12 min spinning (opzionale nei leg day)'
         }
       }
     };
 
-    /* STATE */
-    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v4') || '{}'); } catch (e) { return {}; } }
-    function ss(s) { localStorage.setItem('ppl_v4', JSON.stringify(s)); }
+    const DAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
 
-    /* DATE UTILS */
+    /* ═══════════════════════════════════════════
+       STATE
+    ═══════════════════════════════════════════ */
+    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v5') || '{}'); } catch (e) { return {}; } }
+    function ss(s) { localStorage.setItem('ppl_v5', JSON.stringify(s)); }
+
+    /* ═══════════════════════════════════════════
+       DATE
+    ═══════════════════════════════════════════ */
     function today() { return new Date().toISOString().slice(0, 10); }
     function weekStart() {
       const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day);
@@ -1323,33 +1757,17 @@
       return m.toISOString().slice(0, 10);
     }
     function dayOfWeek() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1; }
-    function dateForOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10); }
+    function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10); }
     function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }); }
-    function fmtDateShort(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' }); }
 
-    /* NAV */
-    let currentView = 'today';
-    function nav(v) {
-      currentView = v;
-      ['today', 'progress', 'history'].forEach(x => {
-        const el = document.getElementById('view-' + x);
-        el.style.display = x === v ? 'block' : 'none';
-        el.classList.toggle('fade-in', x === v);
-      });
-      document.querySelectorAll('.nav-item').forEach((el, i) => {
-        el.classList.toggle('active', ['today', 'progress', 'history'][i] === v);
-      });
-      if (v === 'today') renderToday();
-      if (v === 'progress') renderProgress();
-      if (v === 'history') renderHistory();
-    }
-
-    /* TIMER */
+    /* ═══════════════════════════════════════════
+       TIMER
+    ═══════════════════════════════════════════ */
     let timerInt = null, timerSec = 0, timerRunning = false;
     function timerTick() { timerSec++; updateTimerDisplay(); }
     function startTimer() { if (timerRunning) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay(); }
     function pauseTimer() { clearInterval(timerInt); timerRunning = false; updateTimerDisplay(); }
-    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; updateTimerDisplay(); if (preset > 0) { startTimer(); } }
+    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; updateTimerDisplay(); if (preset > 0) startTimer(); }
     function updateTimerDisplay() {
       const el = document.getElementById('timer-display');
       if (!el) return;
@@ -1357,68 +1775,144 @@
       el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
       el.className = 'timer-display' + (timerRunning ? ' running' : timerSec > 0 ? ' paused' : '');
     }
-    function setTimerPreset(sec) { resetTimer(sec); }
 
-    /* STREAK */
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    let currentView = 'today';
+    function nav(v) {
+      currentView = v;
+      ['today', 'progress', 'history'].forEach(x => {
+        const el = document.getElementById('view-' + x);
+        el.style.display = x === v ? 'block' : 'none';
+        if (x === v) { el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in'); }
+      });
+      document.querySelectorAll('.nav-item').forEach((el, i) => { el.classList.toggle('active', ['today', 'progress', 'history'][i] === v); });
+      ['today', 'progress', 'history'].forEach(x => { const b = document.getElementById('bn-' + x); if (b) b.classList.toggle('active', x === v); });
+      if (v === 'today') renderToday();
+      if (v === 'progress') renderProgress('push');
+      if (v === 'history') renderHistory();
+    }
+
+    /* ═══════════════════════════════════════════
+       SIDEBAR UPDATE
+    ═══════════════════════════════════════════ */
+    function updateSidebar() {
+      const state = gs(), logs = state.logs || {}, ws = weekStart(), all = Object.values(logs);
+      const total = all.length, week = all.filter(l => l.date >= ws).length, streak = calcStreak(state);
+      const els = ['sb-total', 'sb-week-count', 'sb-streak'];
+      [total, week, streak].forEach((v, i) => { const e = document.getElementById(els[i]); if (e) e.textContent = v; });
+      const mob = document.getElementById('mob-streak'); if (mob) mob.textContent = streak + ' 🔥';
+      const now = new Date();
+      const sbDay = document.getElementById('sb-dayname'); if (sbDay) sbDay.textContent = now.toLocaleDateString('it-IT', { weekday: 'long' });
+      const sbFull = document.getElementById('sb-fulldate'); if (sbFull) sbFull.textContent = now.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      const todayIdx = dayOfWeek();
+      const todaySession = getTodaySession();
+      let whtml = '';
+      for (let i = 0; i < 7; i++) {
+        const dkey = dateOffset(i - todayIdx);
+        const isDone = logs[dkey] && logs[dkey].done;
+        const stype = getScheduledType(i, state);
+        whtml += `<div class="wd ${i === todayIdx ? 'today' : ''} ${isDone ? 'done' : ''}">
+      <span class="wd-name">${DAYS[i]}</span>
+      <span class="wd-type type-${stype}">${stype === 'rest' ? '—' : stype.toUpperCase()}</span>
+      <span class="wd-done"></span>
+    </div>`;
+      }
+      const wdEl = document.getElementById('week-days'); if (wdEl) wdEl.innerHTML = whtml;
+    }
+
     function calcStreak(state) {
       const logs = state.logs || {};
       let streak = 0;
       for (let i = 0; i < 60; i++) {
-        const d = dateForOffset(-i);
-        const di = new Date(d + 'T12:00:00').getDay();
-        const idx = di === 0 ? 6 : di - 1;
-        if (PROG.schedule[idx] === 'rest') continue;
+        const d = dateOffset(-i);
         if (logs[d] && logs[d].done) streak++;
         else if (i > 0) break;
       }
       return streak;
     }
 
-    /* SIDEBAR UPDATE */
-    function updateSidebar() {
-      const state = gs();
-      const logs = state.logs || {};
-      const ws = weekStart();
-      const allLogs = Object.values(logs);
-      document.getElementById('sb-total').textContent = allLogs.length;
-      document.getElementById('sb-week-count').textContent = allLogs.filter(l => l.date >= ws).length;
-      document.getElementById('sb-streak').textContent = calcStreak(state);
+    /* ═══════════════════════════════════════════
+       FLEXIBLE SCHEDULE
+       Giorno sì / giorno no = 4 sessioni max
+       L'utente può manualmente scegliere la sessione
+    ═══════════════════════════════════════════ */
+    const DEFAULT_SCHEDULE = ['push', 'pull', 'legs', 'rest', 'push', 'pull', 'rest'];
 
-      const now = new Date();
-      document.getElementById('sb-date-label').textContent = now.toLocaleDateString('it-IT', { weekday: 'long' });
-      document.getElementById('sb-full-date').textContent = now.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
-
-      const wdContainer = document.getElementById('week-days');
-      const todayIdx = dayOfWeek();
-      let html = '';
-      for (let i = 0; i < 7; i++) {
-        const stype = PROG.schedule[i];
-        const dkey = dateForOffset(i - todayIdx);
-        const isDone = logs[dkey] && logs[dkey].done;
-        html += `<div class="wd ${i === todayIdx ? 'today' : ''} ${isDone ? 'done' : ''}">
-      <span class="wd-name">${PROG.dayNames[i]}</span>
-      <span class="wd-type type-${stype}">${stype === 'rest' ? '—' : stype.toUpperCase()}</span>
-      <span class="wd-done"></span>
-    </div>`;
-      }
-      wdContainer.innerHTML = html;
+    function getScheduledType(dayIdx, state) {
+      const custom = (state.customSchedule || {})[dayIdx];
+      return custom || DEFAULT_SCHEDULE[dayIdx];
     }
 
-    /* RENDER TODAY */
+    function getTodaySession() {
+      const state = gs();
+      const log = (state.logs || {})[today()];
+      if (log && log.type) return log.type;
+      const dayIdx = dayOfWeek();
+      return getScheduledType(dayIdx, state);
+    }
+
+    /* ═══════════════════════════════════════════
+       OPEN/CLOSE ALTERNATIVES
+    ═══════════════════════════════════════════ */
+    function toggleAlts(exId) {
+      const panel = document.getElementById('alts-' + exId);
+      if (!panel) return;
+      const isOpen = panel.style.display === 'block';
+      panel.style.display = isOpen ? 'none' : 'block';
+    }
+
+    function useAlt(dayKey, exId, stype, altName, altSets, altDefaultKg) {
+      const state = gs();
+      if (!state.logs) state.logs = {};
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
+      const log = state.logs[dayKey];
+      if (!log.swaps) log.swaps = {};
+      log.swaps[exId] = { name: altName, sets: altSets, kg: altDefaultKg };
+      ss(state); renderToday();
+    }
+
+    function clearSwap(dayKey, exId) {
+      const state = gs();
+      if (state.logs && state.logs[dayKey] && state.logs[dayKey].swaps) {
+        delete state.logs[dayKey].swaps[exId];
+        ss(state); renderToday();
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       RENDER TODAY
+    ═══════════════════════════════════════════ */
     function renderToday() {
       updateSidebar();
       const state = gs();
       const todayKey = today();
       const dayIdx = dayOfWeek();
-      const stype = PROG.schedule[dayIdx];
+      const stype = getTodaySession();
       const container = document.getElementById('view-today');
-      let html = '';
+
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+
+      let html = `<div class="page-header">
+    <div class="page-title">Allenamento di oggi</div>
+    <div class="page-sub">${dateStr}</div>
+  </div>`;
+
+      // Session selector (always visible — giorno sì/no)
+      html += `<div class="session-selector">
+    <span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>
+    ${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}
+  </div>`;
 
       if (stype === 'rest') {
-        html = `<div class="rest-card">
+        html += `<div class="rest-card">
       <div class="rest-icon">🌙</div>
       <div class="rest-title">Giorno di riposo</div>
-      <div class="rest-sub">Recupero attivo — stretching, camminata, 8h di sonno</div>
+      <div class="rest-sub">Schema giorno sì / giorno no — recupero attivo</div>
+      <div class="rest-tip">Stretching 10 min · Camminata leggera · 8h di sonno<br>Premi un pulsante sopra se vuoi comunque allenarti oggi</div>
     </div>`;
         container.innerHTML = html; return;
       }
@@ -1427,112 +1921,132 @@
       const todayLog = (state.logs && state.logs[todayKey]) || {};
       const weights = todayLog.weights || {};
       const checked = todayLog.checked || {};
+      const swaps = todayLog.swaps || {};
       const isDone = todayLog.done || false;
       const allExIds = session.groups.flatMap(g => g.exercises.map(e => e.id));
       const checkedCount = allExIds.filter(id => checked[id]).length;
       const pct = allExIds.length > 0 ? Math.round(checkedCount / allExIds.length * 100) : 0;
-      const circumf = 2 * Math.PI * 18;
-      const offset = circumf - (pct / 100) * circumf;
+      const circ = 2 * Math.PI * 17;
+      const offset = circ - (pct / 100) * circ;
       const colorVar = `var(--${session.color})`;
-
-      // Page header
-      html += `<div class="page-header">
-    <div class="page-title">Allenamento di oggi</div>
-    <div class="page-sub">${new Date().toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
-  </div>`;
 
       // Timer
       html += `<div class="timer-widget">
-    <div>
-      <div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Timer recupero</div>
-      <div id="timer-display" class="timer-display">00:00</div>
-    </div>
-    <div class="timer-controls">
-      <button class="timer-btn start" onclick="startTimer()">▶ Start</button>
-      <button class="timer-btn" onclick="pauseTimer()">⏸ Pausa</button>
-      <button class="timer-btn stop" onclick="resetTimer(0)">■ Reset</button>
+    <div class="timer-top">
+      <div>
+        <div class="timer-label">Timer recupero</div>
+        <div id="timer-display" class="timer-display">00:00</div>
+      </div>
+      <div class="timer-controls">
+        <button class="tbtn tstart" onclick="startTimer()">▶</button>
+        <button class="tbtn" onclick="pauseTimer()">⏸</button>
+        <button class="tbtn tstop" onclick="resetTimer(0)">■</button>
+      </div>
     </div>
     <div class="timer-presets">
-      <button class="preset-btn" onclick="setTimerPreset(60)">1m</button>
-      <button class="preset-btn" onclick="setTimerPreset(90)">90s</button>
-      <button class="preset-btn" onclick="setTimerPreset(120)">2m</button>
-      <button class="preset-btn" onclick="setTimerPreset(180)">3m</button>
+      <button class="preset" onclick="resetTimer(60)">1m</button>
+      <button class="preset" onclick="resetTimer(90)">90s</button>
+      <button class="preset" onclick="resetTimer(120)">2m</button>
+      <button class="preset" onclick="resetTimer(180)">3m</button>
     </div>
   </div>`;
 
-      // Session type bar
+      // Session bar
       html += `<div class="session-type-bar">
     <span class="stype-badge badge-${stype}">${stype}</span>
-    <span class="stype-name">${session.label} — ${['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'][dayIdx]}</span>
+    <span class="stype-name">${session.label}</span>
     <div class="stype-right">
-      <div style="font-size:12px;color:var(--t2)">${checkedCount}/${allExIds.length}</div>
+      <span style="font-size:11px;color:var(--t2)">${checkedCount}/${allExIds.length}</span>
       <div class="progress-ring-wrap">
-        <svg width="44" height="44" viewBox="0 0 44 44">
-          <circle class="pr-bg" cx="22" cy="22" r="18"/>
-          <circle class="pr-fg" cx="22" cy="22" r="18" stroke="${colorVar}"
-            stroke-dasharray="${circumf.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <circle class="pr-bg" cx="20" cy="20" r="17"/>
+          <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}"
+            stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
         </svg>
         <div class="pr-label" style="color:${colorVar}">${pct}%</div>
       </div>
     </div>
   </div>`;
 
-      // Exercise groups
-      html += `<div id="ex-list">`;
+      // Exercises
       for (const group of session.groups) {
-        html += `<div class="ex-group">
-      <div class="ex-group-label">${group.label}</div>`;
+        html += `<div class="ex-group"><div class="ex-group-label">${group.label}</div>`;
         for (const ex of group.exercises) {
           const isChecked = !!checked[ex.id];
-          const kg = weights[ex.id] !== undefined ? weights[ex.id] : ex.defaultKg;
+          const swap = swaps[ex.id];
+          const dispName = swap ? swap.name : ex.name;
+          const dispSets = swap ? swap.sets : ex.sets;
+          const dispKg = weights[ex.id] !== undefined ? weights[ex.id] : (swap ? swap.kg : ex.defaultKg);
           const prev = getPrevKg(state, stype, ex.id, todayKey);
-          const trend = prev !== null ? (kg - prev) : null;
+          const trend = prev !== null ? (dispKg - prev) : null;
           let trendHtml = '';
-          if (trend !== null && trend !== 0) trendHtml = `<span class="ex-trend ${trend > 0 ? 'trend-up' : 'trend-down'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}</span>`;
-          else if (prev !== null) trendHtml = `<span class="ex-trend">=${prev}</span>`;
+          if (trend !== null && trend !== 0) trendHtml = `<span class="ex-trend ${trend > 0 ? 'trend-up' : 'trend-down'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}kg</span>`;
+          else if (prev !== null) trendHtml = `<span class="ex-trend">=${prev}kg</span>`;
+
           html += `<div class="ex-card ${isChecked ? 'done' : ''}" id="excard-${ex.id}">
         <div class="ex-main">
           <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')" aria-label="completato">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <div class="ex-body">
-            <div class="ex-name">${ex.name}</div>
+            <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}
+            </div>
             <div class="ex-meta">
-              <span class="ex-sets">${ex.sets}</span>
-              ${ex.note ? `<span class="ex-note-inline">— ${ex.note}</span>` : ''}
+              <span class="ex-sets">${dispSets}</span>
+              <span class="ex-note-inline">${ex.note ? '— ' + ex.note : ''}</span>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+          <div class="ex-right">
             <div class="ex-kg-wrap">
-              <input type="number" class="ex-kg" value="${kg}" min="0" step="0.5"
-                onchange="saveKg('${todayKey}','${ex.id}',this.value,'${stype}')"
-                onfocus="this.select()" aria-label="kg">
+              <input type="number" class="ex-kg" value="${dispKg}" min="0" step="0.5"
+                onchange="saveKg('${todayKey}','${ex.id}',this.value,'${stype}')" onfocus="this.select()">
               <span class="kg-unit">kg</span>
             </div>
             ${trendHtml}
           </div>
         </div>
+        <div class="ex-actions">
+          <button class="swap-btn" onclick="toggleAlts('${ex.id}')">
+            <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            ${swap ? 'Cambia ancora' : 'Macchina occupata?'}
+          </button>
+          ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Ripristina originale</button>` : ''}
+        </div>
+        <div class="alts-panel" id="alts-${ex.id}" style="display:none">
+          <div class="alts-title">Scegli un'alternativa</div>
+          <div class="alt-options">`;
+          for (const alt of ex.alts) {
+            const safeAltName = alt.name.replace(/'/g, "\\'");
+            const safeAltNote = alt.note.replace(/'/g, "\\'");
+            html += `<div class="alt-opt">
+          <div class="alt-opt-info">
+            <div class="alt-opt-name">${alt.name}</div>
+            <div class="alt-opt-meta">${alt.sets} · ${alt.note}</div>
+          </div>
+          <button class="use-btn" onclick="useAlt('${todayKey}','${ex.id}','${stype}','${safeAltName}','${alt.sets}',${dispKg})">Usa</button>
+        </div>`;
+          }
+          html += `</div>
+          <span class="alts-close" onclick="toggleAlts('${ex.id}')">✕ Chiudi</span>
+        </div>
       </div>`;
         }
         html += `</div>`;
       }
-      html += `</div>`;
 
-      // Cardio row
-      html += `<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;margin-bottom:16px">
-    <div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>
-  </div>`;
+      // Cardio
+      html += `<div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>`;
 
-      // Complete zone
+      // Complete
       if (!isDone) {
-        html += `<div style="display:flex;align-items:center;gap:12px">
+        html += `<div class="complete-zone">
       <button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>
-      ${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} esercizi rimanenti</span>` : ''}
+      ${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimasti</span>` : ''}
     </div>`;
       } else {
         html += `<div class="completed-badge">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-      Sessione completata — ottimo lavoro
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Ottimo lavoro — sessione completata
     </div>`;
       }
 
@@ -1540,171 +2054,164 @@
       updateTimerDisplay();
     }
 
-    function getPrevKg(state, stype, exId, skipDate) {
-      const logs = Object.values(state.logs || {})
-        .filter(l => l.type === stype && l.date !== skipDate && l.weights && l.weights[exId] !== undefined)
-        .sort((a, b) => b.date > a.date ? 1 : -1);
-      return logs.length > 0 ? logs[0].weights[exId] : null;
+    function setTodaySession(stype) {
+      const state = gs();
+      const todayKey = today();
+      if (!state.logs) state.logs = {};
+      if (!state.logs[todayKey]) state.logs[todayKey] = { date: todayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
+      state.logs[todayKey].type = stype;
+      ss(state); renderToday();
     }
 
+    function getPrevKg(state, stype, exId, skipDate) {
+      const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.date !== skipDate && l.weights && l.weights[exId] !== undefined).sort((a, b) => b.date > a.date ? 1 : -1);
+      return logs.length > 0 ? logs[0].weights[exId] : null;
+    }
     function toggleEx(dayKey, exId, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false };
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
       const log = state.logs[dayKey];
       if (!log.checked) log.checked = {};
       log.checked[exId] = !log.checked[exId];
       ss(state); renderToday();
     }
-
     function saveKg(dayKey, exId, val, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false };
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
       const log = state.logs[dayKey];
       if (!log.weights) log.weights = {};
       log.weights[exId] = parseFloat(val) || 0;
       ss(state);
     }
-
     function markDone(dayKey, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false };
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
       state.logs[dayKey].done = true;
       ss(state); renderToday();
     }
 
-    /* PROGRESS CHARTS */
-    let currentFilter = 'push';
-    function setPFilter(f, btn) {
-      currentFilter = f;
-      document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderProgress();
-    }
-
-    function renderProgress() {
+    /* ═══════════════════════════════════════════
+       PROGRESS
+    ═══════════════════════════════════════════ */
+    let progFilter = 'push';
+    function renderProgress(f) {
+      if (f) progFilter = f;
       const state = gs();
-      const session = PROG.sessions[currentFilter];
-      const allLogs = Object.values(state.logs || {}).filter(l => l.type === currentFilter).sort((a, b) => a.date > b.date ? 1 : -1);
+      const session = PROG.sessions[progFilter];
+      const allLogs = Object.values(state.logs || {}).filter(l => l.type === progFilter).sort((a, b) => a.date > b.date ? 1 : -1);
       const allEx = session.groups.flatMap(g => g.exercises);
-      const color = PROG.colors[currentFilter];
+      const color = PROG.colors[progFilter];
+      const container = document.getElementById('view-progress');
 
-      // Sparkline charts (top 4 main exercises)
-      const chartsEl = document.getElementById('prog-charts');
-      let chtml = '';
+      let html = `<div class="section-header">
+    <div class="section-title">Progressi</div>
+    <div class="prog-filter">
+      ${['push', 'pull', 'legs'].map(t => `<button class="pf-btn ${progFilter === t ? 'active' : ''}" onclick="renderProgress('${t}')">${PROG.sessions[t].label}</button>`).join('')}
+    </div>
+  </div>`;
+
+      // Charts
+      html += `<div class="prog-grid">`;
       for (const ex of allEx.slice(0, 4)) {
         const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
         const first = pts.length > 0 ? pts[0].v : ex.defaultKg;
         const last = pts.length > 0 ? pts[pts.length - 1].v : ex.defaultKg;
         const delta = last - first;
-        chtml += `<div class="prog-card">
+        html += `<div class="prog-card">
       <div class="prog-card-title">${ex.name}</div>
       <div class="prog-card-sub">${ex.sets}</div>
-      <div class="chart-wrap">
-        ${pts.length >= 2 ? renderSparkline(pts, color) : `<div class="no-data">Dati insufficienti</div>`}
-      </div>
+      <div class="chart-wrap">${pts.length >= 2 ? sparkline(pts, color) : `<div class="no-data-spark">Dati insufficienti</div>`}</div>
       <div class="prog-delta">
-        <div>
-          <div class="delta-val" style="color:${color}">${last} kg</div>
-          <div class="delta-label">ultimo carico</div>
-        </div>
-        <div style="text-align:right">
-          <div class="delta-val" style="font-size:14px;color:${delta > 0 ? 'var(--pull)' : delta < 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)} kg</div>
-          <div class="delta-label">variazione</div>
-        </div>
+        <div><div class="delta-val" style="color:${color}">${last}kg</div><div class="delta-label">ultimo</div></div>
+        <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta > 0 ? 'var(--pull)' : delta < 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
       </div>
     </div>`;
       }
-      chartsEl.innerHTML = chtml || '<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div></div>';
+      html += `</div>`;
 
-      // Volume table
-      const volEl = document.getElementById('vol-table-wrap');
-      if (allLogs.length === 0) { volEl.innerHTML = '<div class="empty"><div class="empty-icon">🏋️</div><div class="empty-text">Completa alcune sessioni prima</div><div class="empty-sub">I dati appariranno qui automaticamente</div></div>'; return; }
-      let thtml = `<table class="vol-table"><thead><tr><th>Esercizio</th><th>Serie</th><th>Primo</th><th>Ultimo</th><th>Δ</th><th>Sessioni</th></tr></thead><tbody>`;
-      for (const group of session.groups) {
-        for (const ex of group.exercises) {
-          const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined);
-          if (pts.length === 0) continue;
-          const first = pts[0].weights[ex.id];
-          const last = pts[pts.length - 1].weights[ex.id];
-          const delta = last - first;
-          thtml += `<tr>
-        <td><div class="vol-name">${ex.name}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
-        <td><span class="mono" style="font-size:11px;color:var(--t3)">${ex.sets}</span></td>
-        <td class="kg-was">${first} kg</td>
-        <td class="kg-now">${last} kg</td>
-        <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
-        <td style="color:var(--t3)">${pts.length}</td>
-      </tr>`;
+      // Table
+      if (allLogs.length === 0) {
+        html += `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div><div class="empty-sub">Completa alcune sessioni ${progFilter.toUpperCase()}</div></div>`;
+      } else {
+        html += `<div style="margin-bottom:12px;font-size:14px;font-weight:700">Tutti i carichi</div>`;
+        html += `<table class="vol-table"><thead><tr><th>Esercizio</th><th>Serie</th><th>Primo</th><th>Ultimo</th><th>Δ</th><th>N</th></tr></thead><tbody>`;
+        for (const group of session.groups) {
+          for (const ex of group.exercises) {
+            const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined);
+            if (!pts.length) continue;
+            const first = pts[0].weights[ex.id], last = pts[pts.length - 1].weights[ex.id], delta = last - first;
+            html += `<tr>
+          <td><div class="vol-name">${ex.name}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
+          <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)">${ex.sets}</span></td>
+          <td class="kg-was">${first}kg</td>
+          <td class="kg-now">${last}kg</td>
+          <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
+          <td style="color:var(--t3)">${pts.length}</td>
+        </tr>`;
+          }
         }
+        html += `</tbody></table>`;
       }
-      thtml += '</tbody></table>';
-      volEl.innerHTML = thtml;
+      container.innerHTML = html;
     }
 
-    function renderSparkline(pts, color) {
-      if (pts.length < 2) return '';
+    function sparkline(pts, color) {
       const vals = pts.map(p => p.v);
-      const min = Math.min(...vals), max = Math.max(...vals);
-      const range = max - min || 1;
-      const W = 300, H = 70, PAD = 4;
-      const points = pts.map((p, i) => {
-        const x = PAD + i * (W - PAD * 2) / (pts.length - 1);
-        const y = H - PAD - (p.v - min) / range * (H - PAD * 2);
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      }).join(' ');
-      const areaPoints = `${PAD},${H} ${points} ${PAD + (pts.length - 1) * (W - PAD * 2) / (pts.length - 1)},${H}`;
+      const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
+      const W = 300, H = 65, P = 4;
+      const points = pts.map((p, i) => `${(P + i * (W - P * 2) / (pts.length - 1)).toFixed(1)},${(H - P - (p.v - min) / range * (H - P * 2)).toFixed(1)}`).join(' ');
+      const lastX = P + (pts.length - 1) * (W - P * 2) / (pts.length - 1);
+      const lastY = H - P - (pts[pts.length - 1].v - min) / range * (H - P * 2);
       return `<svg class="sparkline" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
     <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
-    <polygon fill="${color}" fill-opacity="0.08" points="${areaPoints}"/>
-    ${pts.map((p, i) => {
-        const x = PAD + i * (W - PAD * 2) / (pts.length - 1);
-        const y = H - PAD - (p.v - min) / range * (H - PAD * 2);
-        return i === pts.length - 1 ? `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="${color}"/>` : '';
-      }).join('')}
+    <polygon fill="${color}" fill-opacity="0.07" points="${P},${H} ${points} ${lastX.toFixed(1)},${H}"/>
+    <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3" fill="${color}"/>
   </svg>`;
     }
 
-    /* HISTORY */
+    /* ═══════════════════════════════════════════
+       HISTORY
+    ═══════════════════════════════════════════ */
     function renderHistory() {
       const state = gs();
       const logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
-      const el = document.getElementById('hist-list');
-      if (logs.length === 0) {
-        el.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nessuna sessione registrata</div><div class="empty-sub">Inizia ad allenarti e le sessioni appariranno qui</div></div>`;
-        return;
+      const container = document.getElementById('view-history');
+      let html = `<div class="section-header">
+    <div class="section-title">Storico</div>
+    ${logs.length > 0 ? `<button class="clear-btn" onclick="clearAll()">Cancella tutto</button>` : ''}
+  </div>`;
+      if (!logs.length) {
+        html += `<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nessuna sessione ancora</div><div class="empty-sub">Le sessioni completate appariranno qui</div></div>`;
+        container.innerHTML = html; return;
       }
-      let html = '<div class="hist-list">';
+      html += `<div class="hist-list">`;
       for (const log of logs) {
-        if (!log.type || log.type === 'rest') continue;
+        if (!log.type || !PROG.sessions[log.type]) continue;
         const sess = PROG.sessions[log.type];
-        if (!sess) continue;
         const allEx = sess.groups.flatMap(g => g.exercises);
         const cc = Object.values(log.checked || {}).filter(Boolean).length;
-        const color = PROG.colors[log.type];
+        const swapCount = Object.keys(log.swaps || {}).length;
         html += `<div class="hist-item">
-      <span class="hist-dot" style="background:${color}"></span>
-      <div class="hist-info">
-        <div class="hist-name">${sess.label}</div>
+      <span class="hist-dot" style="background:${PROG.colors[log.type]}"></span>
+      <div>
+        <div class="hist-name">${sess.label}${swapCount > 0 ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px">${swapCount} sost.</span>` : ''}</div>
         <div class="hist-date">${fmtDate(log.date)}</div>
       </div>
-      <div class="hist-right">
-        <div class="hist-count">${cc}/${allEx.length} esercizi</div>
+      <div>
+        <div class="hist-count">${cc}/${allEx.length}</div>
         ${log.done ? '<div class="hist-done-tag">✓ COMPLETA</div>' : ''}
       </div>
     </div>`;
       }
-      html += '</div>';
-      el.innerHTML = html;
+      html += `</div>`;
+      container.innerHTML = html;
     }
 
     function clearAll() {
-      if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) {
-        localStorage.removeItem('ppl_v4');
-        renderHistory(); updateSidebar();
-      }
+      if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v5'); renderHistory(); updateSidebar(); }
     }
 
     /* INIT */
