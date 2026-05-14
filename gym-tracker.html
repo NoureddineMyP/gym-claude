@@ -35,11 +35,11 @@
     *::after {
       box-sizing: border-box;
       margin: 0;
-      padding: 0;
+      padding: 0
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: smooth
     }
 
     body {
@@ -48,36 +48,41 @@
       font-family: 'Syne', sans-serif;
       font-size: 14px;
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased
     }
 
     ::-webkit-scrollbar {
       width: 3px;
-      height: 3px;
+      height: 3px
     }
 
     ::-webkit-scrollbar-thumb {
       background: var(--b2);
-      border-radius: 2px;
+      border-radius: 2px
     }
 
     input[type=number] {
-      -moz-appearance: textfield;
+      -moz-appearance: textfield
     }
 
     input[type=number]::-webkit-outer-spin-button,
     input[type=number]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
+      -webkit-appearance: none
     }
 
     button {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Syne', sans-serif
+    }
+
+    /* DIM MODE */
+    body.dim-mode {
+      filter: brightness(.55) saturate(.7)
     }
 
     .app {
       display: grid;
       grid-template-rows: auto 1fr auto;
-      min-height: 100vh;
+      min-height: 100vh
     }
 
     .topbar {
@@ -89,35 +94,35 @@
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 100
     }
 
     .topbar-logo {
       font-size: 18px;
       font-weight: 800;
-      letter-spacing: -.5px;
+      letter-spacing: -.5px
     }
 
     .topbar-logo span {
-      color: var(--acc);
+      color: var(--acc)
     }
 
     .topbar-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 10px
     }
 
     .topbar-streak {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .shell {
       display: grid;
       grid-template-columns: 200px 1fr;
-      flex: 1;
+      flex: 1
     }
 
     .sidebar {
@@ -128,22 +133,22 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      overflow-y: auto;
+      overflow-y: auto
     }
 
     .sb-logo {
       padding: 22px 18px 18px;
-      border-bottom: 1px solid var(--b1);
+      border-bottom: 1px solid var(--b1)
     }
 
     .sb-logo-text {
       font-size: 19px;
       font-weight: 800;
-      letter-spacing: -.5px;
+      letter-spacing: -.5px
     }
 
     .sb-logo-text span {
-      color: var(--acc);
+      color: var(--acc)
     }
 
     .sb-logo-sub {
@@ -152,7 +157,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       margin-top: 3px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .sb-stats {
@@ -160,31 +165,31 @@
       border-bottom: 1px solid var(--b1);
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 9px
     }
 
     .sb-stat {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: baseline
     }
 
     .sb-stat-label {
       font-size: 10px;
       color: var(--t3);
       text-transform: uppercase;
-      letter-spacing: .07em;
+      letter-spacing: .07em
     }
 
     .sb-stat-val {
       font-family: 'JetBrains Mono', monospace;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 500
     }
 
     .sb-week {
       padding: 14px 18px;
-      border-bottom: 1px solid var(--b1);
+      border-bottom: 1px solid var(--b1)
     }
 
     .sb-section-title {
@@ -192,13 +197,13 @@
       color: var(--t3);
       text-transform: uppercase;
       letter-spacing: .08em;
-      margin-bottom: 9px;
+      margin-bottom: 9px
     }
 
     .week-days {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 3px
     }
 
     .wd {
@@ -208,25 +213,25 @@
       padding: 6px 8px;
       border-radius: var(--r);
       border: 1px solid transparent;
-      transition: all .15s;
+      transition: all .15s
     }
 
     .wd.today {
       background: var(--bg3);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .wd-name {
       font-size: 11px;
       color: var(--t2);
       font-family: 'JetBrains Mono', monospace;
-      width: 28px;
+      width: 28px
     }
 
     .wd-type {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .03em;
+      letter-spacing: .03em
     }
 
     .wd-done {
@@ -235,32 +240,32 @@
       border-radius: 50%;
       background: var(--pull);
       opacity: 0;
-      transition: opacity .2s;
+      transition: opacity .2s
     }
 
     .wd.done .wd-done {
-      opacity: 1;
+      opacity: 1
     }
 
     .type-push {
-      color: var(--push);
+      color: var(--push)
     }
 
     .type-pull {
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .type-legs {
-      color: var(--legs);
+      color: var(--legs)
     }
 
     .type-rest {
-      color: var(--t4);
+      color: var(--t4)
     }
 
     .sb-nav {
       padding: 14px 18px;
-      flex: 1;
+      flex: 1
     }
 
     .nav-item {
@@ -275,50 +280,50 @@
       font-size: 12px;
       font-weight: 600;
       border: 1px solid transparent;
-      margin-bottom: 2px;
+      margin-bottom: 2px
     }
 
     .nav-item:hover {
       background: var(--bg3);
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .nav-item.active {
       background: var(--bg4);
       color: var(--t1);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .nav-icon {
       width: 15px;
       height: 15px;
       flex-shrink: 0;
-      opacity: .5;
+      opacity: .5
     }
 
     .nav-item.active .nav-icon {
-      opacity: 1;
+      opacity: 1
     }
 
     .sb-footer {
       padding: 14px 18px;
-      border-top: 1px solid var(--b1);
+      border-top: 1px solid var(--b1)
     }
 
     .sb-date {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: var(--t3);
+      color: var(--t3)
     }
 
     .main {
       overflow-y: auto;
-      min-width: 0;
+      min-width: 0
     }
 
     .main-inner {
       padding: 28px 32px 80px;
-      max-width: 840px;
+      max-width: 900px
     }
 
     .bottom-nav {
@@ -328,7 +333,7 @@
       grid-template-columns: repeat(3, 1fr);
       position: sticky;
       bottom: 0;
-      z-index: 100;
+      z-index: 100
     }
 
     .bn-item {
@@ -343,7 +348,7 @@
       font-weight: 700;
       letter-spacing: .04em;
       text-transform: uppercase;
-      transition: color .15s;
+      transition: color .15s
     }
 
     .bn-item svg {
@@ -353,35 +358,35 @@
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
-      stroke-linejoin: round;
+      stroke-linejoin: round
     }
 
     .bn-item.active {
-      color: var(--t1);
+      color: var(--t1)
     }
 
     .page-header {
-      margin-bottom: 24px;
+      margin-bottom: 24px
     }
 
     .page-title {
       font-size: 26px;
       font-weight: 800;
       letter-spacing: -.5px;
-      line-height: 1.1;
+      line-height: 1.1
     }
 
     .page-sub {
       font-size: 12px;
       color: var(--t2);
-      margin-top: 5px;
+      margin-top: 5px
     }
 
     .session-selector {
       display: flex;
       gap: 8px;
       margin-bottom: 20px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .ss-btn {
@@ -395,30 +400,30 @@
       letter-spacing: .04em;
       cursor: pointer;
       transition: all .18s;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .ss-btn:hover {
       background: var(--bg3);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .ss-btn.active-push {
       background: rgba(255, 92, 53, .12);
       border-color: rgba(255, 92, 53, .4);
-      color: var(--push);
+      color: var(--push)
     }
 
     .ss-btn.active-pull {
       background: rgba(45, 204, 122, .12);
       border-color: rgba(45, 204, 122, .4);
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .ss-btn.active-legs {
       background: rgba(245, 166, 35, .12);
       border-color: rgba(245, 166, 35, .4);
-      color: var(--legs);
+      color: var(--legs)
     }
 
     .session-type-bar {
@@ -431,7 +436,7 @@
       border-radius: var(--rl);
       margin-bottom: 18px;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 10px
     }
 
     .stype-badge {
@@ -441,59 +446,59 @@
       padding: 4px 11px;
       border-radius: 99px;
       text-transform: uppercase;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .badge-push {
       background: rgba(255, 92, 53, .12);
-      color: var(--push);
+      color: var(--push)
     }
 
     .badge-pull {
       background: rgba(45, 204, 122, .12);
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .badge-legs {
       background: rgba(245, 166, 35, .12);
-      color: var(--legs);
+      color: var(--legs)
     }
 
     .stype-name {
       font-size: 16px;
       font-weight: 700;
       flex: 1;
-      min-width: 120px;
+      min-width: 120px
     }
 
     .stype-right {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-left: auto;
+      margin-left: auto
     }
 
     .progress-ring-wrap {
       position: relative;
       width: 40px;
-      height: 40px;
+      height: 40px
     }
 
     .progress-ring-wrap svg {
-      transform: rotate(-90deg);
+      transform: rotate(-90deg)
     }
 
     .pr-bg {
       fill: none;
       stroke: var(--b1);
-      stroke-width: 3;
+      stroke-width: 3
     }
 
     .pr-fg {
       fill: none;
       stroke-width: 3;
       stroke-linecap: round;
-      transition: stroke-dashoffset .4s ease;
+      transition: stroke-dashoffset .4s ease
     }
 
     .pr-label {
@@ -504,22 +509,23 @@
       justify-content: center;
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
-      font-weight: 500;
+      font-weight: 500
     }
 
+    /* TIMER */
     .timer-widget {
       background: var(--bg2);
       border: 1px solid var(--b1);
       border-radius: var(--rl);
       padding: 16px 20px;
-      margin-bottom: 18px;
+      margin-bottom: 18px
     }
 
     .timer-top {
       display: flex;
       align-items: center;
       gap: 16px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .timer-label {
@@ -527,7 +533,7 @@
       color: var(--t3);
       text-transform: uppercase;
       letter-spacing: .08em;
-      margin-bottom: 5px;
+      margin-bottom: 5px
     }
 
     .timer-display {
@@ -535,21 +541,21 @@
       font-size: 28px;
       font-weight: 500;
       letter-spacing: -.02em;
-      min-width: 80px;
+      min-width: 80px
     }
 
     .timer-display.running {
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .timer-display.paused {
-      color: var(--legs);
+      color: var(--legs)
     }
 
     .timer-controls {
       display: flex;
       gap: 6px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .tbtn {
@@ -562,31 +568,31 @@
       font-weight: 700;
       cursor: pointer;
       transition: all .15s;
-      letter-spacing: .04em;
+      letter-spacing: .04em
     }
 
     .tbtn:hover {
       background: var(--bg4);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .tbtn.tstart {
       background: rgba(45, 204, 122, .1);
       border-color: rgba(45, 204, 122, .25);
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .tbtn.tstop {
       background: rgba(255, 92, 53, .08);
       border-color: rgba(255, 92, 53, .25);
-      color: var(--push);
+      color: var(--push)
     }
 
     .timer-presets {
       display: flex;
       gap: 5px;
       margin-top: 10px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .preset {
@@ -598,17 +604,34 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       cursor: pointer;
-      transition: all .15s;
+      transition: all .15s
     }
 
     .preset:hover {
       background: var(--bg3);
       color: var(--t2);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
+    .timer-bar-wrap {
+      margin-top: 10px;
+      height: 3px;
+      background: var(--b1);
+      border-radius: 2px;
+      overflow: hidden
+    }
+
+    .timer-bar {
+      height: 3px;
+      background: var(--pull);
+      border-radius: 2px;
+      transition: width .95s linear;
+      width: 0%
+    }
+
+    /* EXERCISE CARDS */
     .ex-group {
-      margin-bottom: 18px;
+      margin-bottom: 18px
     }
 
     .ex-group-label {
@@ -620,14 +643,14 @@
       padding-left: 1px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 8px
     }
 
     .ex-group-label::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--b1);
+      background: var(--b1)
     }
 
     .ex-card {
@@ -636,28 +659,28 @@
       border-radius: var(--rl);
       margin-bottom: 6px;
       overflow: hidden;
-      transition: border-color .2s;
+      transition: border-color .2s
     }
 
     .ex-card:hover {
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .ex-card.done {
-      opacity: .5;
+      opacity: .5
     }
 
     .ex-card.done .ex-name {
       text-decoration: line-through;
-      text-decoration-color: var(--t3);
+      text-decoration-color: var(--t3)
     }
 
     .ex-main {
       display: grid;
       grid-template-columns: 36px 1fr auto;
-      align-items: center;
+      align-items: start;
       gap: 10px;
-      padding: 13px 14px;
+      padding: 13px 14px
     }
 
     .ex-check {
@@ -673,26 +696,27 @@
       transition: all .18s;
       flex-shrink: 0;
       color: transparent;
+      margin-top: 2px
     }
 
     .ex-check:hover {
       border-color: var(--b3);
-      background: var(--bg3);
+      background: var(--bg3)
     }
 
     .ex-check.checked {
       background: var(--pull);
       border-color: var(--pull);
-      color: #000;
+      color: #000
     }
 
     .ex-check svg {
       width: 11px;
-      height: 11px;
+      height: 11px
     }
 
     .ex-body {
-      min-width: 0;
+      min-width: 0
     }
 
     .ex-name {
@@ -700,7 +724,7 @@
       font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     .ex-meta {
@@ -708,13 +732,13 @@
       align-items: center;
       gap: 6px;
       margin-top: 3px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .ex-sets {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .ex-note-inline {
@@ -723,7 +747,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 200px;
+      max-width: 200px
     }
 
     .ex-right {
@@ -731,13 +755,13 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 4px;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .ex-kg-wrap {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 5px
     }
 
     .ex-kg {
@@ -752,32 +776,183 @@
       padding: 6px 8px;
       text-align: center;
       outline: none;
-      transition: border-color .15s;
+      transition: border-color .15s
     }
 
     .ex-kg:focus {
       border-color: var(--b3);
-      background: var(--bg4);
+      background: var(--bg4)
     }
 
     .kg-unit {
       font-size: 10px;
       color: var(--t3);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .ex-trend {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: var(--t3);
+      color: var(--t3)
     }
 
     .trend-up {
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .trend-down {
-      color: var(--push);
+      color: var(--push)
+    }
+
+    /* 1RM badge */
+    .orm-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--acc);
+      background: rgba(124, 110, 245, .1);
+      border: 1px solid rgba(124, 110, 245, .2);
+      border-radius: 4px;
+      padding: 2px 5px;
+      margin-top: 2px;
+      display: inline-block
+    }
+
+    /* DELOAD warning */
+    .deload-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--legs);
+      background: rgba(245, 166, 35, .1);
+      border: 1px solid rgba(245, 166, 35, .25);
+      border-radius: 4px;
+      padding: 2px 5px;
+      margin-top: 2px;
+      display: inline-block
+    }
+
+    /* SET LOG */
+    .setlog-area {
+      padding: 0 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .setlog-title {
+      font-size: 10px;
+      color: var(--t3);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 4px
+    }
+
+    .setlog-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .setlog-row {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .setlog-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--t3);
+      width: 18px;
+      text-align: right;
+      flex-shrink: 0
+    }
+
+    .setlog-kg {
+      background: var(--bg3);
+      border: 1px solid var(--b1);
+      border-radius: 6px;
+      color: var(--t1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      width: 56px;
+      padding: 5px 7px;
+      text-align: center;
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .setlog-kg:focus {
+      border-color: var(--b3)
+    }
+
+    .setlog-reps {
+      background: var(--bg3);
+      border: 1px solid var(--b1);
+      border-radius: 6px;
+      color: var(--t1);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      width: 44px;
+      padding: 5px 7px;
+      text-align: center;
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .setlog-reps:focus {
+      border-color: var(--b3)
+    }
+
+    .setlog-sep {
+      font-size: 10px;
+      color: var(--t3);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .setlog-done {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1.5px solid var(--b2);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+      flex-shrink: 0;
+      color: transparent
+    }
+
+    .setlog-done.ok {
+      background: rgba(45, 204, 122, .15);
+      border-color: rgba(45, 204, 122, .4);
+      color: var(--pull)
+    }
+
+    .setlog-done svg {
+      width: 9px;
+      height: 9px
+    }
+
+    .setlog-add {
+      background: transparent;
+      border: 1px dashed var(--b1);
+      border-radius: 6px;
+      color: var(--t3);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em;
+      align-self: flex-start;
+      margin-top: 2px
+    }
+
+    .setlog-add:hover {
+      border-color: var(--b2);
+      color: var(--t2)
     }
 
     .ex-actions {
@@ -785,6 +960,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap
     }
 
     .swap-btn {
@@ -800,13 +976,13 @@
       font-weight: 700;
       cursor: pointer;
       transition: all .15s;
-      letter-spacing: .03em;
+      letter-spacing: .03em
     }
 
     .swap-btn:hover {
       background: var(--bg3);
       border-color: var(--b2);
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .swap-btn svg {
@@ -815,13 +991,35 @@
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
-      stroke-linecap: round;
+      stroke-linecap: round
+    }
+
+    .toggle-sets-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      padding: 5px 10px;
+      color: var(--t3);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .03em
+    }
+
+    .toggle-sets-btn:hover {
+      background: var(--bg3);
+      border-color: var(--b2);
+      color: var(--t2)
     }
 
     .alts-panel {
       background: var(--bg3);
       border-top: 1px solid var(--b1);
-      padding: 12px 14px;
+      padding: 12px 14px
     }
 
     .alts-title {
@@ -829,13 +1027,13 @@
       color: var(--t3);
       text-transform: uppercase;
       letter-spacing: .08em;
-      margin-bottom: 10px;
+      margin-bottom: 10px
     }
 
     .alt-options {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 6px
     }
 
     .alt-opt {
@@ -848,16 +1046,16 @@
       border-radius: var(--r);
       cursor: pointer;
       transition: all .15s;
-      gap: 10px;
+      gap: 10px
     }
 
     .alt-opt:hover {
       border-color: var(--b2);
-      background: var(--bg4);
+      background: var(--bg4)
     }
 
     .alt-opt-info {
-      min-width: 0;
+      min-width: 0
     }
 
     .alt-opt-name {
@@ -865,14 +1063,14 @@
       font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     .alt-opt-meta {
       font-size: 10px;
       color: var(--t3);
       margin-top: 2px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .use-btn {
@@ -886,11 +1084,11 @@
       cursor: pointer;
       flex-shrink: 0;
       transition: opacity .15s;
-      letter-spacing: .03em;
+      letter-spacing: .03em
     }
 
     .use-btn:hover {
-      opacity: .85;
+      opacity: .85
     }
 
     .alts-close {
@@ -898,11 +1096,53 @@
       color: var(--t3);
       cursor: pointer;
       margin-top: 8px;
-      display: inline-block;
+      display: inline-block
     }
 
     .alts-close:hover {
-      color: var(--t2);
+      color: var(--t2)
+    }
+
+    /* WARMUP */
+    .warmup-panel {
+      background: rgba(124, 110, 245, .05);
+      border: 1px solid rgba(124, 110, 245, .15);
+      border-radius: var(--r);
+      padding: 10px 14px;
+      margin: 0 14px 10px
+    }
+
+    .warmup-title {
+      font-size: 10px;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 7px;
+      font-weight: 700
+    }
+
+    .warmup-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .warmup-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--t2)
+    }
+
+    .warmup-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--acc);
+      flex-shrink: 0;
+      opacity: .5
     }
 
     .cardio-row {
@@ -915,7 +1155,7 @@
       border-radius: var(--rl);
       margin-bottom: 16px;
       font-size: 12px;
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .cardio-dot {
@@ -923,14 +1163,14 @@
       height: 6px;
       border-radius: 50%;
       background: var(--acc);
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .complete-zone {
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .complete-btn {
@@ -943,15 +1183,15 @@
       font-weight: 700;
       cursor: pointer;
       transition: all .18s;
-      letter-spacing: .02em;
+      letter-spacing: .02em
     }
 
     .complete-btn:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.1)
     }
 
     .complete-btn:active {
-      transform: scale(.97);
+      transform: scale(.97)
     }
 
     .completed-badge {
@@ -960,12 +1200,12 @@
       gap: 8px;
       color: var(--pull);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 600
     }
 
     .complete-hint {
       font-size: 11px;
-      color: var(--t3);
+      color: var(--t3)
     }
 
     .rest-card {
@@ -973,23 +1213,23 @@
       border: 1px solid var(--b1);
       border-radius: var(--rl);
       padding: 48px 32px;
-      text-align: center;
+      text-align: center
     }
 
     .rest-icon {
       font-size: 36px;
-      margin-bottom: 14px;
+      margin-bottom: 14px
     }
 
     .rest-title {
       font-size: 18px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 6px
     }
 
     .rest-sub {
       color: var(--t2);
-      font-size: 13px;
+      font-size: 13px
     }
 
     .rest-tip {
@@ -1002,23 +1242,23 @@
       color: var(--t2);
       max-width: 360px;
       margin-left: auto;
-      margin-right: auto;
+      margin-right: auto
     }
 
     .sched-pick {
-      margin-top: 20px;
+      margin-top: 20px
     }
 
     .sched-pick-title {
       font-size: 12px;
       color: var(--t2);
-      margin-bottom: 12px;
+      margin-bottom: 12px
     }
 
     .sched-btns {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .sched-btn {
@@ -1031,30 +1271,31 @@
       cursor: pointer;
       transition: all .18s;
       letter-spacing: .04em;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .sched-btn:hover {
-      background: var(--bg3);
+      background: var(--bg3)
     }
 
     .sched-btn-push {
-      color: var(--push);
+      color: var(--push)
     }
 
     .sched-btn-pull {
-      color: var(--pull);
+      color: var(--pull)
     }
 
     .sched-btn-legs {
-      color: var(--legs);
+      color: var(--legs)
     }
 
+    /* PROGRESS PAGE */
     .prog-filter {
       display: flex;
       gap: 7px;
       margin-bottom: 22px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .pf-btn {
@@ -1067,25 +1308,25 @@
       font-weight: 700;
       cursor: pointer;
       transition: all .15s;
-      letter-spacing: .04em;
+      letter-spacing: .04em
     }
 
     .pf-btn:hover {
       background: var(--bg3);
-      color: var(--t2);
+      color: var(--t2)
     }
 
     .pf-btn.active {
       background: var(--bg3);
       color: var(--t1);
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .prog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 28px
     }
 
     .prog-card {
@@ -1094,6 +1335,12 @@
       border-radius: var(--rl);
       padding: 18px;
       overflow: hidden;
+      cursor: pointer;
+      transition: border-color .2s
+    }
+
+    .prog-card:hover {
+      border-color: var(--b2)
     }
 
     .prog-card-title {
@@ -1102,23 +1349,23 @@
       margin-bottom: 2px;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     .prog-card-sub {
       font-size: 10px;
       color: var(--t3);
       margin-bottom: 14px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .chart-wrap {
-      height: 70px;
+      height: 70px
     }
 
     .sparkline {
       width: 100%;
-      height: 70px;
+      height: 70px
     }
 
     .no-data-spark {
@@ -1127,32 +1374,67 @@
       justify-content: center;
       height: 70px;
       font-size: 11px;
-      color: var(--t3);
+      color: var(--t3)
     }
 
     .prog-delta {
       margin-top: 10px;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: baseline
     }
 
     .delta-val {
       font-family: 'JetBrains Mono', monospace;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 500
     }
 
     .delta-label {
       font-size: 10px;
       color: var(--t3);
       text-transform: uppercase;
-      letter-spacing: .07em;
+      letter-spacing: .07em
+    }
+
+    /* EXPANDED CHART */
+    .chart-expanded {
+      background: var(--bg2);
+      border: 1px solid var(--b2);
+      border-radius: var(--rl);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: none
+    }
+
+    .chart-expanded.open {
+      display: block
+    }
+
+    .chart-exp-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .chart-exp-sub {
+      font-size: 11px;
+      color: var(--t3);
+      margin-bottom: 16px
+    }
+
+    .chart-svg-wrap {
+      width: 100%;
+      overflow-x: auto
+    }
+
+    .chart-svg-wrap svg {
+      min-width: 400px
     }
 
     .vol-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: collapse
     }
 
     .vol-table th {
@@ -1163,71 +1445,72 @@
       padding: 7px 0;
       border-bottom: 1px solid var(--b1);
       text-align: left;
-      font-weight: 400;
+      font-weight: 400
     }
 
     .vol-table th:not(:first-child) {
-      text-align: right;
+      text-align: right
     }
 
     .vol-table td {
       padding: 10px 0;
       border-bottom: 1px solid var(--b1);
       font-size: 12px;
-      vertical-align: middle;
+      vertical-align: middle
     }
 
     .vol-table tr:last-child td {
-      border-bottom: none;
+      border-bottom: none
     }
 
     .vol-table tr:hover td {
-      background: var(--bg3);
+      background: var(--bg3)
     }
 
     .vol-table td:not(:first-child) {
       text-align: right;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .vol-name {
       font-weight: 600;
-      font-size: 12px;
+      font-size: 12px
     }
 
     .vol-sub {
       font-size: 10px;
       color: var(--t3);
-      margin-top: 2px;
+      margin-top: 2px
     }
 
     .kg-now {
-      color: var(--t1);
+      color: var(--t1)
     }
 
     .kg-was {
-      color: var(--t3);
+      color: var(--t3)
     }
 
     .kg-up {
       color: var(--pull);
-      font-size: 11px;
+      font-size: 11px
     }
 
     .kg-down {
       color: var(--push);
-      font-size: 11px;
+      font-size: 11px
     }
 
     .kg-same {
       color: var(--t3);
-      font-size: 11px;
+      font-size: 11px
     }
 
+    /* HISTORY */
     .hist-list {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 7px
     }
 
     .hist-item {
@@ -1239,37 +1522,37 @@
       grid-template-columns: auto 1fr auto;
       align-items: center;
       gap: 14px;
-      transition: border-color .15s;
+      transition: border-color .15s
     }
 
     .hist-item:hover {
-      border-color: var(--b2);
+      border-color: var(--b2)
     }
 
     .hist-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .hist-name {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 600
     }
 
     .hist-date {
       font-size: 11px;
       color: var(--t3);
       font-family: 'JetBrains Mono', monospace;
-      margin-top: 2px;
+      margin-top: 2px
     }
 
     .hist-count {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--t2);
-      text-align: right;
+      text-align: right
     }
 
     .hist-done-tag {
@@ -1277,30 +1560,106 @@
       color: var(--pull);
       font-weight: 700;
       letter-spacing: .04em;
-      margin-top: 2px;
+      margin-top: 2px
     }
 
-    .empty {
-      text-align: center;
-      padding: 56px 20px;
-      color: var(--t3);
+    /* BODY WEIGHT */
+    .bw-section {
+      margin-top: 28px
     }
 
-    .empty-icon {
-      font-size: 32px;
+    .bw-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 14px;
-      opacity: .5;
+      flex-wrap: wrap
     }
 
-    .empty-text {
+    .bw-input {
+      background: var(--bg3);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      color: var(--t1);
+      font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
-      font-weight: 600;
-      color: var(--t2);
-      margin-bottom: 5px;
+      width: 80px;
+      padding: 8px 10px;
+      text-align: center;
+      outline: none;
+      transition: border-color .15s
     }
 
-    .empty-sub {
+    .bw-input:focus {
+      border-color: var(--b3)
+    }
+
+    .bw-save {
+      background: var(--bg3);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      color: var(--t1);
       font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em
+    }
+
+    .bw-save:hover {
+      background: var(--bg4);
+      border-color: var(--b2)
+    }
+
+    .bw-label {
+      font-size: 11px;
+      color: var(--t3)
+    }
+
+    .bw-chart-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--b1);
+      border-radius: var(--rl);
+      padding: 18px;
+      margin-bottom: 14px
+    }
+
+    .bw-chart-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px
+    }
+
+    /* EXPORT/IMPORT */
+    .data-tools {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .data-btn {
+      background: transparent;
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      color: var(--t2);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 7px 13px;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .04em
+    }
+
+    .data-btn:hover {
+      background: var(--bg3);
+      border-color: var(--b2)
+    }
+
+    .data-btn.danger:hover {
+      border-color: var(--push);
+      color: var(--push)
     }
 
     .section-header {
@@ -1309,13 +1668,13 @@
       justify-content: space-between;
       margin-bottom: 18px;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 10px
     }
 
     .section-title {
       font-size: 22px;
       font-weight: 800;
-      letter-spacing: -.4px;
+      letter-spacing: -.4px
     }
 
     .clear-btn {
@@ -1328,113 +1687,167 @@
       padding: 6px 12px;
       cursor: pointer;
       transition: all .15s;
-      letter-spacing: .04em;
+      letter-spacing: .04em
     }
 
     .clear-btn:hover {
       border-color: var(--push);
-      color: var(--push);
+      color: var(--push)
+    }
+
+    .empty {
+      text-align: center;
+      padding: 56px 20px;
+      color: var(--t3)
+    }
+
+    .empty-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+      opacity: .5
+    }
+
+    .empty-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--t2);
+      margin-bottom: 5px
+    }
+
+    .empty-sub {
+      font-size: 12px
     }
 
     .fade-in {
-      animation: fadeIn .25s ease;
+      animation: fadeIn .25s ease
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(5px);
+        transform: translateY(5px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
       }
+    }
+
+    /* TOOLTIP */
+    .tooltip-wrap {
+      position: relative;
+      display: inline-block
+    }
+
+    .tooltip-content {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg4);
+      border: 1px solid var(--b2);
+      border-radius: var(--r);
+      padding: 7px 10px;
+      font-size: 11px;
+      color: var(--t1);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 50;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .tooltip-wrap:hover .tooltip-content {
+      opacity: 1
     }
 
     @media(max-width:720px) {
       .topbar {
-        display: flex;
+        display: flex
       }
 
       .bottom-nav {
-        display: grid;
+        display: grid
       }
 
       .shell {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
       }
 
       .sidebar {
-        display: none;
+        display: none
       }
 
       .app {
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto 1fr auto
       }
 
       .main-inner {
-        padding: 16px 14px 16px;
+        padding: 16px 14px 16px
       }
 
       .page-title {
-        font-size: 20px;
+        font-size: 20px
       }
 
       .session-type-bar {
-        padding: 12px 14px;
+        padding: 12px 14px
       }
 
       .stype-name {
-        font-size: 14px;
+        font-size: 14px
       }
 
       .timer-widget {
-        padding: 13px 14px;
+        padding: 13px 14px
       }
 
       .timer-display {
-        font-size: 24px;
+        font-size: 24px
       }
 
       .prog-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr
       }
 
       .ex-note-inline {
-        display: none;
+        display: none
       }
 
       .ex-main {
         gap: 8px;
-        padding: 11px 12px;
+        padding: 11px 12px
       }
 
       .ex-kg {
-        width: 56px;
+        width: 56px
       }
     }
 
     @media(max-width:400px) {
       .prog-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
       }
 
       .session-selector {
-        gap: 6px;
+        gap: 6px
       }
 
       .ss-btn {
         padding: 7px 13px;
-        font-size: 11px;
+        font-size: 11px
       }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- PIN SCREEN -->
   <div id="pin-screen"
-    style="display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+    style="display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;">
     <div style="text-align:center;max-width:300px;width:90%;">
       <div style="font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;">PPL<span
           style="color:var(--acc);">.</span></div>
@@ -1449,24 +1862,24 @@
         style="height:18px;font-size:11px;color:var(--push);margin-top:10px;font-family:'JetBrains Mono',monospace;">
       </div>
       <button onclick="checkPin()"
-        style="width:100%;margin-top:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r);padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:opacity .15s;"
-        onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-        Entra
-      </button>
+        style="width:100%;margin-top:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r);padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;">Entra</button>
       <div style="margin-top:24px;font-size:10px;color:var(--t3);">Accesso privato · PIN modificabile nel codice</div>
     </div>
   </div>
-  <div id="main-app" style="display:none;" class="app">
 
+  <!-- MAIN APP -->
+  <div id="main-app" style="display:none;" class="app">
     <header class="topbar">
       <div class="topbar-logo">PPL<span>.</span></div>
       <div class="topbar-right">
+        <button onclick="toggleDim()"
+          style="background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:4px 8px;cursor:pointer;letter-spacing:.04em;"
+          id="dim-btn-mob">DIM</button>
         <span class="topbar-streak" id="mob-streak">0 🔥</span>
       </div>
     </header>
 
     <div class="shell">
-
       <aside class="sidebar">
         <div class="sb-logo">
           <div class="sb-logo-text">PPL<span>.</span></div>
@@ -1511,9 +1924,24 @@
             </svg>
             Storico
           </div>
+          <div class="nav-item" onclick="nav('bodyweight')">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            Peso corporeo
+          </div>
         </div>
         <div class="sb-footer">
           <div class="sb-date" id="sb-fulldate"></div>
+          <button onclick="toggleDim()" id="dim-btn-sb"
+            style="margin-top:10px;width:100%;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:5px 10px;cursor:pointer;letter-spacing:.05em;transition:all .15s;">🌑
+            DIM MODE</button>
+          <div class="data-tools" style="margin-top:8px;">
+            <button class="data-btn" onclick="exportData()">↑ Export</button>
+            <button class="data-btn" onclick="importData()">↓ Import</button>
+          </div>
           <button onclick="logout()"
             style="margin-top:10px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:5px 10px;cursor:pointer;letter-spacing:.05em;width:100%;transition:all .15s;"
             onmouseover="this.style.borderColor='var(--push)';this.style.color='var(--push)'"
@@ -1526,6 +1954,7 @@
           <div id="view-today" class="fade-in"></div>
           <div id="view-progress" style="display:none" class="fade-in"></div>
           <div id="view-history" style="display:none" class="fade-in"></div>
+          <div id="view-bodyweight" style="display:none" class="fade-in"></div>
         </div>
       </main>
     </div>
@@ -1553,11 +1982,18 @@
         </svg>
         Storico
       </div>
+      <div class="bn-item" id="bn-bodyweight" onclick="nav('bodyweight')">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        Peso
+      </div>
     </nav>
-  </div>
   </div>
 
   <script>
+    // ─── DATA ───────────────────────────────────────────────────────────────────
     const PROG = {
       colors: { push: '#ff5c35', pull: '#2dcc7a', legs: '#f5a623' },
       sessions: {
@@ -1568,24 +2004,15 @@
               label: 'Petto', exercises: [
                 {
                   id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34, note: 'Priorità — vai a cedimento -1',
-                  alts: [
-                    { name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Se la macchina è occupata — carico -10%' },
-                    { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM, ottima alternativa' }
-                  ]
+                  alts: [{ name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Se la macchina è occupata — carico -10%' }, { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM, ottima alternativa' }]
                 },
                 {
                   id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19, note: 'Petto alto — prima delle croci',
-                  alts: [
-                    { name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Libera quasi sempre' },
-                    { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con cavi' }
-                  ]
+                  alts: [{ name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Libera quasi sempre' }, { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con cavi' }]
                 },
                 {
                   id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36, note: 'Stira bene a fine movimento',
-                  alts: [
-                    { name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Stessa funzione, più controllo' },
-                    { name: 'Croci manubri su panca piatta', sets: '3×12-15', note: 'Classico, funziona sempre' }
-                  ]
+                  alts: [{ name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Stessa funzione, più controllo' }, { name: 'Croci manubri su panca piatta', sets: '3×12-15', note: 'Classico, funziona sempre' }]
                 },
               ]
             },
@@ -1593,17 +2020,11 @@
               label: 'Spalle', exercises: [
                 {
                   id: 'p4', name: 'Shoulder press macchina', sets: '3×10-12', defaultKg: 29, note: 'Dopo il petto',
-                  alts: [
-                    { name: 'Military press manubri seduto', sets: '3×10-12', note: 'Stessa funzione, più stabilizzatori' },
-                    { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM, più volume totale spalla' }
-                  ]
+                  alts: [{ name: 'Military press manubri seduto', sets: '3×10-12', note: 'Stessa funzione, più stabilizzatori' }, { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM, più volume totale spalla' }]
                 },
                 {
                   id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8, note: 'Target: 8 kg',
-                  alts: [
-                    { name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' },
-                    { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Se disponibile — facile da caricare' }
-                  ]
+                  alts: [{ name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' }, { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Se disponibile — facile da caricare' }]
                 },
               ]
             },
@@ -1611,10 +2032,7 @@
               label: 'Tricipiti', exercises: [
                 {
                   id: 'p6', name: 'Pushdown cavi', sets: '3×12-15', defaultKg: 20, note: 'Fisso — non saltare',
-                  alts: [
-                    { name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite' },
-                    { name: 'Dips parallele (assistite)', sets: '3×10-12', note: 'Peso corpo — sempre disponibile' }
-                  ]
+                  alts: [{ name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite' }, { name: 'Dips parallele (assistite)', sets: '3×10-12', note: 'Peso corpo — sempre disponibile' }]
                 },
               ]
             },
@@ -1628,24 +2046,15 @@
               label: 'Dorsali', exercises: [
                 {
                   id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40, note: 'Max ampiezza, scapole giù',
-                  alts: [
-                    { name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stesso attrezzo, diversa angolazione' },
-                    { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se la macchina è disponibile' }
-                  ]
+                  alts: [{ name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stesso attrezzo, diversa angolazione' }, { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se la macchina è disponibile' }]
                 },
                 {
                   id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30, note: 'Gomiti vicino, pausa',
-                  alts: [
-                    { name: 'Rematore T-bar', sets: '4×10-12', note: 'Se il cavo basso è occupato' },
-                    { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }
-                  ]
+                  alts: [{ name: 'Rematore T-bar', sets: '4×10-12', note: 'Se il cavo basso è occupato' }, { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }]
                 },
                 {
                   id: 'l3', name: 'Straight arm pulldown', sets: '3×12-15', defaultKg: 20, note: 'Isolamento dorsale puro',
-                  alts: [
-                    { name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' },
-                    { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
-                  ]
+                  alts: [{ name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' }, { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }]
                 },
               ]
             },
@@ -1653,10 +2062,7 @@
               label: 'Spalla posteriore', exercises: [
                 {
                   id: 'l4', name: 'Alzata a Y / face pull', sets: '3×12-15', defaultKg: 6, note: 'Salute spalla — mai saltare',
-                  alts: [
-                    { name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottima alternativa con cavo alto' },
-                    { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo, più isolamento' }
-                  ]
+                  alts: [{ name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottima alternativa con cavo alto' }, { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo, più isolamento' }]
                 },
               ]
             },
@@ -1664,10 +2070,7 @@
               label: 'Bicipiti', exercises: [
                 {
                   id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22, note: 'Eccentric 3 sec',
-                  alts: [
-                    { name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' },
-                    { name: 'Curl cavo basso (presa supina)', sets: '3×12-15', note: 'Tensione costante — ottimo' }
-                  ]
+                  alts: [{ name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' }, { name: 'Curl cavo basso (presa supina)', sets: '3×12-15', note: 'Tensione costante — ottimo' }]
                 },
               ]
             },
@@ -1681,17 +2084,11 @@
               label: 'Quadricipiti', exercises: [
                 {
                   id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75, note: 'Obiettivo 80-90 kg ad agosto',
-                  alts: [
-                    { name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM, ottimo per quads' },
-                    { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }
-                  ]
+                  alts: [{ name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM, ottimo per quads' }, { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }]
                 },
                 {
                   id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59, note: 'Pausa 1 sec in cima',
-                  alts: [
-                    { name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' },
-                    { name: 'Hack squat con ROM corto', sets: '3×15', note: 'Enfatizza quads se la macchina è occupata' }
-                  ]
+                  alts: [{ name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' }, { name: 'Hack squat con ROM corto', sets: '3×15', note: 'Enfatizza quads se la macchina è occupata' }]
                 },
               ]
             },
@@ -1699,10 +2096,7 @@
               label: 'Ischiocrurali', exercises: [
                 {
                   id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45, note: 'Eccentric 3 sec, piede neutro',
-                  alts: [
-                    { name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina diversa posizione' },
-                    { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Sempre disponibile — ottimo stretch' }
-                  ]
+                  alts: [{ name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina diversa posizione' }, { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Sempre disponibile — ottimo stretch' }]
                 },
               ]
             },
@@ -1710,24 +2104,15 @@
               label: 'Polpacci & accessori', exercises: [
                 {
                   id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40, note: 'Pausa 2 sec in basso',
-                  alts: [
-                    { name: 'Calf raise leg press', sets: '4×15-20', note: 'Sulla leg press — sempre disponibile' },
-                    { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }
-                  ]
+                  alts: [{ name: 'Calf raise leg press', sets: '4×15-20', note: 'Sulla leg press — sempre disponibile' }, { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }]
                 },
                 {
                   id: 'g5', name: 'Adduttori', sets: '2×12', defaultKg: 36, note: '',
-                  alts: [
-                    { name: 'Sumo squat con manubrio', sets: '3×12', note: 'Allena adduttori + glutei' },
-                    { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero — sempre disponibile' }
-                  ]
+                  alts: [{ name: 'Sumo squat con manubrio', sets: '3×12', note: 'Allena adduttori + glutei' }, { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero — sempre disponibile' }]
                 },
                 {
                   id: 'g6', name: 'Abduttori', sets: '2×12', defaultKg: 36, note: '',
-                  alts: [
-                    { name: 'Hip abduction con fascia', sets: '3×15', note: 'Con elastico — sempre disponibile' },
-                    { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }
-                  ]
+                  alts: [{ name: 'Hip abduction con fascia', sets: '3×15', note: 'Con elastico — sempre disponibile' }, { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }]
                 },
               ]
             },
@@ -1738,175 +2123,183 @@
     };
 
     const DAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
+    const BASE_WEEK = ['pull', 'rest', 'legs', 'rest', 'pull', 'push', 'push'];
 
+    // ─── STORAGE ─────────────────────────────────────────────────────────────────
+    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v7') || '{}') } catch (e) { return {} } }
+    function ss(s) { localStorage.setItem('ppl_v7', JSON.stringify(s)) }
 
-    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v6') || '{}'); } catch (e) { return {}; } }
-    function ss(s) { localStorage.setItem('ppl_v6', JSON.stringify(s)); }
+    // ─── DATE HELPERS ────────────────────────────────────────────────────────────
+    function today() { return new Date().toISOString().slice(0, 10) }
+    function weekStart() { const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day), m = new Date(d); m.setDate(d.getDate() + diff); return m.toISOString().slice(0, 10) }
+    function dayOfWeek() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1 }
+    function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10) }
+    function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }) }
 
-    function today() { return new Date().toISOString().slice(0, 10); }
-    function weekStart() {
-      const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day);
-      const m = new Date(d); m.setDate(d.getDate() + diff);
-      return m.toISOString().slice(0, 10);
-    }
-    function dayOfWeek() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1; }
-    function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10); }
-    function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }); }
+    // ─── 1RM Epley ───────────────────────────────────────────────────────────────
+    function calc1RM(kg, reps) { if (!kg || !reps || reps <= 0) return null; if (reps === 1) return kg; return Math.round(kg * (1 + reps / 30)) }
 
+    // ─── TIMER ───────────────────────────────────────────────────────────────────
     let timerInt = null, timerSec = 0, timerTotal = 0, timerRunning = false;
-    function timerTick() {
-      if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; timerSec = 0; updateTimerDisplay(); playBeep(); return; }
-      timerSec--; updateTimerDisplay();
-    }
-    function startTimer() { if (timerRunning || timerSec <= 0) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay(); }
-    function pauseTimer() { clearInterval(timerInt); timerRunning = false; updateTimerDisplay(); }
-    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; timerTotal = timerSec; updateTimerDisplay(); if (preset > 0) startTimer(); }
-    function updateTimerDisplay() {
-      const el = document.getElementById('timer-display');
-      if (!el) return;
-      const m = Math.floor(timerSec / 60), s = timerSec % 60;
-      el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-      el.className = 'timer-display' + (timerRunning ? ' running' : timerSec > 0 ? ' paused' : '');
-    }
-    function playBeep() {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        [0, 0.15, 0.3].forEach(t => {
-          const o = ctx.createOscillator(), g = ctx.createGain();
-          o.connect(g); g.connect(ctx.destination);
-          o.frequency.value = 880; g.gain.setValueAtTime(0.3, ctx.currentTime + t);
-          g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.12);
-          o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.12);
-        });
-      } catch (e) { }
-    }
+    function timerTick() { if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; timerSec = 0; updateTimerDisplay(); playBeep(); vibrateEnd(); return } timerSec--; updateTimerDisplay(); updateTimerBar() }
+    function startTimer() { if (timerRunning || timerSec <= 0) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay() }
+    function pauseTimer() { clearInterval(timerInt); timerRunning = false; updateTimerDisplay() }
+    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; timerTotal = timerSec; updateTimerBar(); updateTimerDisplay(); if (preset > 0) startTimer() }
+    function updateTimerDisplay() { const el = document.getElementById('timer-display'); if (!el) return; const m = Math.floor(timerSec / 60), s = timerSec % 60; el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; el.className = 'timer-display' + (timerRunning ? ' running' : timerSec > 0 ? ' paused' : '') }
+    function updateTimerBar() { const el = document.getElementById('timer-bar'); if (!el) return; const pct = timerTotal > 0 ? Math.round((timerSec / timerTotal) * 100) : 0; el.style.width = pct + '%'; el.style.background = pct > 33 ? 'var(--pull)' : pct > 10 ? 'var(--legs)' : 'var(--push)' }
+    function playBeep() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)();[0, .15, .3].forEach(t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = 880; g.gain.setValueAtTime(.3, ctx.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + t + .12); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .12) }) } catch (e) { } }
+    function vibrateEnd() { try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 300]) } catch (e) { } }
 
+    // ─── DIM MODE ────────────────────────────────────────────────────────────────
+    let dimMode = false;
+    function toggleDim() { dimMode = !dimMode; document.body.classList.toggle('dim-mode', dimMode); const btns = [document.getElementById('dim-btn-sb'), document.getElementById('dim-btn-mob')]; btns.forEach(b => { if (b) b.style.color = dimMode ? 'var(--legs)' : 'var(--t3)' }) }
+
+    // ─── NAVIGATION ──────────────────────────────────────────────────────────────
     let currentView = 'today';
     function nav(v) {
       currentView = v;
-      ['today', 'progress', 'history'].forEach(x => {
-        const el = document.getElementById('view-' + x);
-        el.style.display = x === v ? 'block' : 'none';
-        if (x === v) { el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in'); }
-      });
-      document.querySelectorAll('.nav-item').forEach((el, i) => { el.classList.toggle('active', ['today', 'progress', 'history'][i] === v); });
-      ['today', 'progress', 'history'].forEach(x => { const b = document.getElementById('bn-' + x); if (b) b.classList.toggle('active', x === v); });
+      const views = ['today', 'progress', 'history', 'bodyweight'];
+      views.forEach(x => { const el = document.getElementById('view-' + x); if (!el) return; el.style.display = x === v ? 'block' : 'none'; if (x === v) { el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in') } });
+      document.querySelectorAll('.nav-item').forEach((el, i) => { el.classList.toggle('active', views[i] === v) });
+      views.forEach(x => { const b = document.getElementById('bn-' + x); if (b) b.classList.toggle('active', x === v) });
       if (v === 'today') renderToday();
       if (v === 'progress') renderProgress('push');
       if (v === 'history') renderHistory();
+      if (v === 'bodyweight') renderBodyweight();
     }
 
+    // ─── SIDEBAR ─────────────────────────────────────────────────────────────────
     function updateSidebar() {
       const state = gs(), logs = state.logs || {}, ws = weekStart(), all = Object.values(logs);
       const total = all.length, week = all.filter(l => l.date >= ws).length, streak = calcStreak(state);
-      const els = ['sb-total', 'sb-week-count', 'sb-streak'];
-      [total, week, streak].forEach((v, i) => { const e = document.getElementById(els[i]); if (e) e.textContent = v; });
+      ['sb-total', 'sb-week-count', 'sb-streak'].forEach((id, i) => { const e = document.getElementById(id); if (e) e.textContent = [total, week, streak][i] });
       const mob = document.getElementById('mob-streak'); if (mob) mob.textContent = streak + ' 🔥';
       const now = new Date();
       const sbDay = document.getElementById('sb-dayname'); if (sbDay) sbDay.textContent = now.toLocaleDateString('it-IT', { weekday: 'long' });
       const sbFull = document.getElementById('sb-fulldate'); if (sbFull) sbFull.textContent = now.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
-
       const todayIdx = dayOfWeek();
-      const todaySession = getTodaySession();
       let whtml = '';
       for (let i = 0; i < 7; i++) {
         const dkey = dateOffset(i - todayIdx);
         const isDone = logs[dkey] && logs[dkey].done;
         const stype = getScheduledType(i, state);
-        whtml += `<div class="wd ${i === todayIdx ? 'today' : ''} ${isDone ? 'done' : ''}">
-      <span class="wd-name">${DAYS[i]}</span>
-      <span class="wd-type type-${stype}">${stype === 'rest' ? '—' : stype.toUpperCase()}</span>
-      <span class="wd-done"></span>
-    </div>`;
+        whtml += `<div class="wd ${i === todayIdx ? 'today' : ''} ${isDone ? 'done' : ''}"><span class="wd-name">${DAYS[i]}</span><span class="wd-type type-${stype}">${stype === 'rest' ? '—' : stype.toUpperCase()}</span><span class="wd-done"></span></div>`;
       }
       const wdEl = document.getElementById('week-days'); if (wdEl) wdEl.innerHTML = whtml;
     }
 
-    function calcStreak(state) {
-      const logs = state.logs || {};
-      let streak = 0;
-      for (let i = 0; i < 60; i++) {
-        const d = dateOffset(-i);
-        if (logs[d] && logs[d].done) streak++;
-        else if (i > 0) break;
-      }
-      return streak;
+    function calcStreak(state) { const logs = state.logs || {}; let s = 0; for (let i = 0; i < 60; i++) { const d = dateOffset(-i); if (logs[d] && logs[d].done) s++; else if (i > 0) break } return s }
+    function getDefaultForDay(dayIdx) { return BASE_WEEK[dayIdx] || 'rest' }
+    function getScheduledType(dayIdx, state) { const dkey = dateOffset(dayIdx - dayOfWeek()); const log = (state.logs || {})[dkey]; if (log && log.type) return log.type; return getDefaultForDay(dayIdx) }
+    function getTodaySession() { const state = gs(); const log = (state.logs || {})[today()]; if (log && log.type) return log.type; return getDefaultForDay(dayOfWeek()) }
+
+    // ─── DELOAD DETECTION ────────────────────────────────────────────────────────
+    function checkDeload(state, stype, exId) {
+      const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.weights && l.weights[exId] !== undefined).sort((a, b) => a.date > b.date ? 1 : -1);
+      if (logs.length < 3) return false;
+      const last3 = logs.slice(-3).map(l => l.weights[exId]);
+      return last3[0] === last3[1] && last3[1] === last3[2];
     }
 
-    const WEEKEND_PUSH = ['push', 'push']; 
-    const BASE_WEEK = ['pull', 'rest', 'legs', 'rest', 'pull', 'push', 'push'];
-
-    function getDefaultForDay(dayIdx) {
-      return BASE_WEEK[dayIdx] || 'rest';
+    // ─── WARMUP CALC ─────────────────────────────────────────────────────────────
+    function calcWarmup(kg) {
+      if (!kg || kg < 20) return [];
+      return [
+        { pct: 50, reps: 10, kg: Math.round(kg * 0.5 / 2.5) * 2.5 },
+        { pct: 70, reps: 5, kg: Math.round(kg * 0.7 / 2.5) * 2.5 },
+        { pct: 85, reps: 3, kg: Math.round(kg * 0.85 / 2.5) * 2.5 },
+      ];
     }
 
-    function getScheduledType(dayIdx, state) {
-      const dkey = dateOffset(dayIdx - dayOfWeek());
-      const log = (state.logs || {})[dkey];
-      if (log && log.type) return log.type;
-      return getDefaultForDay(dayIdx);
-    }
-
-    function getTodaySession() {
-      const state = gs();
-      const log = (state.logs || {})[today()];
-      if (log && log.type) return log.type;
-      return getDefaultForDay(dayOfWeek());
-    }
-
-    function toggleAlts(exId) {
-      const panel = document.getElementById('alts-' + exId);
-      if (!panel) return;
-      const isOpen = panel.style.display === 'block';
-      panel.style.display = isOpen ? 'none' : 'block';
-    }
-
-    function useAlt(dayKey, exId, stype, altName, altSets, altDefaultKg) {
-      const state = gs();
+    // ─── SET LOG ─────────────────────────────────────────────────────────────────
+    function initSetLog(state, dayKey, exId, stype, defaultKg, numSets) {
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
       const log = state.logs[dayKey];
-      if (!log.swaps) log.swaps = {};
-      log.swaps[exId] = { name: altName, sets: altSets, kg: altDefaultKg };
+      if (!log.setLogs) log.setLogs = {};
+      if (!log.setLogs[exId]) {
+        const n = parseInt(numSets) || 4;
+        log.setLogs[exId] = Array.from({ length: n }, () => ({ kg: defaultKg, reps: '', done: false }));
+      }
+      return log.setLogs[exId];
+    }
+
+    function saveSetField(dayKey, exId, stype, setIdx, field, val) {
+      const state = gs();
+      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
+      state.logs[dayKey].setLogs[exId][setIdx][field] = field === 'done' ? val : (parseFloat(val) || val);
+      // update main weight from last done set
+      const sets = state.logs[dayKey].setLogs[exId];
+      const doneSets = sets.filter(s => s.done && s.kg);
+      if (doneSets.length > 0) state.logs[dayKey].weights[exId] = doneSets[doneSets.length - 1].kg;
+      ss(state);
+      // update 1rm display
+      updateOrmDisplay(exId, state, dayKey);
+    }
+
+    function addSet(dayKey, exId, stype) {
+      const state = gs();
+      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
+      const sets = state.logs[dayKey].setLogs[exId];
+      const lastKg = sets.length > 0 ? sets[sets.length - 1].kg : 0;
+      state.logs[dayKey].setLogs[exId].push({ kg: lastKg, reps: '', done: false });
       ss(state); renderToday();
     }
 
-    function clearSwap(dayKey, exId) {
+    function toggleSetDone(dayKey, exId, stype, setIdx) {
       const state = gs();
-      if (state.logs && state.logs[dayKey] && state.logs[dayKey].swaps) {
-        delete state.logs[dayKey].swaps[exId];
-        ss(state); renderToday();
-      }
+      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
+      state.logs[dayKey].setLogs[exId][setIdx].done = !state.logs[dayKey].setLogs[exId][setIdx].done;
+      const sets = state.logs[dayKey].setLogs[exId];
+      const doneSets = sets.filter(s => s.done && s.kg);
+      if (doneSets.length > 0) state.logs[dayKey].weights[exId] = doneSets[doneSets.length - 1].kg;
+      ss(state); renderToday();
     }
 
+    function updateOrmDisplay(exId, state, dayKey) {
+      const el = document.getElementById('orm-' + exId); if (!el) return;
+      const sets = (state.logs[dayKey]?.setLogs?.[exId] || []).filter(s => s.done && s.kg && s.reps);
+      if (!sets.length) { el.textContent = ''; return }
+      const orms = sets.map(s => calc1RM(s.kg, parseInt(s.reps)));
+      const best = Math.max(...orms.filter(Boolean));
+      if (best) el.textContent = '1RM est. ' + best + 'kg';
+    }
+
+    // ─── TOGGLE SETS PANEL ───────────────────────────────────────────────────────
+    function toggleSetsPanel(exId) {
+      const p = document.getElementById('sets-panel-' + exId); if (!p) return;
+      p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+    function toggleWarmup(exId) {
+      const p = document.getElementById('warmup-' + exId); if (!p) return;
+      p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+    function toggleAlts(exId) { const panel = document.getElementById('alts-' + exId); if (!panel) return; panel.style.display = panel.style.display === 'block' ? 'none' : 'block' }
+    function useAlt(dayKey, exId, stype, altName, altSets, altDefaultKg) {
+      const state = gs();
+      if (!state.logs) state.logs = {};
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
+      const log = state.logs[dayKey]; if (!log.swaps) log.swaps = {};
+      log.swaps[exId] = { name: altName, sets: altSets, kg: altDefaultKg };
+      ss(state); renderToday();
+    }
+    function clearSwap(dayKey, exId) { const state = gs(); if (state.logs && state.logs[dayKey] && state.logs[dayKey].swaps) { delete state.logs[dayKey].swaps[exId]; ss(state); renderToday() } }
+
+    // ─── RENDER TODAY ─────────────────────────────────────────────────────────────
     function renderToday() {
       updateSidebar();
       const state = gs();
       const todayKey = today();
-      const dayIdx = dayOfWeek();
       const stype = getTodaySession();
       const container = document.getElementById('view-today');
-
       const now = new Date();
       const dateStr = now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
 
-      let html = `<div class="page-header">
-    <div class="page-title">Allenamento di oggi</div>
-    <div class="page-sub">${dateStr}</div>
-  </div>`;
-
-      html += `<div class="session-selector">
-    <span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>
-    ${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}
-  </div>`;
+      let html = `<div class="page-header"><div class="page-title">Allenamento di oggi</div><div class="page-sub">${dateStr}</div></div>`;
+      html += `<div class="session-selector"><span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div>`;
 
       if (stype === 'rest') {
-        html += `<div class="rest-card">
-      <div class="rest-icon">🌙</div>
-      <div class="rest-title">Giorno di riposo</div>
-      <div class="rest-sub">Schema giorno sì / giorno no — recupero attivo</div>
-      <div class="rest-tip">Stretching 10 min · Camminata leggera · 8h di sonno<br>Premi un pulsante sopra se vuoi comunque allenarti oggi</div>
-    </div>`;
+        html += `<div class="rest-card"><div class="rest-icon">🌙</div><div class="rest-title">Giorno di riposo</div><div class="rest-sub">Schema giorno sì / giorno no — recupero attivo</div><div class="rest-tip">Stretching 10 min · Camminata leggera · 8h di sonno<br>Premi un pulsante sopra se vuoi comunque allenarti oggi</div></div>`;
         container.innerHTML = html; return;
       }
 
@@ -1915,27 +2308,25 @@
       const weights = todayLog.weights || {};
       const checked = todayLog.checked || {};
       const swaps = todayLog.swaps || {};
+      const setLogs = todayLog.setLogs || {};
       const isDone = todayLog.done || false;
       const allExIds = session.groups.flatMap(g => g.exercises.map(e => e.id));
       const checkedCount = allExIds.filter(id => checked[id]).length;
       const pct = allExIds.length > 0 ? Math.round(checkedCount / allExIds.length * 100) : 0;
-      const circ = 2 * Math.PI * 17;
-      const offset = circ - (pct / 100) * circ;
+      const circ = 2 * Math.PI * 17, offset = circ - (pct / 100) * circ;
       const colorVar = `var(--${session.color})`;
 
-
+      // TIMER
       html += `<div class="timer-widget">
     <div class="timer-top">
-      <div>
-        <div class="timer-label">Timer recupero</div>
-        <div id="timer-display" class="timer-display">00:00</div>
-      </div>
+      <div><div class="timer-label">Timer recupero</div><div id="timer-display" class="timer-display">00:00</div></div>
       <div class="timer-controls">
         <button class="tbtn tstart" onclick="startTimer()">▶</button>
         <button class="tbtn" onclick="pauseTimer()">⏸</button>
         <button class="tbtn tstop" onclick="resetTimer(0)">■</button>
       </div>
     </div>
+    <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
     <div class="timer-presets">
       <button class="preset" onclick="resetTimer(60)">1m</button>
       <button class="preset" onclick="resetTimer(90)">90s</button>
@@ -1944,7 +2335,7 @@
     </div>
   </div>`;
 
-
+      // SESSION BAR
       html += `<div class="session-type-bar">
     <span class="stype-badge badge-${stype}">${stype}</span>
     <span class="stype-name">${session.label}</span>
@@ -1953,14 +2344,14 @@
       <div class="progress-ring-wrap">
         <svg width="40" height="40" viewBox="0 0 40 40">
           <circle class="pr-bg" cx="20" cy="20" r="17"/>
-          <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}"
-            stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
+          <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
         </svg>
         <div class="pr-label" style="color:${colorVar}">${pct}%</div>
       </div>
     </div>
   </div>`;
 
+      // EXERCISES
       for (const group of session.groups) {
         html += `<div class="ex-group"><div class="ex-group-label">${group.label}</div>`;
         for (const ex of group.exercises) {
@@ -1975,18 +2366,61 @@
           if (trend !== null && trend !== 0) trendHtml = `<span class="ex-trend ${trend > 0 ? 'trend-up' : 'trend-down'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}kg</span>`;
           else if (prev !== null) trendHtml = `<span class="ex-trend">=${prev}kg</span>`;
 
+          // 1RM from set log
+          const exSets = (setLogs[ex.id] || []).filter(s => s.done && s.kg && s.reps);
+          const bestOrm = exSets.length > 0 ? Math.max(...exSets.map(s => calc1RM(s.kg, parseInt(s.reps))).filter(Boolean)) : null;
+          const ormHtml = bestOrm ? `<span class="orm-badge" id="orm-${ex.id}">1RM est. ${bestOrm}kg</span>` : `<span class="orm-badge" id="orm-${ex.id}" style="display:none"></span>`;
+
+          // Deload warning
+          const isDeload = checkDeload(state, stype, ex.id);
+          const deloadHtml = isDeload ? `<span class="deload-badge">⚠ Stesso peso x3 — considera deload o variazione</span>` : '';
+
+          // Warmup
+          const warmupSets = calcWarmup(dispKg);
+          let warmupHtml = '';
+          if (warmupSets.length > 0) {
+            warmupHtml = `<div class="warmup-panel" id="warmup-${ex.id}" style="display:none">
+          <div class="warmup-title">☀ Riscaldamento suggerito</div>
+          <div class="warmup-rows">`;
+            warmupSets.forEach(w => { warmupHtml += `<div class="warmup-row"><span class="warmup-dot"></span><span>${w.pct}% → ${w.kg}kg × ${w.reps} reps</span></div>` });
+            warmupHtml += `</div></div>`;
+          }
+
+          // Set log panel
+          const curSets = initSetLog(state, todayKey, ex.id, stype, dispKg, dispSets.split('×')[0]);
+          // save back (initSetLog may have modified state)
+          ss(state);
+          let setLogHtml = `<div class="setlog-area" id="sets-panel-${ex.id}" style="display:none">
+        <div class="setlog-title">Serie dettagliate</div>
+        <div class="setlog-rows">`;
+          curSets.forEach((s, i) => {
+            setLogHtml += `<div class="setlog-row">
+          <span class="setlog-num">${i + 1}</span>
+          <input type="number" class="setlog-kg" value="${s.kg}" min="0" step="0.5" placeholder="kg"
+            onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'kg',this.value)">
+          <span class="setlog-sep">×</span>
+          <input type="number" class="setlog-reps" value="${s.reps}" min="1" step="1" placeholder="reps"
+            onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'reps',this.value)">
+          <button class="setlog-done ${s.done ? 'ok' : ''}" onclick="toggleSetDone('${todayKey}','${ex.id}','${stype}',${i})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>`;
+          });
+          setLogHtml += `</div><button class="setlog-add" onclick="addSet('${todayKey}','${ex.id}','${stype}')">+ Serie</button></div>`;
+
           html += `<div class="ex-card ${isChecked ? 'done' : ''}" id="excard-${ex.id}">
         <div class="ex-main">
-          <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')" aria-label="completato">
+          <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <div class="ex-body">
-            <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}
-            </div>
+            <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}</div>
             <div class="ex-meta">
               <span class="ex-sets">${dispSets}</span>
               <span class="ex-note-inline">${ex.note ? '— ' + ex.note : ''}</span>
             </div>
+            ${ormHtml}
+            ${deloadHtml}
           </div>
           <div class="ex-right">
             <div class="ex-kg-wrap">
@@ -1997,60 +2431,50 @@
             ${trendHtml}
           </div>
         </div>
+        ${warmupHtml}
+        ${setLogHtml}
         <div class="ex-actions">
+          <button class="toggle-sets-btn" onclick="toggleSetsPanel('${ex.id}')">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Serie
+          </button>
+          ${warmupSets.length > 0 ? `<button class="toggle-sets-btn" onclick="toggleWarmup('${ex.id}')">☀ Warm-up</button>` : ''}
           <button class="swap-btn" onclick="toggleAlts('${ex.id}')">
             <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
             ${swap ? 'Cambia ancora' : 'Macchina occupata?'}
           </button>
-          ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Ripristina originale</button>` : ''}
+          ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Originale</button>` : ''}
         </div>
         <div class="alts-panel" id="alts-${ex.id}" style="display:none">
           <div class="alts-title">Scegli un'alternativa</div>
           <div class="alt-options">`;
           for (const alt of ex.alts) {
-            const safeAltName = alt.name.replace(/'/g, "\\'");
-            const safeAltNote = alt.note.replace(/'/g, "\\'");
-            html += `<div class="alt-opt">
-          <div class="alt-opt-info">
-            <div class="alt-opt-name">${alt.name}</div>
-            <div class="alt-opt-meta">${alt.sets} · ${alt.note}</div>
-          </div>
-          <button class="use-btn" onclick="useAlt('${todayKey}','${ex.id}','${stype}','${safeAltName}','${alt.sets}',${dispKg})">Usa</button>
-        </div>`;
+            const san = alt.name.replace(/'/g, "\\'");
+            html += `<div class="alt-opt"><div class="alt-opt-info"><div class="alt-opt-name">${alt.name}</div><div class="alt-opt-meta">${alt.sets} · ${alt.note}</div></div><button class="use-btn" onclick="useAlt('${todayKey}','${ex.id}','${stype}','${san}','${alt.sets}',${dispKg})">Usa</button></div>`;
           }
-          html += `</div>
-          <span class="alts-close" onclick="toggleAlts('${ex.id}')">✕ Chiudi</span>
-        </div>
+          html += `</div><span class="alts-close" onclick="toggleAlts('${ex.id}')">✕ Chiudi</span></div>
       </div>`;
         }
         html += `</div>`;
       }
 
       html += `<div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>`;
-
       if (!isDone) {
-        html += `<div class="complete-zone">
-      <button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>
-      ${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimasti</span>` : ''}
-    </div>`;
+        html += `<div class="complete-zone"><button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimasti</span>` : ''}</div>`;
       } else {
-        html += `<div class="completed-badge">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-      Ottimo lavoro — sessione completata
-    </div>`;
+        html += `<div class="completed-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ottimo lavoro — sessione completata</div>`;
       }
 
       container.innerHTML = html;
       updateTimerDisplay();
+      updateTimerBar();
     }
 
     function setTodaySession(stype) {
-      const state = gs();
-      const todayKey = today();
+      const state = gs(); const todayKey = today();
       if (!state.logs) state.logs = {};
-      if (!state.logs[todayKey]) state.logs[todayKey] = { date: todayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
-      state.logs[todayKey].type = stype;
-      ss(state); renderToday();
+      if (!state.logs[todayKey]) state.logs[todayKey] = { date: todayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
+      state.logs[todayKey].type = stype; ss(state); renderToday();
     }
 
     function getPrevKg(state, stype, exId, skipDate) {
@@ -2060,31 +2484,27 @@
     function toggleEx(dayKey, exId, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
-      const log = state.logs[dayKey];
-      if (!log.checked) log.checked = {};
-      log.checked[exId] = !log.checked[exId];
-      ss(state); renderToday();
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
+      const log = state.logs[dayKey]; if (!log.checked) log.checked = {};
+      log.checked[exId] = !log.checked[exId]; ss(state); renderToday();
     }
     function saveKg(dayKey, exId, val, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
-      const log = state.logs[dayKey];
-      if (!log.weights) log.weights = {};
-      log.weights[exId] = parseFloat(val) || 0;
-      ss(state);
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
+      const log = state.logs[dayKey]; if (!log.weights) log.weights = {};
+      log.weights[exId] = parseFloat(val) || 0; ss(state);
     }
     function markDone(dayKey, stype) {
       const state = gs();
       if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {} };
-      state.logs[dayKey].done = true;
-      ss(state); renderToday();
+      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
+      state.logs[dayKey].done = true; ss(state); renderToday();
     }
 
-
+    // ─── PROGRESS ────────────────────────────────────────────────────────────────
     let progFilter = 'push';
+    let expandedEx = null;
     function renderProgress(f) {
       if (f) progFilter = f;
       const state = gs();
@@ -2094,22 +2514,43 @@
       const color = PROG.colors[progFilter];
       const container = document.getElementById('view-progress');
 
-      let html = `<div class="section-header">
-    <div class="section-title">Progressi</div>
-    <div class="prog-filter">
-      ${['push', 'pull', 'legs'].map(t => `<button class="pf-btn ${progFilter === t ? 'active' : ''}" onclick="renderProgress('${t}')">${PROG.sessions[t].label}</button>`).join('')}
-    </div>
-  </div>`;
+      let html = `<div class="section-header"><div class="section-title">Progressi</div><div class="prog-filter">${['push', 'pull', 'legs'].map(t => `<button class="pf-btn ${progFilter === t ? 'active' : ''}" onclick="renderProgress('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div></div>`;
 
+      // EXPANDED CHART
+      html += `<div class="chart-expanded ${expandedEx ? 'open' : ''}" id="chart-expanded">`;
+      if (expandedEx) {
+        const ex = allEx.find(e => e.id === expandedEx);
+        if (ex) {
+          const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
+          html += `<div class="chart-exp-title">${ex.name}</div><div class="chart-exp-sub">${ex.sets} · ${pts.length} sessioni tracciate</div>`;
+          if (pts.length >= 2) {
+            html += `<div class="chart-svg-wrap">${bigChart(pts, color)}</div>`;
+            // data table
+            html += `<div style="margin-top:14px;overflow-x:auto"><table class="vol-table"><thead><tr><th>Data</th><th>Kg</th><th>1RM est.</th></tr></thead><tbody>`;
+            pts.slice().reverse().slice(0, 10).forEach(p => {
+              const orm = calc1RM(p.v, 8);
+              html += `<tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(p.d)}</td><td class="kg-now">${p.v}kg</td><td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td></tr>`;
+            });
+            html += `</tbody></table></div>`;
+          } else {
+            html += `<div class="no-data-spark" style="height:120px">Insufficienti dati per il grafico espanso</div>`;
+          }
+          html += `<button onclick="expandedEx=null;renderProgress()" style="margin-top:14px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:11px;font-weight:700;padding:5px 12px;cursor:pointer;">✕ Chiudi</button>`;
+        }
+      }
+      html += `</div>`;
+
+      // CARDS
       html += `<div class="prog-grid">`;
       for (const ex of allEx.slice(0, 4)) {
         const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
         const first = pts.length > 0 ? pts[0].v : ex.defaultKg;
         const last = pts.length > 0 ? pts[pts.length - 1].v : ex.defaultKg;
         const delta = last - first;
-        html += `<div class="prog-card">
+        const isDeload = checkDeload(state, progFilter, ex.id);
+        html += `<div class="prog-card" onclick="expandedEx='${ex.id}';renderProgress()">
       <div class="prog-card-title">${ex.name}</div>
-      <div class="prog-card-sub">${ex.sets}</div>
+      <div class="prog-card-sub">${ex.sets}${isDeload ? ' · ⚠ plateau' : ''}</div>
       <div class="chart-wrap">${pts.length >= 2 ? sparkline(pts, color) : `<div class="no-data-spark">Dati insufficienti</div>`}</div>
       <div class="prog-delta">
         <div><div class="delta-val" style="color:${color}">${last}kg</div><div class="delta-label">ultimo</div></div>
@@ -2123,18 +2564,21 @@
         html += `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div><div class="empty-sub">Completa alcune sessioni ${progFilter.toUpperCase()}</div></div>`;
       } else {
         html += `<div style="margin-bottom:12px;font-size:14px;font-weight:700">Tutti i carichi</div>`;
-        html += `<table class="vol-table"><thead><tr><th>Esercizio</th><th>Serie</th><th>Primo</th><th>Ultimo</th><th>Δ</th><th>N</th></tr></thead><tbody>`;
+        html += `<table class="vol-table"><thead><tr><th>Esercizio</th><th>Serie</th><th>Primo</th><th>Ultimo</th><th>Δ</th><th>1RM</th><th>N</th></tr></thead><tbody>`;
         for (const group of session.groups) {
           for (const ex of group.exercises) {
             const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined);
             if (!pts.length) continue;
             const first = pts[0].weights[ex.id], last = pts[pts.length - 1].weights[ex.id], delta = last - first;
-            html += `<tr>
-          <td><div class="vol-name">${ex.name}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
+            const orm = calc1RM(last, 8);
+            const isDeload = checkDeload(state, progFilter, ex.id);
+            html += `<tr style="cursor:pointer" onclick="expandedEx='${ex.id}';renderProgress()">
+          <td><div class="vol-name">${ex.name}${isDeload ? ' <span style="color:var(--legs);font-size:10px">⚠</span>' : ''}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
           <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)">${ex.sets}</span></td>
           <td class="kg-was">${first}kg</td>
           <td class="kg-now">${last}kg</td>
           <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
+          <td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td>
           <td style="color:var(--t3)">${pts.length}</td>
         </tr>`;
           }
@@ -2158,18 +2602,40 @@
   </svg>`;
     }
 
+    function bigChart(pts, color) {
+      const vals = pts.map(p => p.v);
+      const min = Math.min(...vals) - 2, max = Math.max(...vals) + 2, range = max - min || 1;
+      const W = 600, H = 160, PX = 40, PY = 12;
+      const iW = W - PX * 2, iH = H - PY * 2;
+      const x = i => PX + i * (iW / (pts.length - 1));
+      const y = v => PY + iH - (v - min) / range * iH;
+      const points = pts.map((p, i) => `${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
+      // Y axis labels
+      const yLabels = [min, min + range / 2, max].map(v => ({ v: Math.round(v * 10) / 10, y: y(v) }));
+      let yHtml = ''; yLabels.forEach(l => { yHtml += `<text x="${PX - 4}" y="${l.y.toFixed(1)}" text-anchor="end" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${l.v}</text>` });
+      // X axis labels (max 5)
+      let xHtml = '';
+      const step = Math.ceil(pts.length / 5);
+      pts.forEach((p, i) => { if (i % step === 0 || i === pts.length - 1) { xHtml += `<text x="${x(i).toFixed(1)}" y="${H - 1}" text-anchor="middle" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${p.d.slice(5)}</text>` } });
+      // dots with tooltip
+      let dots = ''; pts.forEach((p, i) => { dots += `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3.5" fill="${color}" opacity="0.8"><title>${p.d}: ${p.v}kg</title></circle>` });
+      return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:400px">
+    <line x1="${PX}" y1="${PY}" x2="${PX}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
+    <line x1="${PX}" y1="${PY + iH}" x2="${PX + iW}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
+    ${yHtml}${xHtml}
+    <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
+    <polygon fill="${color}" fill-opacity="0.06" points="${PX},${PY + iH} ${points} ${x(pts.length - 1).toFixed(1)},${PY + iH}"/>
+    ${dots}
+  </svg>`;
+    }
+
+    // ─── HISTORY ─────────────────────────────────────────────────────────────────
     function renderHistory() {
       const state = gs();
       const logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
       const container = document.getElementById('view-history');
-      let html = `<div class="section-header">
-    <div class="section-title">Storico</div>
-    ${logs.length > 0 ? `<button class="clear-btn" onclick="clearAll()">Cancella tutto</button>` : ''}
-  </div>`;
-      if (!logs.length) {
-        html += `<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nessuna sessione ancora</div><div class="empty-sub">Le sessioni completate appariranno qui</div></div>`;
-        container.innerHTML = html; return;
-      }
+      let html = `<div class="section-header"><div class="section-title">Storico</div>${logs.length > 0 ? `<button class="clear-btn" onclick="clearAll()">Cancella tutto</button>` : ''}</div>`;
+      if (!logs.length) { html += `<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nessuna sessione ancora</div><div class="empty-sub">Le sessioni completate appariranno qui</div></div>`; container.innerHTML = html; return }
       html += `<div class="hist-list">`;
       for (const log of logs) {
         if (!log.type || !PROG.sessions[log.type]) continue;
@@ -2177,11 +2643,14 @@
         const allEx = sess.groups.flatMap(g => g.exercises);
         const cc = Object.values(log.checked || {}).filter(Boolean).length;
         const swapCount = Object.keys(log.swaps || {}).length;
+        // Calc total volume from set logs
+        let totalVol = 0;
+        if (log.setLogs) { Object.values(log.setLogs).forEach(sets => { sets.filter(s => s.done && s.kg && s.reps).forEach(s => { totalVol += s.kg * parseInt(s.reps) || 0 }) }) }
         html += `<div class="hist-item">
       <span class="hist-dot" style="background:${PROG.colors[log.type]}"></span>
       <div>
         <div class="hist-name">${sess.label}${swapCount > 0 ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px">${swapCount} sost.</span>` : ''}</div>
-        <div class="hist-date">${fmtDate(log.date)}</div>
+        <div class="hist-date">${fmtDate(log.date)}${totalVol > 0 ? ` · <span style="color:var(--t2)">${totalVol.toLocaleString('it-IT')}kg vol.</span>` : ''}</div>
       </div>
       <div>
         <div class="hist-count">${cc}/${allEx.length}</div>
@@ -2193,33 +2662,119 @@
       container.innerHTML = html;
     }
 
-    function clearAll() {
-      if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v6'); renderHistory(); updateSidebar(); }
+    function clearAll() { if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v7'); renderHistory(); updateSidebar() } }
+
+    // ─── BODY WEIGHT ─────────────────────────────────────────────────────────────
+    function renderBodyweight() {
+      const state = gs();
+      const bwLog = state.bwLog || {};
+      const container = document.getElementById('view-bodyweight');
+      const entries = Object.entries(bwLog).sort((a, b) => a[0] > b[0] ? 1 : -1);
+      const latestEntry = entries.length > 0 ? entries[entries.length - 1] : null;
+
+      let html = `<div class="page-header"><div class="page-title">Peso corporeo</div><div class="page-sub">Traccia il tuo peso nel tempo</div></div>`;
+
+      // input
+      html += `<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:18px 20px;margin-bottom:20px">
+    <div style="font-size:12px;font-weight:700;margin-bottom:12px">Aggiungi misurazione di oggi</div>
+    <div class="bw-row">
+      <input type="number" class="bw-input" id="bw-new" value="${latestEntry ? latestEntry[1] : ''}" min="30" max="200" step="0.1" placeholder="kg" onkeydown="if(event.key==='Enter')saveBW()">
+      <span class="bw-label">kg</span>
+      <button class="bw-save" onclick="saveBW()">Salva oggi</button>
+    </div>
+    ${latestEntry ? `<div style="font-size:11px;color:var(--t3);margin-top:4px">Ultima: ${fmtDate(latestEntry[0])} — ${latestEntry[1]} kg</div>` : ''}
+  </div>`;
+
+      if (entries.length >= 2) {
+        const pts = entries.map(([d, v]) => ({ d, v }));
+        const first = pts[0].v, last = pts[pts.length - 1].v, delta = last - first;
+        html += `<div class="bw-chart-wrap">
+      <div class="bw-chart-title">Trend peso corporeo</div>
+      <div class="chart-svg-wrap">${bigChart(pts, '#7c6ef5')}</div>
+      <div class="prog-delta" style="margin-top:14px">
+        <div><div class="delta-val" style="color:var(--acc)">${last}kg</div><div class="delta-label">attuale</div></div>
+        <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta < 0 ? 'var(--pull)' : delta > 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
+      </div>
+    </div>`;
+      }
+
+      if (entries.length > 0) {
+        html += `<div style="margin-top:20px;margin-bottom:10px;font-size:14px;font-weight:700">Storico misurazioni</div>`;
+        html += `<table class="vol-table"><thead><tr><th>Data</th><th>Peso</th><th>Δ giorno</th></tr></thead><tbody>`;
+        entries.slice().reverse().slice(0, 20).forEach(([d, v], i, arr) => {
+          const prev = arr[i + 1] ? arr[i + 1][1] : null;
+          const delta = prev !== null ? v - prev : null;
+          html += `<tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(d)}</td>
+        <td class="kg-now">${v}kg</td>
+        <td class="${delta === null ? 'kg-same' : delta < 0 ? 'kg-up' : delta > 0 ? 'kg-down' : 'kg-same'}">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg'}</td>
+      </tr>`;
+        });
+        html += `</tbody></table>`;
+      } else {
+        html += `<div class="empty"><div class="empty-icon">⚖</div><div class="empty-text">Nessuna misurazione ancora</div><div class="empty-sub">Inserisci il tuo peso sopra</div></div>`;
+      }
+
+      container.innerHTML = html;
     }
+
+    function saveBW() {
+      const input = document.getElementById('bw-new'); if (!input) return;
+      const val = parseFloat(input.value); if (!val || val < 30 || val > 300) { input.style.borderColor = 'var(--push)'; setTimeout(() => input.style.borderColor = '', 1500); return }
+      const state = gs(); if (!state.bwLog) state.bwLog = {};
+      state.bwLog[today()] = val; ss(state); renderBodyweight();
+    }
+
+    // ─── EXPORT / IMPORT ─────────────────────────────────────────────────────────
+    function exportData() {
+      const state = gs();
+      const json = JSON.stringify(state, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'ppl-backup-' + today() + '.json'; a.click(); URL.revokeObjectURL(url);
+    }
+
+    function importData() {
+      const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json';
+      input.onchange = e => {
+        const file = e.target.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try {
+            const data = JSON.parse(ev.target.result);
+            if (data && typeof data === 'object') {
+              if (confirm('Importare il backup? I dati attuali verranno sovrascritti.')) {
+                localStorage.setItem('ppl_v7', JSON.stringify(data));
+                renderToday(); updateSidebar();
+                alert('Import completato ✓');
+              }
+            } else { alert('File non valido') }
+          } catch (err) { alert('Errore nel file: ' + err.message) }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    // ─── AUTH ────────────────────────────────────────────────────────────────────
     function logout() {
       localStorage.removeItem('ppl_auth');
       document.getElementById('pin-screen').style.display = 'flex';
       document.getElementById('main-app').style.display = 'none';
-      setTimeout(() => { const i = document.getElementById('pin-input'); if (i) { i.value = ''; i.focus(); } }, 100);
+      setTimeout(() => { const i = document.getElementById('pin-input'); if (i) { i.value = ''; i.focus() } }, 100);
     }
 
     const CORRECT_PIN = '3520';
-
     function checkPin() {
-      const input = document.getElementById('pin-input');
-      const err = document.getElementById('pin-err');
-      if (!input) return;
+      const input = document.getElementById('pin-input'); const err = document.getElementById('pin-err'); if (!input) return;
       if (input.value === CORRECT_PIN) {
         localStorage.setItem('ppl_auth', '1');
         document.getElementById('pin-screen').style.display = 'none';
         document.getElementById('main-app').style.display = 'grid';
         renderToday();
       } else {
-        err.textContent = 'PIN errato — riprova';
-        input.value = '';
-        input.focus();
-        input.style.borderColor = 'var(--push)';
-        setTimeout(() => { input.style.borderColor = ''; err.textContent = ''; }, 1500);
+        err.textContent = 'PIN errato — riprova'; input.value = ''; input.focus();
+        input.style.borderColor = 'var(--push)'; setTimeout(() => { input.style.borderColor = ''; err.textContent = '' }, 1500);
       }
     }
 
@@ -2232,7 +2787,7 @@
       } else {
         document.getElementById('pin-screen').style.display = 'flex';
         document.getElementById('main-app').style.display = 'none';
-        setTimeout(() => { const i = document.getElementById('pin-input'); if (i) i.focus(); }, 100);
+        setTimeout(() => { const i = document.getElementById('pin-input'); if (i) i.focus() }, 100);
       }
     })();
   </script>
