@@ -74,7 +74,6 @@
       font-family: 'Syne', sans-serif
     }
 
-    /* DIM MODE */
     body.dim-mode {
       filter: brightness(.55) saturate(.7)
     }
@@ -330,7 +329,7 @@
       display: none;
       background: var(--bg2);
       border-top: 1px solid var(--b1);
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       position: sticky;
       bottom: 0;
       z-index: 100
@@ -512,7 +511,6 @@
       font-weight: 500
     }
 
-    /* TIMER */
     .timer-widget {
       background: var(--bg2);
       border: 1px solid var(--b1);
@@ -629,7 +627,64 @@
       width: 0%
     }
 
-    /* EXERCISE CARDS */
+    /* RPE badge */
+    .rpe-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px
+    }
+
+    .rpe-8 {
+      background: rgba(45, 204, 122, .12);
+      color: var(--pull);
+      border: 1px solid rgba(45, 204, 122, .3)
+    }
+
+    .rpe-9 {
+      background: rgba(255, 92, 53, .1);
+      color: var(--push);
+      border: 1px solid rgba(255, 92, 53, .25)
+    }
+
+    .rpe-std {
+      background: rgba(124, 110, 245, .1);
+      color: var(--acc);
+      border: 1px solid rgba(124, 110, 245, .25)
+    }
+
+    /* new exercise badge */
+    .new-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      background: rgba(45, 204, 122, .12);
+      color: var(--pull);
+      border: 1px solid rgba(45, 204, 122, .3)
+    }
+
+    .increase-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      background: rgba(245, 166, 35, .12);
+      color: var(--legs);
+      border: 1px solid rgba(245, 166, 35, .3)
+    }
+
     .ex-group {
       margin-bottom: 18px
     }
@@ -747,7 +802,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 200px
+      max-width: 220px
     }
 
     .ex-right {
@@ -804,7 +859,6 @@
       color: var(--push)
     }
 
-    /* 1RM badge */
     .orm-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
@@ -817,7 +871,6 @@
       display: inline-block
     }
 
-    /* DELOAD warning */
     .deload-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
@@ -830,7 +883,6 @@
       display: inline-block
     }
 
-    /* SET LOG */
     .setlog-area {
       padding: 0 14px 12px;
       display: flex;
@@ -1103,7 +1155,6 @@
       color: var(--t2)
     }
 
-    /* WARMUP */
     .warmup-panel {
       background: rgba(124, 110, 245, .05);
       border: 1px solid rgba(124, 110, 245, .15);
@@ -1143,6 +1194,22 @@
       background: var(--acc);
       flex-shrink: 0;
       opacity: .5
+    }
+
+    /* Progressione tip box */
+    .prog-tip {
+      background: rgba(45, 204, 122, .05);
+      border: 1px solid rgba(45, 204, 122, .15);
+      border-radius: var(--r);
+      padding: 10px 14px;
+      margin: 0 14px 12px;
+      font-size: 11px;
+      color: var(--t2)
+    }
+
+    .prog-tip b {
+      color: var(--pull);
+      font-weight: 600
     }
 
     .cardio-row {
@@ -1290,7 +1357,6 @@
       color: var(--legs)
     }
 
-    /* PROGRESS PAGE */
     .prog-filter {
       display: flex;
       gap: 7px;
@@ -1397,7 +1463,6 @@
       letter-spacing: .07em
     }
 
-    /* EXPANDED CHART */
     .chart-expanded {
       background: var(--bg2);
       border: 1px solid var(--b2);
@@ -1506,7 +1571,6 @@
       font-size: 11px
     }
 
-    /* HISTORY */
     .hist-list {
       display: flex;
       flex-direction: column;
@@ -1563,7 +1627,6 @@
       margin-top: 2px
     }
 
-    /* BODY WEIGHT */
     .bw-section {
       margin-top: 28px
     }
@@ -1631,7 +1694,6 @@
       margin-bottom: 14px
     }
 
-    /* EXPORT/IMPORT */
     .data-tools {
       display: flex;
       gap: 8px;
@@ -1734,33 +1796,28 @@
       }
     }
 
-    /* TOOLTIP */
-    .tooltip-wrap {
-      position: relative;
-      display: inline-block
+    /* Sezione RPE rapida */
+    .rpe-quick {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 18px
     }
 
-    .tooltip-content {
-      position: absolute;
-      bottom: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg4);
-      border: 1px solid var(--b2);
-      border-radius: var(--r);
-      padding: 7px 10px;
-      font-size: 11px;
-      color: var(--t1);
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .15s;
-      z-index: 50;
-      font-family: 'JetBrains Mono', monospace
+    .rpe-chip {
+      padding: 5px 11px;
+      border-radius: 99px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      border: 1px solid var(--b1);
+      color: var(--t3)
     }
 
-    .tooltip-wrap:hover .tooltip-content {
-      opacity: 1
+    .rpe-chip.target {
+      background: rgba(45, 204, 122, .08);
+      border-color: rgba(45, 204, 122, .3);
+      color: var(--pull)
     }
 
     @media(max-width:720px) {
@@ -1845,7 +1902,6 @@
 
 <body>
 
-  <!-- PIN SCREEN -->
   <div id="pin-screen"
     style="display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;">
     <div style="text-align:center;max-width:300px;width:90%;">
@@ -1863,11 +1919,10 @@
       </div>
       <button onclick="checkPin()"
         style="width:100%;margin-top:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r);padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;">Entra</button>
-      <div style="margin-top:24px;font-size:10px;color:var(--t3);">Accesso privato · PIN modificabile nel codice</div>
+      <div style="margin-top:24px;font-size:10px;color:var(--t3);">PIN modificabile nel codice — cerca CORRECT_PIN</div>
     </div>
   </div>
 
-  <!-- MAIN APP -->
   <div id="main-app" style="display:none;" class="app">
     <header class="topbar">
       <div class="topbar-logo">PPL<span>.</span></div>
@@ -1930,7 +1985,7 @@
               <path
                 d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
-            Peso corporeo
+            Peso
           </div>
         </div>
         <div class="sb-footer">
@@ -1993,7 +2048,7 @@
   </div>
 
   <script>
-    // ─── DATA ───────────────────────────────────────────────────────────────────
+    // ─── PROGRAMMA AGGIORNATO ────────────────────────────────────────────────────
     const PROG = {
       colors: { push: '#ff5c35', pull: '#2dcc7a', legs: '#f5a623' },
       sessions: {
@@ -2001,145 +2056,228 @@
           label: 'Push', color: 'push',
           groups: [
             {
-              label: 'Petto', exercises: [
+              label: 'Petto — priorità assoluta', exercises: [
                 {
-                  id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34, note: 'Priorità — vai a cedimento -1',
-                  alts: [{ name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Se la macchina è occupata — carico -10%' }, { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM, ottima alternativa' }]
+                  id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34,
+                  note: 'Prima esercizio — vai a RPE 8-9 ultima serie',
+                  rpe: 'rpe-9', isKey: true,
+                  alts: [
+                    { name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Carico -10% rispetto alla macchina' },
+                    { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM — ottima alternativa' }
+                  ]
                 },
                 {
-                  id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19, note: 'Petto alto — prima delle croci',
-                  alts: [{ name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Libera quasi sempre' }, { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con cavi' }]
+                  id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19,
+                  note: 'Petto alto — non saltare mai',
+                  rpe: 'rpe-8',
+                  alts: [
+                    { name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Quasi sempre libera' },
+                    { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con tensione costante' }
+                  ]
                 },
                 {
-                  id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36, note: 'Stira bene a fine movimento',
-                  alts: [{ name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Stessa funzione, più controllo' }, { name: 'Croci manubri su panca piatta', sets: '3×12-15', note: 'Classico, funziona sempre' }]
+                  id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36,
+                  note: 'Stira bene in basso — pausa 1 sec',
+                  rpe: 'rpe-std',
+                  alts: [
+                    { name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Tensione costante su tutto il ROM' },
+                    { name: 'Croci manubri su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
+                  ]
                 },
               ]
             },
             {
               label: 'Spalle', exercises: [
                 {
-                  id: 'p4', name: 'Shoulder press macchina', sets: '3×10-12', defaultKg: 29, note: 'Dopo il petto',
-                  alts: [{ name: 'Military press manubri seduto', sets: '3×10-12', note: 'Stessa funzione, più stabilizzatori' }, { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM, più volume totale spalla' }]
+                  id: 'p4', name: 'Shoulder press macchina', sets: '4×10-12', defaultKg: 29,
+                  note: '4 serie — porta sempre al limite',
+                  rpe: 'rpe-8',
+                  alts: [
+                    { name: 'Military press manubri seduto', sets: '4×10-12', note: 'Più stabilizzatori' },
+                    { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM — più volume spalla' }
+                  ]
                 },
                 {
-                  id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8, note: 'Target: 8 kg',
-                  alts: [{ name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' }, { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Se disponibile — facile da caricare' }]
+                  id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8,
+                  note: 'Target 8 kg → poi 10 kg. Spalle rotonde vengono da qui',
+                  rpe: 'rpe-std', isIncrease: true,
+                  alts: [
+                    { name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' },
+                    { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Più facile caricare progressivamente' }
+                  ]
                 },
               ]
             },
             {
               label: 'Tricipiti', exercises: [
                 {
-                  id: 'p6', name: 'Pushdown cavi', sets: '3×12-15', defaultKg: 20, note: 'Fisso — non saltare',
-                  alts: [{ name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite' }, { name: 'Dips parallele (assistite)', sets: '3×10-12', note: 'Peso corpo — sempre disponibile' }]
+                  id: 'p6', name: 'Pushdown cavi (corda)', sets: '3×12-15', defaultKg: 20,
+                  note: 'Testa lunga — non saltare',
+                  rpe: 'rpe-std', isNew: true,
+                  alts: [
+                    { name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite — ottimo isolamento' },
+                    { name: 'Dips parallele', sets: '3×10-12', note: 'Sempre disponibile — peso corporeo' }
+                  ]
                 },
               ]
             },
           ],
-          cardio: '15 min spinning post-workout'
+          cardio: '15 min spinning — bassa/media intensità'
         },
+
         pull: {
           label: 'Pull', color: 'pull',
           groups: [
             {
-              label: 'Dorsali', exercises: [
+              label: 'Dorsali — V-taper', exercises: [
                 {
-                  id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40, note: 'Max ampiezza, scapole giù',
-                  alts: [{ name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stesso attrezzo, diversa angolazione' }, { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se la macchina è disponibile' }]
+                  id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40,
+                  note: 'Punta i gomiti verso il pavimento — scapole giù',
+                  rpe: 'rpe-9', isKey: true,
+                  alts: [
+                    { name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stessa macchina — angolazione diversa' },
+                    { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se disponibile — funzionalità extra' }
+                  ]
                 },
                 {
-                  id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30, note: 'Gomiti vicino, pausa',
-                  alts: [{ name: 'Rematore T-bar', sets: '4×10-12', note: 'Se il cavo basso è occupato' }, { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }]
+                  id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30,
+                  note: 'Pausa 1 sec in contrazione — non rimbalzare',
+                  rpe: 'rpe-8',
+                  alts: [
+                    { name: 'Rematore T-bar', sets: '4×10-12', note: 'Se cavo basso è occupato' },
+                    { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }
+                  ]
                 },
                 {
-                  id: 'l3', name: 'Straight arm pulldown', sets: '3×12-15', defaultKg: 20, note: 'Isolamento dorsale puro',
-                  alts: [{ name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' }, { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }]
+                  id: 'l3', name: 'Straight arm pulldown (cavo)', sets: '3×12-15', defaultKg: 20,
+                  note: 'Isola dorsali puri — braccia semi-tese, tira verso i fianchi',
+                  rpe: 'rpe-std', isNew: true,
+                  alts: [
+                    { name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' },
+                    { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
+                  ]
                 },
               ]
             },
             {
-              label: 'Spalla posteriore', exercises: [
+              label: 'Spalla posteriore — rotondità', exercises: [
                 {
-                  id: 'l4', name: 'Alzata a Y / face pull', sets: '3×12-15', defaultKg: 6, note: 'Salute spalla — mai saltare',
-                  alts: [{ name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottima alternativa con cavo alto' }, { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo, più isolamento' }]
+                  id: 'l4', name: 'Alzata a Y / Face pull', sets: '3×12-15', defaultKg: 6,
+                  note: 'Salute della spalla — mai saltare questo',
+                  rpe: 'rpe-std',
+                  alts: [
+                    { name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottimo con cavo alto — tensione costante' },
+                    { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo — più isolamento' }
+                  ]
                 },
               ]
             },
             {
               label: 'Bicipiti', exercises: [
                 {
-                  id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22, note: 'Eccentric 3 sec',
-                  alts: [{ name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' }, { name: 'Curl cavo basso (presa supina)', sets: '3×12-15', note: 'Tensione costante — ottimo' }]
+                  id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22,
+                  note: 'Eccentrica 3 secondi — non mollare in basso',
+                  rpe: 'rpe-8',
+                  alts: [
+                    { name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' },
+                    { name: 'Curl cavo basso', sets: '3×12-15', note: 'Tensione costante — ottimo per picco' }
+                  ]
                 },
               ]
             },
           ],
           cardio: '20 min spinning post-workout'
         },
+
         legs: {
           label: 'Legs', color: 'legs',
           groups: [
             {
               label: 'Quadricipiti', exercises: [
                 {
-                  id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75, note: 'Obiettivo 80-90 kg ad agosto',
-                  alts: [{ name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM, ottimo per quads' }, { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }]
+                  id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75,
+                  note: 'Obiettivo 80-90 kg — aumenta subito',
+                  rpe: 'rpe-9', isIncrease: true,
+                  alts: [
+                    { name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM — ottimo per quads' },
+                    { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }
+                  ]
                 },
                 {
-                  id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59, note: 'Pausa 1 sec in cima',
-                  alts: [{ name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' }, { name: 'Hack squat con ROM corto', sets: '3×15', note: 'Enfatizza quads se la macchina è occupata' }]
+                  id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59,
+                  note: 'Pausa 1 sec in cima — contrazione massima',
+                  rpe: 'rpe-std',
+                  alts: [
+                    { name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' },
+                    { name: 'Hack squat ROM corto', sets: '3×15', note: 'Enfatizza quads se macchina occupata' }
+                  ]
                 },
               ]
             },
             {
               label: 'Ischiocrurali', exercises: [
                 {
-                  id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45, note: 'Eccentric 3 sec, piede neutro',
-                  alts: [{ name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina diversa posizione' }, { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Sempre disponibile — ottimo stretch' }]
+                  id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45,
+                  note: 'Eccentrica 3 sec — piede neutro — non saltare femorali',
+                  rpe: 'rpe-8',
+                  alts: [
+                    { name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina — posizione diversa' },
+                    { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Ottimo stretch — sempre disponibile' }
+                  ]
                 },
               ]
             },
             {
-              label: 'Polpacci & accessori', exercises: [
+              label: 'Polpacci e accessori', exercises: [
                 {
-                  id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40, note: 'Pausa 2 sec in basso',
-                  alts: [{ name: 'Calf raise leg press', sets: '4×15-20', note: 'Sulla leg press — sempre disponibile' }, { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }]
+                  id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40,
+                  note: 'ROM completo — pausa 2 sec in basso',
+                  rpe: 'rpe-std', isNew: true,
+                  alts: [
+                    { name: 'Calf raise sulla leg press', sets: '4×15-20', note: 'Sempre disponibile' },
+                    { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }
+                  ]
                 },
                 {
-                  id: 'g5', name: 'Adduttori', sets: '2×12', defaultKg: 36, note: '',
-                  alts: [{ name: 'Sumo squat con manubrio', sets: '3×12', note: 'Allena adduttori + glutei' }, { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero — sempre disponibile' }]
+                  id: 'g5', name: 'Adduttori macchina', sets: '2×12', defaultKg: 36,
+                  note: '',
+                  alts: [
+                    { name: 'Sumo squat con manubrio', sets: '3×12', note: 'Adduttori + glutei' },
+                    { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero' }
+                  ]
                 },
                 {
-                  id: 'g6', name: 'Abduttori', sets: '2×12', defaultKg: 36, note: '',
-                  alts: [{ name: 'Hip abduction con fascia', sets: '3×15', note: 'Con elastico — sempre disponibile' }, { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }]
+                  id: 'g6', name: 'Abduttori macchina', sets: '2×12', defaultKg: 36,
+                  note: '',
+                  alts: [
+                    { name: 'Hip abduction con elastico', sets: '3×15', note: 'Sempre disponibile' },
+                    { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }
+                  ]
                 },
               ]
             },
           ],
-          cardio: '10-12 min spinning (opzionale nei leg day)'
+          cardio: '10-15 min spinning (opzionale nel leg day)'
         }
       }
     };
 
+    // Regola doppia progressione: quando aumentare
+    // Completi tutte le reps su tutte le serie → +passo minimo al prossimo allenamento
+
     const DAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
-    const BASE_WEEK = ['pull', 'rest', 'legs', 'rest', 'pull', 'push', 'push'];
+    // Schema 1 giorno sì / 1 giorno no — rotazione Push→Pull→Legs indipendente dal giorno
+    const BASE_WEEK = ['push', 'rest', 'pull', 'rest', 'legs', 'rest', 'push'];
 
-    // ─── STORAGE ─────────────────────────────────────────────────────────────────
-    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v7') || '{}') } catch (e) { return {} } }
-    function ss(s) { localStorage.setItem('ppl_v7', JSON.stringify(s)) }
-
-    // ─── DATE HELPERS ────────────────────────────────────────────────────────────
+    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v8') || '{}') } catch (e) { return {} } }
+    function ss(s) { localStorage.setItem('ppl_v8', JSON.stringify(s)) }
     function today() { return new Date().toISOString().slice(0, 10) }
     function weekStart() { const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day), m = new Date(d); m.setDate(d.getDate() + diff); return m.toISOString().slice(0, 10) }
     function dayOfWeek() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1 }
     function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10) }
     function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }) }
-
-    // ─── 1RM Epley ───────────────────────────────────────────────────────────────
     function calc1RM(kg, reps) { if (!kg || !reps || reps <= 0) return null; if (reps === 1) return kg; return Math.round(kg * (1 + reps / 30)) }
 
-    // ─── TIMER ───────────────────────────────────────────────────────────────────
     let timerInt = null, timerSec = 0, timerTotal = 0, timerRunning = false;
     function timerTick() { if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; timerSec = 0; updateTimerDisplay(); playBeep(); vibrateEnd(); return } timerSec--; updateTimerDisplay(); updateTimerBar() }
     function startTimer() { if (timerRunning || timerSec <= 0) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay() }
@@ -2150,11 +2288,9 @@
     function playBeep() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)();[0, .15, .3].forEach(t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = 880; g.gain.setValueAtTime(.3, ctx.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + t + .12); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .12) }) } catch (e) { } }
     function vibrateEnd() { try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 300]) } catch (e) { } }
 
-    // ─── DIM MODE ────────────────────────────────────────────────────────────────
     let dimMode = false;
     function toggleDim() { dimMode = !dimMode; document.body.classList.toggle('dim-mode', dimMode); const btns = [document.getElementById('dim-btn-sb'), document.getElementById('dim-btn-mob')]; btns.forEach(b => { if (b) b.style.color = dimMode ? 'var(--legs)' : 'var(--t3)' }) }
 
-    // ─── NAVIGATION ──────────────────────────────────────────────────────────────
     let currentView = 'today';
     function nav(v) {
       currentView = v;
@@ -2168,7 +2304,6 @@
       if (v === 'bodyweight') renderBodyweight();
     }
 
-    // ─── SIDEBAR ─────────────────────────────────────────────────────────────────
     function updateSidebar() {
       const state = gs(), logs = state.logs || {}, ws = weekStart(), all = Object.values(logs);
       const total = all.length, week = all.filter(l => l.date >= ws).length, streak = calcStreak(state);
@@ -2193,7 +2328,6 @@
     function getScheduledType(dayIdx, state) { const dkey = dateOffset(dayIdx - dayOfWeek()); const log = (state.logs || {})[dkey]; if (log && log.type) return log.type; return getDefaultForDay(dayIdx) }
     function getTodaySession() { const state = gs(); const log = (state.logs || {})[today()]; if (log && log.type) return log.type; return getDefaultForDay(dayOfWeek()) }
 
-    // ─── DELOAD DETECTION ────────────────────────────────────────────────────────
     function checkDeload(state, stype, exId) {
       const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.weights && l.weights[exId] !== undefined).sort((a, b) => a.date > b.date ? 1 : -1);
       if (logs.length < 3) return false;
@@ -2201,7 +2335,6 @@
       return last3[0] === last3[1] && last3[1] === last3[2];
     }
 
-    // ─── WARMUP CALC ─────────────────────────────────────────────────────────────
     function calcWarmup(kg) {
       if (!kg || kg < 20) return [];
       return [
@@ -2211,7 +2344,6 @@
       ];
     }
 
-    // ─── SET LOG ─────────────────────────────────────────────────────────────────
     function initSetLog(state, dayKey, exId, stype, defaultKg, numSets) {
       if (!state.logs) state.logs = {};
       if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
@@ -2228,12 +2360,10 @@
       const state = gs();
       if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
       state.logs[dayKey].setLogs[exId][setIdx][field] = field === 'done' ? val : (parseFloat(val) || val);
-      // update main weight from last done set
       const sets = state.logs[dayKey].setLogs[exId];
       const doneSets = sets.filter(s => s.done && s.kg);
       if (doneSets.length > 0) state.logs[dayKey].weights[exId] = doneSets[doneSets.length - 1].kg;
       ss(state);
-      // update 1rm display
       updateOrmDisplay(exId, state, dayKey);
     }
 
@@ -2259,22 +2389,16 @@
     function updateOrmDisplay(exId, state, dayKey) {
       const el = document.getElementById('orm-' + exId); if (!el) return;
       const sets = (state.logs[dayKey]?.setLogs?.[exId] || []).filter(s => s.done && s.kg && s.reps);
-      if (!sets.length) { el.textContent = ''; return }
+      if (!sets.length) { el.style.display = 'none'; return }
       const orms = sets.map(s => calc1RM(s.kg, parseInt(s.reps)));
       const best = Math.max(...orms.filter(Boolean));
-      if (best) el.textContent = '1RM est. ' + best + 'kg';
+      if (best) { el.textContent = '1RM est. ' + best + 'kg'; el.style.display = 'inline-block' }
     }
 
-    // ─── TOGGLE SETS PANEL ───────────────────────────────────────────────────────
-    function toggleSetsPanel(exId) {
-      const p = document.getElementById('sets-panel-' + exId); if (!p) return;
-      p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    }
-    function toggleWarmup(exId) {
-      const p = document.getElementById('warmup-' + exId); if (!p) return;
-      p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    }
+    function toggleSetsPanel(exId) { const p = document.getElementById('sets-panel-' + exId); if (!p) return; p.style.display = p.style.display === 'block' ? 'none' : 'block' }
+    function toggleWarmup(exId) { const p = document.getElementById('warmup-' + exId); if (!p) return; p.style.display = p.style.display === 'block' ? 'none' : 'block' }
     function toggleAlts(exId) { const panel = document.getElementById('alts-' + exId); if (!panel) return; panel.style.display = panel.style.display === 'block' ? 'none' : 'block' }
+
     function useAlt(dayKey, exId, stype, altName, altSets, altDefaultKg) {
       const state = gs();
       if (!state.logs) state.logs = {};
@@ -2285,7 +2409,6 @@
     }
     function clearSwap(dayKey, exId) { const state = gs(); if (state.logs && state.logs[dayKey] && state.logs[dayKey].swaps) { delete state.logs[dayKey].swaps[exId]; ss(state); renderToday() } }
 
-    // ─── RENDER TODAY ─────────────────────────────────────────────────────────────
     function renderToday() {
       updateSidebar();
       const state = gs();
@@ -2295,11 +2418,11 @@
       const now = new Date();
       const dateStr = now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
 
-      let html = `<div class="page-header"><div class="page-title">Allenamento di oggi</div><div class="page-sub">${dateStr}</div></div>`;
+      let html = `<div class="page-header"><div class="page-title">Allenamento di oggi</div><div class="page-sub">${dateStr} · Schema giorno sì/giorno no</div></div>`;
       html += `<div class="session-selector"><span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div>`;
 
       if (stype === 'rest') {
-        html += `<div class="rest-card"><div class="rest-icon">🌙</div><div class="rest-title">Giorno di riposo</div><div class="rest-sub">Schema giorno sì / giorno no — recupero attivo</div><div class="rest-tip">Stretching 10 min · Camminata leggera · 8h di sonno<br>Premi un pulsante sopra se vuoi comunque allenarti oggi</div></div>`;
+        html += `<div class="rest-card"><div class="rest-icon">🌙</div><div class="rest-title">Giorno di riposo</div><div class="rest-sub">Schema giorno sì / giorno no — recupero completo</div><div class="rest-tip">48h di recupero → puoi andare più vicino al cedimento nel prossimo allenamento<br><br>Stretching 10 min · Camminata · Almeno 8h di sonno · Proteine 110-130g</div><div class="sched-pick"><div class="sched-pick-title">Vuoi comunque allenarti?</div><div class="sched-btns">${['push', 'pull', 'legs'].map(t => `<button class="sched-btn sched-btn-${t}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div></div></div>`;
         container.innerHTML = html; return;
       }
 
@@ -2316,42 +2439,51 @@
       const circ = 2 * Math.PI * 17, offset = circ - (pct / 100) * circ;
       const colorVar = `var(--${session.color})`;
 
-      // TIMER
+      // Timer
       html += `<div class="timer-widget">
-    <div class="timer-top">
-      <div><div class="timer-label">Timer recupero</div><div id="timer-display" class="timer-display">00:00</div></div>
-      <div class="timer-controls">
-        <button class="tbtn tstart" onclick="startTimer()">▶</button>
-        <button class="tbtn" onclick="pauseTimer()">⏸</button>
-        <button class="tbtn tstop" onclick="resetTimer(0)">■</button>
-      </div>
+  <div class="timer-top">
+    <div><div class="timer-label">Timer recupero</div><div id="timer-display" class="timer-display">00:00</div></div>
+    <div class="timer-controls">
+      <button class="tbtn tstart" onclick="startTimer()">▶</button>
+      <button class="tbtn" onclick="pauseTimer()">⏸</button>
+      <button class="tbtn tstop" onclick="resetTimer(0)">■</button>
     </div>
-    <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
-    <div class="timer-presets">
-      <button class="preset" onclick="resetTimer(60)">1m</button>
-      <button class="preset" onclick="resetTimer(90)">90s</button>
-      <button class="preset" onclick="resetTimer(120)">2m</button>
-      <button class="preset" onclick="resetTimer(180)">3m</button>
-    </div>
-  </div>`;
+  </div>
+  <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
+  <div class="timer-presets">
+    <button class="preset" onclick="resetTimer(60)">1m</button>
+    <button class="preset" onclick="resetTimer(90)">90s</button>
+    <button class="preset" onclick="resetTimer(120)">2m</button>
+    <button class="preset" onclick="resetTimer(180)">3m</button>
+  </div>
+</div>`;
 
-      // SESSION BAR
+      // RPE quick reference
+      html += `<div class="rpe-quick">
+  <span style="font-size:10px;color:var(--t3);align-self:center;letter-spacing:.06em;text-transform:uppercase;margin-right:4px;">RPE</span>
+  <span class="rpe-chip">6 — troppo facile</span>
+  <span class="rpe-chip">7 — warm-up</span>
+  <span class="rpe-chip target">8 — target serie</span>
+  <span class="rpe-chip target">9 — ultima serie</span>
+  <span class="rpe-chip">10 — cedimento</span>
+</div>`;
+
+      // Session bar
       html += `<div class="session-type-bar">
-    <span class="stype-badge badge-${stype}">${stype}</span>
-    <span class="stype-name">${session.label}</span>
-    <div class="stype-right">
-      <span style="font-size:11px;color:var(--t2)">${checkedCount}/${allExIds.length}</span>
-      <div class="progress-ring-wrap">
-        <svg width="40" height="40" viewBox="0 0 40 40">
-          <circle class="pr-bg" cx="20" cy="20" r="17"/>
-          <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
-        </svg>
-        <div class="pr-label" style="color:${colorVar}">${pct}%</div>
-      </div>
+  <span class="stype-badge badge-${stype}">${stype}</span>
+  <span class="stype-name">${session.label}</span>
+  <div class="stype-right">
+    <span style="font-size:11px;color:var(--t2)">${checkedCount}/${allExIds.length}</span>
+    <div class="progress-ring-wrap">
+      <svg width="40" height="40" viewBox="0 0 40 40">
+        <circle class="pr-bg" cx="20" cy="20" r="17"/>
+        <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
+      </svg>
+      <div class="pr-label" style="color:${colorVar}">${pct}%</div>
     </div>
-  </div>`;
+  </div>
+</div>`;
 
-      // EXERCISES
       for (const group of session.groups) {
         html += `<div class="ex-group"><div class="ex-group-label">${group.label}</div>`;
         for (const ex of group.exercises) {
@@ -2366,103 +2498,108 @@
           if (trend !== null && trend !== 0) trendHtml = `<span class="ex-trend ${trend > 0 ? 'trend-up' : 'trend-down'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}kg</span>`;
           else if (prev !== null) trendHtml = `<span class="ex-trend">=${prev}kg</span>`;
 
-          // 1RM from set log
           const exSets = (setLogs[ex.id] || []).filter(s => s.done && s.kg && s.reps);
           const bestOrm = exSets.length > 0 ? Math.max(...exSets.map(s => calc1RM(s.kg, parseInt(s.reps))).filter(Boolean)) : null;
           const ormHtml = bestOrm ? `<span class="orm-badge" id="orm-${ex.id}">1RM est. ${bestOrm}kg</span>` : `<span class="orm-badge" id="orm-${ex.id}" style="display:none"></span>`;
-
-          // Deload warning
           const isDeload = checkDeload(state, stype, ex.id);
-          const deloadHtml = isDeload ? `<span class="deload-badge">⚠ Stesso peso x3 — considera deload o variazione</span>` : '';
+          const deloadHtml = isDeload ? `<span class="deload-badge">⚠ Stesso peso ×3 — aumenta o varia</span>` : '';
 
-          // Warmup
+          // Badges
+          let badgeHtml = '';
+          if (ex.isNew) badgeHtml += `<span class="new-tag">Nuovo</span>`;
+          if (ex.isIncrease) badgeHtml += `<span class="increase-tag">↑ Aumenta</span>`;
+          if (ex.isKey) badgeHtml += `<span class="rpe-tag ${ex.rpe || 'rpe-std'}">Priorità</span>`;
+
           const warmupSets = calcWarmup(dispKg);
           let warmupHtml = '';
           if (warmupSets.length > 0) {
-            warmupHtml = `<div class="warmup-panel" id="warmup-${ex.id}" style="display:none">
-          <div class="warmup-title">☀ Riscaldamento suggerito</div>
-          <div class="warmup-rows">`;
+            warmupHtml = `<div class="warmup-panel" id="warmup-${ex.id}" style="display:none"><div class="warmup-title">☀ Riscaldamento suggerito</div><div class="warmup-rows">`;
             warmupSets.forEach(w => { warmupHtml += `<div class="warmup-row"><span class="warmup-dot"></span><span>${w.pct}% → ${w.kg}kg × ${w.reps} reps</span></div>` });
             warmupHtml += `</div></div>`;
           }
 
-          // Set log panel
+          // Tip progressione
+          let progTip = '';
+          if (ex.note) {
+            progTip = `<div class="prog-tip">${ex.note}</div>`;
+          }
+
           const curSets = initSetLog(state, todayKey, ex.id, stype, dispKg, dispSets.split('×')[0]);
-          // save back (initSetLog may have modified state)
           ss(state);
           let setLogHtml = `<div class="setlog-area" id="sets-panel-${ex.id}" style="display:none">
-        <div class="setlog-title">Serie dettagliate</div>
-        <div class="setlog-rows">`;
+      <div class="setlog-title">Serie dettagliate · doppia progressione</div>
+      <div class="setlog-rows">`;
           curSets.forEach((s, i) => {
             setLogHtml += `<div class="setlog-row">
-          <span class="setlog-num">${i + 1}</span>
-          <input type="number" class="setlog-kg" value="${s.kg}" min="0" step="0.5" placeholder="kg"
-            onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'kg',this.value)">
-          <span class="setlog-sep">×</span>
-          <input type="number" class="setlog-reps" value="${s.reps}" min="1" step="1" placeholder="reps"
-            onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'reps',this.value)">
-          <button class="setlog-done ${s.done ? 'ok' : ''}" onclick="toggleSetDone('${todayKey}','${ex.id}','${stype}',${i})">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
-        </div>`;
+        <span class="setlog-num">${i + 1}</span>
+        <input type="number" class="setlog-kg" value="${s.kg}" min="0" step="0.5" placeholder="kg"
+          onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'kg',this.value)">
+        <span class="setlog-sep">×</span>
+        <input type="number" class="setlog-reps" value="${s.reps}" min="1" step="1" placeholder="reps"
+          onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'reps',this.value)">
+        <button class="setlog-done ${s.done ? 'ok' : ''}" onclick="toggleSetDone('${todayKey}','${ex.id}','${stype}',${i})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>`;
           });
           setLogHtml += `</div><button class="setlog-add" onclick="addSet('${todayKey}','${ex.id}','${stype}')">+ Serie</button></div>`;
 
           html += `<div class="ex-card ${isChecked ? 'done' : ''}" id="excard-${ex.id}">
-        <div class="ex-main">
-          <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
-          <div class="ex-body">
-            <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}</div>
-            <div class="ex-meta">
-              <span class="ex-sets">${dispSets}</span>
-              <span class="ex-note-inline">${ex.note ? '— ' + ex.note : ''}</span>
-            </div>
-            ${ormHtml}
-            ${deloadHtml}
+      <div class="ex-main">
+        <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+        <div class="ex-body">
+          <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}</div>
+          <div class="ex-meta">
+            <span class="ex-sets">${dispSets}</span>
+            ${badgeHtml}
           </div>
-          <div class="ex-right">
-            <div class="ex-kg-wrap">
-              <input type="number" class="ex-kg" value="${dispKg}" min="0" step="0.5"
-                onchange="saveKg('${todayKey}','${ex.id}',this.value,'${stype}')" onfocus="this.select()">
-              <span class="kg-unit">kg</span>
-            </div>
-            ${trendHtml}
+          ${ormHtml}
+          ${deloadHtml}
+        </div>
+        <div class="ex-right">
+          <div class="ex-kg-wrap">
+            <input type="number" class="ex-kg" value="${dispKg}" min="0" step="0.5"
+              onchange="saveKg('${todayKey}','${ex.id}',this.value,'${stype}')" onfocus="this.select()">
+            <span class="kg-unit">kg</span>
           </div>
+          ${trendHtml}
         </div>
-        ${warmupHtml}
-        ${setLogHtml}
-        <div class="ex-actions">
-          <button class="toggle-sets-btn" onclick="toggleSetsPanel('${ex.id}')">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Serie
-          </button>
-          ${warmupSets.length > 0 ? `<button class="toggle-sets-btn" onclick="toggleWarmup('${ex.id}')">☀ Warm-up</button>` : ''}
-          <button class="swap-btn" onclick="toggleAlts('${ex.id}')">
-            <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-            ${swap ? 'Cambia ancora' : 'Macchina occupata?'}
-          </button>
-          ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Originale</button>` : ''}
-        </div>
-        <div class="alts-panel" id="alts-${ex.id}" style="display:none">
-          <div class="alts-title">Scegli un'alternativa</div>
-          <div class="alt-options">`;
+      </div>
+      ${progTip}
+      ${warmupHtml}
+      ${setLogHtml}
+      <div class="ex-actions">
+        <button class="toggle-sets-btn" onclick="toggleSetsPanel('${ex.id}')">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Serie
+        </button>
+        ${warmupSets.length > 0 ? `<button class="toggle-sets-btn" onclick="toggleWarmup('${ex.id}')">☀ Warm-up</button>` : ''}
+        <button class="swap-btn" onclick="toggleAlts('${ex.id}')">
+          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          ${swap ? 'Cambia ancora' : 'Macchina occupata?'}
+        </button>
+        ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Originale</button>` : ''}
+      </div>
+      <div class="alts-panel" id="alts-${ex.id}" style="display:none">
+        <div class="alts-title">Scegli un'alternativa — palestra piena</div>
+        <div class="alt-options">`;
           for (const alt of ex.alts) {
             const san = alt.name.replace(/'/g, "\\'");
             html += `<div class="alt-opt"><div class="alt-opt-info"><div class="alt-opt-name">${alt.name}</div><div class="alt-opt-meta">${alt.sets} · ${alt.note}</div></div><button class="use-btn" onclick="useAlt('${todayKey}','${ex.id}','${stype}','${san}','${alt.sets}',${dispKg})">Usa</button></div>`;
           }
           html += `</div><span class="alts-close" onclick="toggleAlts('${ex.id}')">✕ Chiudi</span></div>
-      </div>`;
+    </div>`;
         }
         html += `</div>`;
       }
 
       html += `<div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>`;
       if (!isDone) {
-        html += `<div class="complete-zone"><button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimasti</span>` : ''}</div>`;
+        html += `<div class="complete-zone"><button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimanenti</span>` : ''}</div>`;
       } else {
-        html += `<div class="completed-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ottimo lavoro — sessione completata</div>`;
+        html += `<div class="completed-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ottimo — sessione completata</div>`;
       }
 
       container.innerHTML = html;
@@ -2502,7 +2639,6 @@
       state.logs[dayKey].done = true; ss(state); renderToday();
     }
 
-    // ─── PROGRESS ────────────────────────────────────────────────────────────────
     let progFilter = 'push';
     let expandedEx = null;
     function renderProgress(f) {
@@ -2513,10 +2649,7 @@
       const allEx = session.groups.flatMap(g => g.exercises);
       const color = PROG.colors[progFilter];
       const container = document.getElementById('view-progress');
-
       let html = `<div class="section-header"><div class="section-title">Progressi</div><div class="prog-filter">${['push', 'pull', 'legs'].map(t => `<button class="pf-btn ${progFilter === t ? 'active' : ''}" onclick="renderProgress('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div></div>`;
-
-      // EXPANDED CHART
       html += `<div class="chart-expanded ${expandedEx ? 'open' : ''}" id="chart-expanded">`;
       if (expandedEx) {
         const ex = allEx.find(e => e.id === expandedEx);
@@ -2525,22 +2658,17 @@
           html += `<div class="chart-exp-title">${ex.name}</div><div class="chart-exp-sub">${ex.sets} · ${pts.length} sessioni tracciate</div>`;
           if (pts.length >= 2) {
             html += `<div class="chart-svg-wrap">${bigChart(pts, color)}</div>`;
-            // data table
             html += `<div style="margin-top:14px;overflow-x:auto"><table class="vol-table"><thead><tr><th>Data</th><th>Kg</th><th>1RM est.</th></tr></thead><tbody>`;
             pts.slice().reverse().slice(0, 10).forEach(p => {
               const orm = calc1RM(p.v, 8);
               html += `<tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(p.d)}</td><td class="kg-now">${p.v}kg</td><td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td></tr>`;
             });
             html += `</tbody></table></div>`;
-          } else {
-            html += `<div class="no-data-spark" style="height:120px">Insufficienti dati per il grafico espanso</div>`;
-          }
+          } else { html += `<div class="no-data-spark" style="height:120px">Dati insufficienti per il grafico</div>`; }
           html += `<button onclick="expandedEx=null;renderProgress()" style="margin-top:14px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:11px;font-weight:700;padding:5px 12px;cursor:pointer;">✕ Chiudi</button>`;
         }
       }
       html += `</div>`;
-
-      // CARDS
       html += `<div class="prog-grid">`;
       for (const ex of allEx.slice(0, 4)) {
         const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
@@ -2549,17 +2677,16 @@
         const delta = last - first;
         const isDeload = checkDeload(state, progFilter, ex.id);
         html += `<div class="prog-card" onclick="expandedEx='${ex.id}';renderProgress()">
-      <div class="prog-card-title">${ex.name}</div>
-      <div class="prog-card-sub">${ex.sets}${isDeload ? ' · ⚠ plateau' : ''}</div>
-      <div class="chart-wrap">${pts.length >= 2 ? sparkline(pts, color) : `<div class="no-data-spark">Dati insufficienti</div>`}</div>
-      <div class="prog-delta">
-        <div><div class="delta-val" style="color:${color}">${last}kg</div><div class="delta-label">ultimo</div></div>
-        <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta > 0 ? 'var(--pull)' : delta < 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
-      </div>
-    </div>`;
+    <div class="prog-card-title">${ex.name}</div>
+    <div class="prog-card-sub">${ex.sets}${isDeload ? ' · ⚠ plateau' : ''}</div>
+    <div class="chart-wrap">${pts.length >= 2 ? sparkline(pts, color) : `<div class="no-data-spark">Dati insufficienti</div>`}</div>
+    <div class="prog-delta">
+      <div><div class="delta-val" style="color:${color}">${last}kg</div><div class="delta-label">ultimo</div></div>
+      <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta > 0 ? 'var(--pull)' : delta < 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
+    </div>
+  </div>`;
       }
       html += `</div>`;
-
       if (allLogs.length === 0) {
         html += `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div><div class="empty-sub">Completa alcune sessioni ${progFilter.toUpperCase()}</div></div>`;
       } else {
@@ -2573,14 +2700,14 @@
             const orm = calc1RM(last, 8);
             const isDeload = checkDeload(state, progFilter, ex.id);
             html += `<tr style="cursor:pointer" onclick="expandedEx='${ex.id}';renderProgress()">
-          <td><div class="vol-name">${ex.name}${isDeload ? ' <span style="color:var(--legs);font-size:10px">⚠</span>' : ''}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
-          <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)">${ex.sets}</span></td>
-          <td class="kg-was">${first}kg</td>
-          <td class="kg-now">${last}kg</td>
-          <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
-          <td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td>
-          <td style="color:var(--t3)">${pts.length}</td>
-        </tr>`;
+        <td><div class="vol-name">${ex.name}${isDeload ? ' <span style="color:var(--legs);font-size:10px">⚠</span>' : ''}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
+        <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)">${ex.sets}</span></td>
+        <td class="kg-was">${first}kg</td>
+        <td class="kg-now">${last}kg</td>
+        <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
+        <td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td>
+        <td style="color:var(--t3)">${pts.length}</td>
+      </tr>`;
           }
         }
         html += `</tbody></table>`;
@@ -2596,10 +2723,10 @@
       const lastX = P + (pts.length - 1) * (W - P * 2) / (pts.length - 1);
       const lastY = H - P - (pts[pts.length - 1].v - min) / range * (H - P * 2);
       return `<svg class="sparkline" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-    <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
-    <polygon fill="${color}" fill-opacity="0.07" points="${P},${H} ${points} ${lastX.toFixed(1)},${H}"/>
-    <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3" fill="${color}"/>
-  </svg>`;
+  <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
+  <polygon fill="${color}" fill-opacity="0.07" points="${P},${H} ${points} ${lastX.toFixed(1)},${H}"/>
+  <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3" fill="${color}"/>
+</svg>`;
     }
 
     function bigChart(pts, color) {
@@ -2610,26 +2737,22 @@
       const x = i => PX + i * (iW / (pts.length - 1));
       const y = v => PY + iH - (v - min) / range * iH;
       const points = pts.map((p, i) => `${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
-      // Y axis labels
       const yLabels = [min, min + range / 2, max].map(v => ({ v: Math.round(v * 10) / 10, y: y(v) }));
       let yHtml = ''; yLabels.forEach(l => { yHtml += `<text x="${PX - 4}" y="${l.y.toFixed(1)}" text-anchor="end" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${l.v}</text>` });
-      // X axis labels (max 5)
       let xHtml = '';
       const step = Math.ceil(pts.length / 5);
       pts.forEach((p, i) => { if (i % step === 0 || i === pts.length - 1) { xHtml += `<text x="${x(i).toFixed(1)}" y="${H - 1}" text-anchor="middle" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${p.d.slice(5)}</text>` } });
-      // dots with tooltip
       let dots = ''; pts.forEach((p, i) => { dots += `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3.5" fill="${color}" opacity="0.8"><title>${p.d}: ${p.v}kg</title></circle>` });
       return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:400px">
-    <line x1="${PX}" y1="${PY}" x2="${PX}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
-    <line x1="${PX}" y1="${PY + iH}" x2="${PX + iW}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
-    ${yHtml}${xHtml}
-    <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
-    <polygon fill="${color}" fill-opacity="0.06" points="${PX},${PY + iH} ${points} ${x(pts.length - 1).toFixed(1)},${PY + iH}"/>
-    ${dots}
-  </svg>`;
+  <line x1="${PX}" y1="${PY}" x2="${PX}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
+  <line x1="${PX}" y1="${PY + iH}" x2="${PX + iW}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
+  ${yHtml}${xHtml}
+  <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
+  <polygon fill="${color}" fill-opacity="0.06" points="${PX},${PY + iH} ${points} ${x(pts.length - 1).toFixed(1)},${PY + iH}"/>
+  ${dots}
+</svg>`;
     }
 
-    // ─── HISTORY ─────────────────────────────────────────────────────────────────
     function renderHistory() {
       const state = gs();
       const logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
@@ -2643,78 +2766,69 @@
         const allEx = sess.groups.flatMap(g => g.exercises);
         const cc = Object.values(log.checked || {}).filter(Boolean).length;
         const swapCount = Object.keys(log.swaps || {}).length;
-        // Calc total volume from set logs
         let totalVol = 0;
         if (log.setLogs) { Object.values(log.setLogs).forEach(sets => { sets.filter(s => s.done && s.kg && s.reps).forEach(s => { totalVol += s.kg * parseInt(s.reps) || 0 }) }) }
         html += `<div class="hist-item">
-      <span class="hist-dot" style="background:${PROG.colors[log.type]}"></span>
-      <div>
-        <div class="hist-name">${sess.label}${swapCount > 0 ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px">${swapCount} sost.</span>` : ''}</div>
-        <div class="hist-date">${fmtDate(log.date)}${totalVol > 0 ? ` · <span style="color:var(--t2)">${totalVol.toLocaleString('it-IT')}kg vol.</span>` : ''}</div>
-      </div>
-      <div>
-        <div class="hist-count">${cc}/${allEx.length}</div>
-        ${log.done ? '<div class="hist-done-tag">✓ COMPLETA</div>' : ''}
-      </div>
-    </div>`;
+    <span class="hist-dot" style="background:${PROG.colors[log.type]}"></span>
+    <div>
+      <div class="hist-name">${sess.label}${swapCount > 0 ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px">${swapCount} sost.</span>` : ''}</div>
+      <div class="hist-date">${fmtDate(log.date)}${totalVol > 0 ? ` · <span style="color:var(--t2)">${totalVol.toLocaleString('it-IT')}kg vol.</span>` : ''}</div>
+    </div>
+    <div>
+      <div class="hist-count">${cc}/${allEx.length}</div>
+      ${log.done ? '<div class="hist-done-tag">✓ COMPLETA</div>' : ''}
+    </div>
+  </div>`;
       }
       html += `</div>`;
       container.innerHTML = html;
     }
 
-    function clearAll() { if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v7'); renderHistory(); updateSidebar() } }
+    function clearAll() { if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v8'); renderHistory(); updateSidebar() } }
 
-    // ─── BODY WEIGHT ─────────────────────────────────────────────────────────────
     function renderBodyweight() {
       const state = gs();
       const bwLog = state.bwLog || {};
       const container = document.getElementById('view-bodyweight');
       const entries = Object.entries(bwLog).sort((a, b) => a[0] > b[0] ? 1 : -1);
       const latestEntry = entries.length > 0 ? entries[entries.length - 1] : null;
-
-      let html = `<div class="page-header"><div class="page-title">Peso corporeo</div><div class="page-sub">Traccia il tuo peso nel tempo</div></div>`;
-
-      // input
+      let html = `<div class="page-header"><div class="page-title">Peso corporeo</div><div class="page-sub">Obiettivo: 65-67 kg · composizione, non solo peso</div></div>`;
       html += `<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:18px 20px;margin-bottom:20px">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px">Aggiungi misurazione di oggi</div>
-    <div class="bw-row">
-      <input type="number" class="bw-input" id="bw-new" value="${latestEntry ? latestEntry[1] : ''}" min="30" max="200" step="0.1" placeholder="kg" onkeydown="if(event.key==='Enter')saveBW()">
-      <span class="bw-label">kg</span>
-      <button class="bw-save" onclick="saveBW()">Salva oggi</button>
-    </div>
-    ${latestEntry ? `<div style="font-size:11px;color:var(--t3);margin-top:4px">Ultima: ${fmtDate(latestEntry[0])} — ${latestEntry[1]} kg</div>` : ''}
-  </div>`;
-
+  <div style="font-size:12px;font-weight:700;margin-bottom:12px">Misurazione di oggi</div>
+  <div class="bw-row">
+    <input type="number" class="bw-input" id="bw-new" value="${latestEntry ? latestEntry[1] : ''}" min="30" max="200" step="0.1" placeholder="kg" onkeydown="if(event.key==='Enter')saveBW()">
+    <span class="bw-label">kg</span>
+    <button class="bw-save" onclick="saveBW()">Salva oggi</button>
+  </div>
+  ${latestEntry ? `<div style="font-size:11px;color:var(--t3);margin-top:4px">Ultima: ${fmtDate(latestEntry[0])} — ${latestEntry[1]} kg</div>` : ''}
+  <div style="margin-top:12px;background:var(--bg3);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--t2);">
+    Zona target: <b style="color:var(--pull)">65–67 kg</b> · Se sale oltre 68 kg taglia 100-200 kcal · Se scende sotto 65 aumenta leggermente · Proteine: min <b style="color:var(--pull)">110g/giorno</b>
+  </div>
+</div>`;
       if (entries.length >= 2) {
         const pts = entries.map(([d, v]) => ({ d, v }));
         const first = pts[0].v, last = pts[pts.length - 1].v, delta = last - first;
         html += `<div class="bw-chart-wrap">
-      <div class="bw-chart-title">Trend peso corporeo</div>
-      <div class="chart-svg-wrap">${bigChart(pts, '#7c6ef5')}</div>
-      <div class="prog-delta" style="margin-top:14px">
-        <div><div class="delta-val" style="color:var(--acc)">${last}kg</div><div class="delta-label">attuale</div></div>
-        <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta < 0 ? 'var(--pull)' : delta > 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
-      </div>
-    </div>`;
+    <div class="bw-chart-title">Trend peso corporeo</div>
+    <div class="chart-svg-wrap">${bigChart(pts, '#7c6ef5')}</div>
+    <div class="prog-delta" style="margin-top:14px">
+      <div><div class="delta-val" style="color:var(--acc)">${last}kg</div><div class="delta-label">attuale</div></div>
+      <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta < 0 ? 'var(--pull)' : delta > 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
+    </div>
+  </div>`;
       }
-
       if (entries.length > 0) {
         html += `<div style="margin-top:20px;margin-bottom:10px;font-size:14px;font-weight:700">Storico misurazioni</div>`;
-        html += `<table class="vol-table"><thead><tr><th>Data</th><th>Peso</th><th>Δ giorno</th></tr></thead><tbody>`;
+        html += `<table class="vol-table"><thead><tr><th>Data</th><th>Peso</th><th>Δ</th></tr></thead><tbody>`;
         entries.slice().reverse().slice(0, 20).forEach(([d, v], i, arr) => {
           const prev = arr[i + 1] ? arr[i + 1][1] : null;
           const delta = prev !== null ? v - prev : null;
-          html += `<tr>
-        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(d)}</td>
-        <td class="kg-now">${v}kg</td>
-        <td class="${delta === null ? 'kg-same' : delta < 0 ? 'kg-up' : delta > 0 ? 'kg-down' : 'kg-same'}">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg'}</td>
-      </tr>`;
+          html += `<tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(d)}</td><td class="kg-now">${v}kg</td><td class="${delta === null ? 'kg-same' : delta < 0 ? 'kg-up' : delta > 0 ? 'kg-down' : 'kg-same'}">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg'}</td></tr>`;
         });
         html += `</tbody></table>`;
       } else {
-        html += `<div class="empty"><div class="empty-icon">⚖</div><div class="empty-text">Nessuna misurazione ancora</div><div class="empty-sub">Inserisci il tuo peso sopra</div></div>`;
+        html += `<div class="empty"><div class="empty-icon">⚖</div><div class="empty-text">Nessuna misurazione ancora</div><div class="empty-sub">Inserisci il tuo peso sopra ogni mattina a digiuno</div></div>`;
       }
-
       container.innerHTML = html;
     }
 
@@ -2725,7 +2839,6 @@
       state.bwLog[today()] = val; ss(state); renderBodyweight();
     }
 
-    // ─── EXPORT / IMPORT ─────────────────────────────────────────────────────────
     function exportData() {
       const state = gs();
       const json = JSON.stringify(state, null, 2);
@@ -2744,7 +2857,7 @@
             const data = JSON.parse(ev.target.result);
             if (data && typeof data === 'object') {
               if (confirm('Importare il backup? I dati attuali verranno sovrascritti.')) {
-                localStorage.setItem('ppl_v7', JSON.stringify(data));
+                localStorage.setItem('ppl_v8', JSON.stringify(data));
                 renderToday(); updateSidebar();
                 alert('Import completato ✓');
               }
@@ -2756,7 +2869,6 @@
       input.click();
     }
 
-    // ─── AUTH ────────────────────────────────────────────────────────────────────
     function logout() {
       localStorage.removeItem('ppl_auth');
       document.getElementById('pin-screen').style.display = 'flex';
@@ -2764,7 +2876,7 @@
       setTimeout(() => { const i = document.getElementById('pin-input'); if (i) { i.value = ''; i.focus() } }, 100);
     }
 
-    const CORRECT_PIN = '3520';
+    const CORRECT_PIN = '3520'; // ← cambia il PIN qui
     function checkPin() {
       const input = document.getElementById('pin-input'); const err = document.getElementById('pin-err'); if (!input) return;
       if (input.value === CORRECT_PIN) {
