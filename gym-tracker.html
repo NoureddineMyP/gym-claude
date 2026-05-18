@@ -1,33 +1,51 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>PPL Tracker</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>PPL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --bg: #080808;
-      --bg2: #111;
-      --bg3: #191919;
-      --bg4: #222;
-      --bg5: #2a2a2a;
-      --b1: #252525;
-      --b2: #353535;
-      --b3: #484848;
-      --t1: #f0ede6;
-      --t2: #9e9b94;
-      --t3: #555250;
-      --t4: #333;
-      --push: #ff5c35;
-      --pull: #2dcc7a;
-      --legs: #f5a623;
-      --acc: #7c6ef5;
-      --r: 8px;
-      --rl: 12px;
+      --push: #FF2D00;
+      --pull: #00F070;
+      --legs: #FFB400;
+      --acc: #4D7CFF;
+      --push-dim: rgba(255, 45, 0, .12);
+      --pull-dim: rgba(0, 240, 112, .1);
+      --legs-dim: rgba(255, 180, 0, .1);
+      --r: 12px;
+      --rl: 18px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0C0C0C;
+      --s1: #161616;
+      --s2: #202020;
+      --s3: #2A2A2A;
+      --s4: #363636;
+      --ln: rgba(255, 255, 255, .06);
+      --ln2: rgba(255, 255, 255, .11);
+      --fg: #EDEAE2;
+      --fg2: #888480;
+      --fg3: #444;
+      --card-bg: #161616;
+    }
+
+    [data-theme="light"] {
+      --bg: #EDEBE5;
+      --s1: #E3E0D8;
+      --s2: #D8D4CB;
+      --s3: #CBC7BC;
+      --s4: #BFBBB0;
+      --ln: rgba(0, 0, 0, .07);
+      --ln2: rgba(0, 0, 0, .13);
+      --fg: #1C1A17;
+      --fg2: #6A6760;
+      --fg3: #AAA7A0;
+      --card-bg: #E3E0D8;
     }
 
     *,
@@ -35,30 +53,22 @@
     *::after {
       box-sizing: border-box;
       margin: 0;
-      padding: 0
+      padding: 0;
+      -webkit-tap-highlight-color: transparent
     }
 
     html {
-      scroll-behavior: smooth
+      font-size: 16px
     }
 
     body {
       background: var(--bg);
-      color: var(--t1);
-      font-family: 'Syne', sans-serif;
-      font-size: 14px;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased
-    }
-
-    ::-webkit-scrollbar {
-      width: 3px;
-      height: 3px
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--b2);
-      border-radius: 2px
+      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      transition: background .2s, color .2s;
+      -webkit-font-smoothing: antialiased;
     }
 
     input[type=number] {
@@ -71,288 +81,124 @@
     }
 
     button {
-      font-family: 'Syne', sans-serif
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      border: none;
+      background: none
     }
 
-    body.dim-mode {
-      filter: brightness(.55) saturate(.7)
+    ::-webkit-scrollbar {
+      width: 2px
     }
 
-    .app {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: 100vh
+    ::-webkit-scrollbar-thumb {
+      background: var(--ln2);
+      border-radius: 2px
     }
 
-    .topbar {
-      display: none;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--b1);
-      padding: 14px 16px;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100
-    }
-
-    .topbar-logo {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -.5px
-    }
-
-    .topbar-logo span {
-      color: var(--acc)
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px
-    }
-
-    .topbar-streak {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--t2)
-    }
-
-    .shell {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      flex: 1
-    }
-
-    .sidebar {
-      background: var(--bg2);
-      border-right: 1px solid var(--b1);
-      display: flex;
-      flex-direction: column;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto
-    }
-
-    .sb-logo {
-      padding: 22px 18px 18px;
-      border-bottom: 1px solid var(--b1)
-    }
-
-    .sb-logo-text {
-      font-size: 19px;
-      font-weight: 800;
-      letter-spacing: -.5px
-    }
-
-    .sb-logo-text span {
-      color: var(--acc)
-    }
-
-    .sb-logo-sub {
-      font-size: 10px;
-      color: var(--t3);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-top: 3px;
-      font-family: 'JetBrains Mono', monospace
-    }
-
-    .sb-stats {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--b1);
-      display: flex;
-      flex-direction: column;
-      gap: 9px
-    }
-
-    .sb-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline
-    }
-
-    .sb-stat-label {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .07em
-    }
-
-    .sb-stat-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 500
-    }
-
-    .sb-week {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--b1)
-    }
-
-    .sb-section-title {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 9px
-    }
-
-    .week-days {
-      display: flex;
-      flex-direction: column;
-      gap: 3px
-    }
-
-    .wd {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 8px;
-      border-radius: var(--r);
-      border: 1px solid transparent;
-      transition: all .15s
-    }
-
-    .wd.today {
-      background: var(--bg3);
-      border-color: var(--b2)
-    }
-
-    .wd-name {
-      font-size: 11px;
-      color: var(--t2);
-      font-family: 'JetBrains Mono', monospace;
-      width: 28px
-    }
-
-    .wd-type {
-      font-size: 11px;
-      font-weight: 700;
+    .bb {
+      font-family: 'Bebas Neue', sans-serif;
       letter-spacing: .03em
     }
 
-    .wd-done {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--pull);
-      opacity: 0;
-      transition: opacity .2s
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      max-width: 430px;
+      margin: 0 auto
     }
 
-    .wd.done .wd-done {
-      opacity: 1
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--ln);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 12px;
     }
 
-    .type-push {
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: .05em;
+      line-height: 1
+    }
+
+    .logo .dot {
       color: var(--push)
     }
 
-    .type-pull {
-      color: var(--pull)
-    }
-
-    .type-legs {
-      color: var(--legs)
-    }
-
-    .type-rest {
-      color: var(--t4)
-    }
-
-    .sb-nav {
-      padding: 14px 18px;
-      flex: 1
-    }
-
-    .nav-item {
+    .topbar-r {
       display: flex;
       align-items: center;
-      gap: 9px;
-      padding: 8px 9px;
-      border-radius: var(--r);
-      cursor: pointer;
-      transition: all .15s;
-      color: var(--t3);
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid transparent;
-      margin-bottom: 2px
+      gap: 8px
     }
 
-    .nav-item:hover {
-      background: var(--bg3);
-      color: var(--t2)
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--s2);
+      border: 1px solid var(--ln);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: .04em;
     }
 
-    .nav-item.active {
-      background: var(--bg4);
-      color: var(--t1);
-      border-color: var(--b2)
+    .theme-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--s2);
+      border: 1px solid var(--ln2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      transition: background .15s;
     }
 
-    .nav-icon {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-      opacity: .5
+    .theme-btn:hover {
+      background: var(--s3)
     }
 
-    .nav-item.active .nav-icon {
-      opacity: 1
-    }
-
-    .sb-footer {
-      padding: 14px 18px;
-      border-top: 1px solid var(--b1)
-    }
-
-    .sb-date {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--t3)
-    }
-
-    .main {
-      overflow-y: auto;
-      min-width: 0
-    }
-
-    .main-inner {
-      padding: 28px 32px 80px;
-      max-width: 900px
-    }
-
-    .bottom-nav {
-      display: none;
-      background: var(--bg2);
-      border-top: 1px solid var(--b1);
-      grid-template-columns: repeat(4, 1fr);
-      position: sticky;
+    .bnav {
+      position: fixed;
       bottom: 0;
-      z-index: 100
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      background: var(--s1);
+      border-top: 1px solid var(--ln);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      z-index: 50;
     }
 
-    .bn-item {
+    .bni {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      padding: 10px 8px;
-      cursor: pointer;
-      color: var(--t3);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: color .15s
+      gap: 3px;
+      padding: 10px 6px 9px;
+      color: var(--fg3);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: .08em;
+      transition: color .15s;
     }
 
-    .bn-item svg {
-      width: 20px;
-      height: 20px;
+    .bni svg {
+      width: 21px;
+      height: 21px;
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
@@ -360,452 +206,510 @@
       stroke-linejoin: round
     }
 
-    .bn-item.active {
-      color: var(--t1)
+    .bni.on {
+      color: var(--fg)
     }
 
-    .page-header {
-      margin-bottom: 24px
-    }
-
-    .page-title {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -.5px;
-      line-height: 1.1
-    }
-
-    .page-sub {
-      font-size: 12px;
-      color: var(--t2);
-      margin-top: 5px
-    }
-
-    .session-selector {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-wrap: wrap
-    }
-
-    .ss-btn {
-      padding: 9px 18px;
-      border-radius: 99px;
-      border: 1px solid var(--b1);
-      background: transparent;
-      color: var(--t3);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      cursor: pointer;
-      transition: all .18s;
-      text-transform: uppercase
-    }
-
-    .ss-btn:hover {
-      background: var(--bg3);
-      border-color: var(--b2)
-    }
-
-    .ss-btn.active-push {
-      background: rgba(255, 92, 53, .12);
-      border-color: rgba(255, 92, 53, .4);
-      color: var(--push)
-    }
-
-    .ss-btn.active-pull {
-      background: rgba(45, 204, 122, .12);
-      border-color: rgba(45, 204, 122, .4);
-      color: var(--pull)
-    }
-
-    .ss-btn.active-legs {
-      background: rgba(245, 166, 35, .12);
-      border-color: rgba(245, 166, 35, .4);
-      color: var(--legs)
-    }
-
-    .session-type-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 10px
-    }
-
-    .stype-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      padding: 4px 11px;
-      border-radius: 99px;
-      text-transform: uppercase;
-      flex-shrink: 0
-    }
-
-    .badge-push {
-      background: rgba(255, 92, 53, .12);
-      color: var(--push)
-    }
-
-    .badge-pull {
-      background: rgba(45, 204, 122, .12);
-      color: var(--pull)
-    }
-
-    .badge-legs {
-      background: rgba(245, 166, 35, .12);
-      color: var(--legs)
-    }
-
-    .stype-name {
-      font-size: 16px;
-      font-weight: 700;
-      flex: 1;
-      min-width: 120px
-    }
-
-    .stype-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto
-    }
-
-    .progress-ring-wrap {
-      position: relative;
-      width: 40px;
-      height: 40px
-    }
-
-    .progress-ring-wrap svg {
-      transform: rotate(-90deg)
-    }
-
-    .pr-bg {
-      fill: none;
-      stroke: var(--b1);
-      stroke-width: 3
-    }
-
-    .pr-fg {
-      fill: none;
-      stroke-width: 3;
-      stroke-linecap: round;
-      transition: stroke-dashoffset .4s ease
-    }
-
-    .pr-label {
+    .nav-indicator {
       position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      font-weight: 500
+      top: 0;
+      height: 2px;
+      border-radius: 0 0 3px 3px;
+      background: var(--push);
+      transition: left .25s cubic-bezier(.4, 0, .2, 1), width .25s cubic-bezier(.4, 0, .2, 1);
     }
 
-    .timer-widget {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 16px 20px;
-      margin-bottom: 18px
-    }
-
-    .timer-top {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap
-    }
-
-    .timer-label {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 5px
-    }
-
-    .timer-display {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 28px;
-      font-weight: 500;
-      letter-spacing: -.02em;
-      min-width: 80px
-    }
-
-    .timer-display.running {
-      color: var(--pull)
-    }
-
-    .timer-display.paused {
-      color: var(--legs)
-    }
-
-    .timer-controls {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap
-    }
-
-    .tbtn {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 7px 12px;
-      color: var(--t1);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em
-    }
-
-    .tbtn:hover {
-      background: var(--bg4);
-      border-color: var(--b2)
-    }
-
-    .tbtn.tstart {
-      background: rgba(45, 204, 122, .1);
-      border-color: rgba(45, 204, 122, .25);
-      color: var(--pull)
-    }
-
-    .tbtn.tstop {
-      background: rgba(255, 92, 53, .08);
-      border-color: rgba(255, 92, 53, .25);
-      color: var(--push)
-    }
-
-    .timer-presets {
-      display: flex;
-      gap: 5px;
-      margin-top: 10px;
-      flex-wrap: wrap
-    }
-
-    .preset {
-      background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 5px 9px;
-      color: var(--t3);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      cursor: pointer;
-      transition: all .15s
-    }
-
-    .preset:hover {
-      background: var(--bg3);
-      color: var(--t2);
-      border-color: var(--b2)
-    }
-
-    .timer-bar-wrap {
-      margin-top: 10px;
-      height: 3px;
-      background: var(--b1);
-      border-radius: 2px;
-      overflow: hidden
-    }
-
-    .timer-bar {
-      height: 3px;
-      background: var(--pull);
-      border-radius: 2px;
-      transition: width .95s linear;
-      width: 0%
-    }
-
-    /* RPE badge */
-    .rpe-tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      font-weight: 500;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 6px
-    }
-
-    .rpe-8 {
-      background: rgba(45, 204, 122, .12);
-      color: var(--pull);
-      border: 1px solid rgba(45, 204, 122, .3)
-    }
-
-    .rpe-9 {
-      background: rgba(255, 92, 53, .1);
-      color: var(--push);
-      border: 1px solid rgba(255, 92, 53, .25)
-    }
-
-    .rpe-std {
-      background: rgba(124, 110, 245, .1);
-      color: var(--acc);
-      border: 1px solid rgba(124, 110, 245, .25)
-    }
-
-    /* new exercise badge */
-    .new-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 6px;
-      background: rgba(45, 204, 122, .12);
-      color: var(--pull);
-      border: 1px solid rgba(45, 204, 122, .3)
-    }
-
-    .increase-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 6px;
-      background: rgba(245, 166, 35, .12);
-      color: var(--legs);
-      border: 1px solid rgba(245, 166, 35, .3)
-    }
-
-    .ex-group {
-      margin-bottom: 18px
-    }
-
-    .ex-group-label {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      margin-bottom: 7px;
-      padding-left: 1px;
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .ex-group-label::after {
-      content: '';
+    .scroll {
       flex: 1;
-      height: 1px;
-      background: var(--b1)
+      overflow-y: auto;
+      padding-bottom: calc(62px + env(safe-area-inset-bottom, 0))
     }
 
-    .ex-card {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      margin-bottom: 6px;
-      overflow: hidden;
-      transition: border-color .2s
+    .pg {
+      display: none;
+      padding: 18px 16px 8px
     }
 
-    .ex-card:hover {
-      border-color: var(--b2)
+    .pg.on {
+      display: block
     }
 
-    .ex-card.done {
-      opacity: .5
+    .fadein {
+      animation: fi .2s ease both
     }
 
-    .ex-card.done .ex-name {
-      text-decoration: line-through;
-      text-decoration-color: var(--t3)
+    @keyframes fi {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
     }
 
-    .ex-main {
+    .ph {
+      margin-bottom: 20px
+    }
+
+    .ph-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: .02em;
+      line-height: 1
+    }
+
+    .ph-sub {
+      font-size: 13px;
+      color: var(--fg2);
+      margin-top: 3px
+    }
+
+    .sess-tabs {
       display: grid;
-      grid-template-columns: 36px 1fr auto;
-      align-items: start;
-      gap: 10px;
-      padding: 13px 14px
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 16px
     }
 
-    .ex-check {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 1.5px solid var(--b2);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .sess-tab {
+      padding: 11px 4px;
+      border-radius: 10px;
+      border: 1.5px solid var(--ln);
+      background: var(--s1);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      letter-spacing: .06em;
+      color: var(--fg2);
       transition: all .18s;
-      flex-shrink: 0;
-      color: transparent;
-      margin-top: 2px
     }
 
-    .ex-check:hover {
-      border-color: var(--b3);
-      background: var(--bg3)
+    .sess-tab.ap {
+      background: var(--push);
+      border-color: var(--push);
+      color: #fff
     }
 
-    .ex-check.checked {
+    .sess-tab.al {
       background: var(--pull);
       border-color: var(--pull);
       color: #000
     }
 
-    .ex-check svg {
-      width: 11px;
-      height: 11px
+    .sess-tab.ag {
+      background: var(--legs);
+      border-color: var(--legs);
+      color: #000
+    }
+
+    .hero {
+      border-radius: var(--rl);
+      padding: 22px 20px 18px;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(-45deg, currentColor 0, currentColor .5px, transparent 0, transparent 8px);
+      opacity: .06;
+      pointer-events: none;
+    }
+
+    .hero-push {
+      background: linear-gradient(135deg, #1a0800, #2a0e00);
+      border: 1px solid rgba(255, 45, 0, .2);
+      color: var(--push)
+    }
+
+    .hero-pull {
+      background: linear-gradient(135deg, #001508, #002712);
+      border: 1px solid rgba(0, 240, 112, .15);
+      color: var(--pull)
+    }
+
+    .hero-legs {
+      background: linear-gradient(135deg, #161000, #251c00);
+      border: 1px solid rgba(255, 180, 0, .15);
+      color: var(--legs)
+    }
+
+    .hero-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px
+    }
+
+    .hero-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .12em;
+      border: 1.5px solid currentColor;
+      border-radius: 5px;
+      padding: 3px 8px;
+      opacity: .8;
+    }
+
+    .hero-count {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: rgba(255, 255, 255, .4)
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: .01em;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 14px
+    }
+
+    .pbar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .pbar-track {
+      flex: 1;
+      height: 3px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 2px
+    }
+
+    .pbar-fill {
+      height: 3px;
+      border-radius: 2px;
+      background: currentColor;
+      transition: width .4s ease
+    }
+
+    .pbar-pct {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px
+    }
+
+    .timer-box {
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: var(--rl);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .timer-row {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .timer-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: -.01em;
+      line-height: 1;
+      min-width: 110px;
+      transition: color .2s;
+    }
+
+    .timer-num.go {
+      color: var(--pull)
+    }
+
+    .timer-num.pause {
+      color: var(--legs)
+    }
+
+    .timer-ctrls {
+      display: flex;
+      gap: 6px;
+      flex: 1
+    }
+
+    .tc {
+      flex: 1;
+      padding: 10px 4px;
+      border-radius: 9px;
+      border: 1.5px solid var(--ln);
+      background: var(--s2);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      color: var(--fg);
+      transition: all .15s;
+    }
+
+    .tc.start {
+      background: var(--pull);
+      border-color: var(--pull);
+      color: #000
+    }
+
+    .tc.stp {
+      color: var(--push)
+    }
+
+    .tc:hover {
+      background: var(--s3)
+    }
+
+    .tc.start:hover {
+      opacity: .88
+    }
+
+    .t-presets {
+      display: flex;
+      gap: 5px;
+      margin-top: 10px
+    }
+
+    .tp {
+      flex: 1;
+      padding: 7px 2px;
+      border-radius: 8px;
+      border: 1px solid var(--ln);
+      background: transparent;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--fg2);
+      transition: all .14s;
+    }
+
+    .tp:hover,
+    .tp:active {
+      background: var(--s2);
+      color: var(--fg);
+      border-color: var(--ln2)
+    }
+
+    .t-bar-track {
+      height: 3px;
+      background: var(--ln);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 10px
+    }
+
+    .t-bar {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--pull);
+      transition: width .9s linear, background .4s
+    }
+
+    .rpe-strip {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 14px
+    }
+
+    .rpe-chip {
+      flex: 1;
+      padding: 6px 2px;
+      border-radius: 8px;
+      border: 1px solid var(--ln);
+      background: var(--s1);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: var(--fg3);
+      text-align: center;
+    }
+
+    .rpe-chip.t {
+      background: var(--pull-dim);
+      border-color: rgba(0, 240, 112, .25);
+      color: var(--pull)
+    }
+
+    .rpe-chip.r {
+      background: var(--push-dim);
+      border-color: rgba(255, 45, 0, .2);
+      color: var(--push)
+    }
+
+    .grp-hd {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 10px
+    }
+
+    .grp-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: .12em;
+      color: var(--fg2);
+      white-space: nowrap;
+    }
+
+    .grp-line {
+      flex: 1;
+      height: 1px;
+      background: var(--ln)
+    }
+
+    .exc {
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: var(--rl);
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: border-color .2s, opacity .2s;
+    }
+
+    .exc:hover {
+      border-color: var(--ln2)
+    }
+
+    .exc.done {
+      opacity: .38
+    }
+
+    .exc.done .ex-name {
+      text-decoration: line-through;
+      text-decoration-color: var(--fg3)
+    }
+
+    .exc.prio-push {
+      border-left: 3px solid var(--push)
+    }
+
+    .exc.prio-pull {
+      border-left: 3px solid var(--pull)
+    }
+
+    .exc.prio-legs {
+      border-left: 3px solid var(--legs)
+    }
+
+    .exc.new {
+      border-left: 3px solid var(--acc)
+    }
+
+    .exc.up {
+      border-left: 3px solid var(--legs)
+    }
+
+    .ex-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 14px 14px 10px
+    }
+
+    .ex-chk {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+      border: 2px solid var(--ln2);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: all .2s;
+    }
+
+    .ex-chk.on {
+      background: var(--pull);
+      border-color: var(--pull);
+      color: #000
+    }
+
+    .ex-chk svg {
+      width: 13px;
+      height: 13px
     }
 
     .ex-body {
+      flex: 1;
       min-width: 0
     }
 
     .ex-name {
-      font-size: 13px;
-      font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap
-    }
-
-    .ex-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 3px;
-      flex-wrap: wrap
-    }
-
-    .ex-sets {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--t2)
-    }
-
-    .ex-note-inline {
-      font-size: 11px;
-      color: var(--t3);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: .02em;
+      line-height: 1.1;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 220px
     }
 
-    .ex-right {
+    .ex-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px
+    }
+
+    .tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: .08em;
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+
+    .tag-set {
+      background: var(--s3);
+      color: var(--fg2)
+    }
+
+    .tag-push {
+      background: var(--push-dim);
+      color: var(--push);
+      border: 1px solid rgba(255, 45, 0, .2)
+    }
+
+    .tag-pull {
+      background: var(--pull-dim);
+      color: var(--pull);
+      border: 1px solid rgba(0, 240, 112, .18)
+    }
+
+    .tag-legs {
+      background: var(--legs-dim);
+      color: var(--legs);
+      border: 1px solid rgba(255, 180, 0, .2)
+    }
+
+    .tag-new {
+      background: rgba(77, 124, 255, .14);
+      color: var(--acc);
+      border: 1px solid rgba(77, 124, 255, .22)
+    }
+
+    .tag-up {
+      background: var(--legs-dim);
+      color: var(--legs);
+      border: 1px solid rgba(255, 180, 0, .2)
+    }
+
+    .ex-note {
+      font-size: 12px;
+      color: var(--fg2);
+      margin-top: 5px;
+      line-height: 1.4
+    }
+
+    .ex-orm {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      color: var(--acc);
+      margin-top: 4px
+    }
+
+    .ex-r {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -813,231 +717,76 @@
       flex-shrink: 0
     }
 
-    .ex-kg-wrap {
-      display: flex;
-      align-items: center;
-      gap: 5px
-    }
-
-    .ex-kg {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      color: var(--t1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      width: 62px;
-      padding: 6px 8px;
+    .kg-inp {
+      width: 68px;
+      background: var(--s2);
+      border: 1.5px solid var(--ln);
+      border-radius: 10px;
+      color: var(--fg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
       text-align: center;
+      padding: 7px 6px 5px;
       outline: none;
-      transition: border-color .15s
+      transition: border-color .15s;
     }
 
-    .ex-kg:focus {
-      border-color: var(--b3);
-      background: var(--bg4)
+    .kg-inp:focus {
+      border-color: var(--ln2)
     }
 
-    .kg-unit {
+    .kg-lbl {
       font-size: 10px;
-      color: var(--t3);
-      font-family: 'JetBrains Mono', monospace
+      color: var(--fg3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em
     }
 
     .ex-trend {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--t3)
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      color: var(--fg3)
     }
 
-    .trend-up {
+    .ex-trend.up {
       color: var(--pull)
     }
 
-    .trend-down {
+    .ex-trend.dn {
       color: var(--push)
     }
 
-    .orm-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      color: var(--acc);
-      background: rgba(124, 110, 245, .1);
-      border: 1px solid rgba(124, 110, 245, .2);
-      border-radius: 4px;
-      padding: 2px 5px;
-      margin-top: 2px;
-      display: inline-block
-    }
-
-    .deload-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      color: var(--legs);
-      background: rgba(245, 166, 35, .1);
-      border: 1px solid rgba(245, 166, 35, .25);
-      border-radius: 4px;
-      padding: 2px 5px;
-      margin-top: 2px;
-      display: inline-block
-    }
-
-    .setlog-area {
+    .ex-acts {
+      display: flex;
+      gap: 5px;
       padding: 0 14px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .setlog-title {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 4px
-    }
-
-    .setlog-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 4px
-    }
-
-    .setlog-row {
-      display: flex;
-      align-items: center;
-      gap: 6px
-    }
-
-    .setlog-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: var(--t3);
-      width: 18px;
-      text-align: right;
-      flex-shrink: 0
-    }
-
-    .setlog-kg {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: 6px;
-      color: var(--t1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      width: 56px;
-      padding: 5px 7px;
-      text-align: center;
-      outline: none;
-      transition: border-color .15s
-    }
-
-    .setlog-kg:focus {
-      border-color: var(--b3)
-    }
-
-    .setlog-reps {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: 6px;
-      color: var(--t1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      width: 44px;
-      padding: 5px 7px;
-      text-align: center;
-      outline: none;
-      transition: border-color .15s
-    }
-
-    .setlog-reps:focus {
-      border-color: var(--b3)
-    }
-
-    .setlog-sep {
-      font-size: 10px;
-      color: var(--t3);
-      font-family: 'JetBrains Mono', monospace
-    }
-
-    .setlog-done {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      border: 1.5px solid var(--b2);
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .15s;
-      flex-shrink: 0;
-      color: transparent
-    }
-
-    .setlog-done.ok {
-      background: rgba(45, 204, 122, .15);
-      border-color: rgba(45, 204, 122, .4);
-      color: var(--pull)
-    }
-
-    .setlog-done svg {
-      width: 9px;
-      height: 9px
-    }
-
-    .setlog-add {
-      background: transparent;
-      border: 1px dashed var(--b1);
-      border-radius: 6px;
-      color: var(--t3);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em;
-      align-self: flex-start;
-      margin-top: 2px
-    }
-
-    .setlog-add:hover {
-      border-color: var(--b2);
-      color: var(--t2)
-    }
-
-    .ex-actions {
-      padding: 0 14px 11px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
       flex-wrap: wrap
     }
 
-    .swap-btn {
+    .act {
       display: flex;
       align-items: center;
-      gap: 5px;
-      background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 5px 10px;
-      color: var(--t3);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .03em
+      gap: 4px;
+      background: var(--s2);
+      border: 1px solid var(--ln);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: var(--fg2);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .06em;
+      transition: all .14s;
     }
 
-    .swap-btn:hover {
-      background: var(--bg3);
-      border-color: var(--b2);
-      color: var(--t2)
+    .act:hover,
+    .act:active {
+      background: var(--s3);
+      color: var(--fg);
+      border-color: var(--ln2)
     }
 
-    .swap-btn svg {
+    .act svg {
       width: 12px;
       height: 12px;
       stroke: currentColor;
@@ -1046,529 +795,591 @@
       stroke-linecap: round
     }
 
-    .toggle-sets-btn {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 5px 10px;
-      color: var(--t3);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .03em
+    .sets-panel {
+      display: none;
+      padding: 0 14px 14px
     }
 
-    .toggle-sets-btn:hover {
-      background: var(--bg3);
-      border-color: var(--b2);
-      color: var(--t2)
+    .sets-lbl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: .1em;
+      color: var(--fg3);
+      margin-bottom: 8px
+    }
+
+    .set-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px
+    }
+
+    .set-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      color: var(--fg3);
+      width: 16px;
+      text-align: right;
+      flex-shrink: 0
+    }
+
+    .set-kg {
+      width: 56px;
+      background: var(--s2);
+      border: 1.5px solid var(--ln);
+      border-radius: 8px;
+      color: var(--fg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      text-align: center;
+      padding: 6px 4px;
+      outline: none;
+      transition: border-color .14s;
+    }
+
+    .set-kg:focus {
+      border-color: var(--ln2)
+    }
+
+    .set-rp {
+      width: 46px;
+      background: var(--s2);
+      border: 1.5px solid var(--ln);
+      border-radius: 8px;
+      color: var(--fg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      text-align: center;
+      padding: 6px 4px;
+      outline: none;
+      transition: border-color .14s;
+    }
+
+    .set-rp:focus {
+      border-color: var(--ln2)
+    }
+
+    .set-x {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--fg3)
+    }
+
+    .set-ok {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1.5px solid var(--ln2);
+      background: transparent;
+      color: transparent;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .14s;
+    }
+
+    .set-ok.on {
+      background: rgba(0, 240, 112, .14);
+      border-color: rgba(0, 240, 112, .35);
+      color: var(--pull)
+    }
+
+    .set-ok svg {
+      width: 11px;
+      height: 11px
+    }
+
+    .set-add {
+      background: transparent;
+      border: 1px dashed var(--ln2);
+      border-radius: 8px;
+      padding: 6px 12px;
+      color: var(--fg3);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .06em;
+      margin-top: 4px;
+      transition: all .14s;
+      align-self: flex-start;
+    }
+
+    .set-add:hover {
+      border-color: var(--fg3);
+      color: var(--fg2)
+    }
+
+    .wu-panel {
+      display: none;
+      padding: 0 14px 12px
+    }
+
+    .wu-inner {
+      background: var(--s2);
+      border-radius: 10px;
+      padding: 12px
+    }
+
+    .wu-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .1em;
+      color: var(--acc);
+      margin-bottom: 8px
+    }
+
+    .wu-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--fg2);
+      padding: 2px 0
+    }
+
+    .wu-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--acc);
+      opacity: .6;
+      flex-shrink: 0
     }
 
     .alts-panel {
-      background: var(--bg3);
-      border-top: 1px solid var(--b1);
-      padding: 12px 14px
+      display: none;
+      border-top: 1px solid var(--ln);
+      background: var(--s2);
+      padding: 14px
     }
 
-    .alts-title {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .08em;
+    .alts-lbl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: .1em;
+      color: var(--fg3);
       margin-bottom: 10px
     }
 
-    .alt-options {
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .alt-opt {
+    .alt-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 12px;
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      cursor: pointer;
-      transition: all .15s;
-      gap: 10px
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: 10px;
+      padding: 11px 12px;
+      margin-bottom: 6px;
+      gap: 10px;
     }
 
-    .alt-opt:hover {
-      border-color: var(--b2);
-      background: var(--bg4)
+    .alt-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: .02em
     }
 
-    .alt-opt-info {
-      min-width: 0
+    .alt-sub {
+      font-size: 11px;
+      color: var(--fg3);
+      margin-top: 1px
     }
 
-    .alt-opt-name {
-      font-size: 12px;
-      font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap
-    }
-
-    .alt-opt-meta {
-      font-size: 10px;
-      color: var(--t3);
-      margin-top: 2px;
-      font-family: 'JetBrains Mono', monospace
-    }
-
-    .use-btn {
+    .alt-use {
       background: var(--acc);
       color: #fff;
-      border: none;
-      border-radius: var(--r);
-      padding: 5px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: .06em;
       flex-shrink: 0;
-      transition: opacity .15s;
-      letter-spacing: .03em
+      transition: opacity .14s;
     }
 
-    .use-btn:hover {
+    .alt-use:hover {
       opacity: .85
     }
 
     .alts-close {
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 11px;
-      color: var(--t3);
+      letter-spacing: .06em;
+      color: var(--fg3);
       cursor: pointer;
-      margin-top: 8px;
+      margin-top: 6px;
       display: inline-block
     }
 
-    .alts-close:hover {
-      color: var(--t2)
+    .deload {
+      margin: 0 14px 10px;
+      padding: 8px 12px;
+      background: rgba(255, 180, 0, .08);
+      border: 1px solid rgba(255, 180, 0, .18);
+      border-radius: 9px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--legs);
     }
 
-    .warmup-panel {
-      background: rgba(124, 110, 245, .05);
-      border: 1px solid rgba(124, 110, 245, .15);
-      border-radius: var(--r);
-      padding: 10px 14px;
-      margin: 0 14px 10px
-    }
-
-    .warmup-title {
-      font-size: 10px;
-      color: var(--acc);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 7px;
-      font-weight: 700
-    }
-
-    .warmup-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 4px
-    }
-
-    .warmup-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--t2)
-    }
-
-    .warmup-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--acc);
-      flex-shrink: 0;
-      opacity: .5
-    }
-
-    /* Progressione tip box */
-    .prog-tip {
-      background: rgba(45, 204, 122, .05);
-      border: 1px solid rgba(45, 204, 122, .15);
-      border-radius: var(--r);
-      padding: 10px 14px;
-      margin: 0 14px 12px;
-      font-size: 11px;
-      color: var(--t2)
-    }
-
-    .prog-tip b {
-      color: var(--pull);
-      font-weight: 600
-    }
-
-    .cardio-row {
+    .cardio {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 11px 16px;
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: 12px;
+      padding: 12px 16px;
       margin-bottom: 16px;
-      font-size: 12px;
-      color: var(--t2)
-    }
-
-    .cardio-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--acc);
-      flex-shrink: 0
-    }
-
-    .complete-zone {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap
-    }
-
-    .complete-btn {
-      background: var(--pull);
-      color: #000;
-      border: none;
-      border-radius: var(--r);
-      padding: 11px 22px;
       font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .18s;
-      letter-spacing: .02em
+      color: var(--fg2);
     }
 
-    .complete-btn:hover {
-      filter: brightness(1.1)
+    .cta {
+      width: 100%;
+      padding: 17px;
+      border-radius: 14px;
+      margin-bottom: 4px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .06em;
+      transition: all .16s;
     }
 
-    .complete-btn:active {
+    .cta:active {
       transform: scale(.97)
     }
 
-    .completed-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--pull);
-      font-size: 13px;
-      font-weight: 600
+    .cta-push {
+      background: var(--push);
+      color: #fff
     }
 
-    .complete-hint {
-      font-size: 11px;
-      color: var(--t3)
+    .cta-pull {
+      background: var(--pull);
+      color: #000
+    }
+
+    .cta-legs {
+      background: var(--legs);
+      color: #000
+    }
+
+    .cta-hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--fg3);
+      margin-top: 7px
+    }
+
+    .done-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      background: rgba(0, 240, 112, .07);
+      border: 1px solid rgba(0, 240, 112, .18);
+      border-radius: 14px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: .06em;
+      color: var(--pull);
     }
 
     .rest-card {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
+      background: var(--s1);
+      border: 1px solid var(--ln);
       border-radius: var(--rl);
-      padding: 48px 32px;
-      text-align: center
+      padding: 36px 22px;
+      text-align: center;
+      margin-bottom: 14px;
     }
 
-    .rest-icon {
-      font-size: 36px;
+    .rest-em {
+      font-size: 50px;
+      display: block;
       margin-bottom: 14px
     }
 
-    .rest-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 6px
+    .rest-h {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 46px;
+      letter-spacing: .02em
     }
 
-    .rest-sub {
-      color: var(--t2);
-      font-size: 13px
+    .rest-s {
+      font-size: 14px;
+      color: var(--fg2);
+      margin-top: 6px
+    }
+
+    .rest-tips-box {
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px
     }
 
     .rest-tip {
-      margin-top: 20px;
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 14px;
-      font-size: 12px;
-      color: var(--t2);
-      max-width: 360px;
-      margin-left: auto;
-      margin-right: auto
-    }
-
-    .sched-pick {
-      margin-top: 20px
-    }
-
-    .sched-pick-title {
-      font-size: 12px;
-      color: var(--t2);
-      margin-bottom: 12px
-    }
-
-    .sched-btns {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--ln);
+      font-size: 14px
     }
 
-    .sched-btn {
-      padding: 10px 20px;
-      border-radius: 99px;
-      border: 1px solid var(--b1);
-      background: transparent;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .18s;
+    .rest-tip:last-child {
+      border-bottom: none
+    }
+
+    .rest-tip-ic {
+      font-size: 18px;
+      flex-shrink: 0
+    }
+
+    .override-lbl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: .08em;
+      color: var(--fg2);
+      margin-bottom: 10px
+    }
+
+    .override-row {
+      display: flex;
+      gap: 8px
+    }
+
+    .ov-btn {
+      flex: 1;
+      padding: 13px 4px;
+      border-radius: 12px;
+      border: 2px solid currentColor;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
       letter-spacing: .04em;
-      text-transform: uppercase
+      background: transparent;
+      transition: all .18s;
     }
 
-    .sched-btn:hover {
-      background: var(--bg3)
-    }
-
-    .sched-btn-push {
+    .ov-push {
       color: var(--push)
     }
 
-    .sched-btn-pull {
+    .ov-push:hover,
+    .ov-push:active {
+      background: var(--push);
+      color: #fff
+    }
+
+    .ov-pull {
       color: var(--pull)
     }
 
-    .sched-btn-legs {
+    .ov-pull:hover,
+    .ov-pull:active {
+      background: var(--pull);
+      color: #000
+    }
+
+    .ov-legs {
       color: var(--legs)
     }
 
-    .prog-filter {
+    .ov-legs:hover,
+    .ov-legs:active {
+      background: var(--legs);
+      color: #000
+    }
+
+    .filter-row {
       display: flex;
-      gap: 7px;
-      margin-bottom: 22px;
-      flex-wrap: wrap
+      gap: 6px;
+      margin-bottom: 18px
     }
 
-    .pf-btn {
-      padding: 6px 14px;
-      border-radius: var(--r);
-      border: 1px solid var(--b1);
-      background: transparent;
-      color: var(--t3);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em
+    .f-btn {
+      flex: 1;
+      padding: 10px 4px;
+      border-radius: 10px;
+      border: 1.5px solid var(--ln);
+      background: var(--s1);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: .06em;
+      color: var(--fg2);
+      transition: all .16s;
     }
 
-    .pf-btn:hover {
-      background: var(--bg3);
-      color: var(--t2)
+    .f-push.on {
+      background: var(--push);
+      border-color: var(--push);
+      color: #fff
     }
 
-    .pf-btn.active {
-      background: var(--bg3);
-      color: var(--t1);
-      border-color: var(--b2)
+    .f-pull.on {
+      background: var(--pull);
+      border-color: var(--pull);
+      color: #000
+    }
+
+    .f-legs.on {
+      background: var(--legs);
+      border-color: var(--legs);
+      color: #000
     }
 
     .prog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 28px
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px
     }
 
     .prog-card {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 18px;
-      overflow: hidden;
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 14px;
       cursor: pointer;
-      transition: border-color .2s
+      transition: border-color .15s;
+      overflow: hidden;
     }
 
     .prog-card:hover {
-      border-color: var(--b2)
+      border-color: var(--ln2)
     }
 
-    .prog-card-title {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 2px;
+    .pc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: .03em;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap
+      white-space: nowrap;
+      margin-bottom: 2px
     }
 
-    .prog-card-sub {
+    .pc-sub {
       font-size: 10px;
-      color: var(--t3);
-      margin-bottom: 14px;
-      font-family: 'JetBrains Mono', monospace
+      color: var(--fg3);
+      margin-bottom: 8px;
+      font-weight: 600
     }
 
-    .chart-wrap {
-      height: 70px
+    .pc-kg {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      letter-spacing: -.01em;
+      margin-top: 6px
+    }
+
+    .pc-delta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px
     }
 
     .sparkline {
       width: 100%;
-      height: 70px
+      height: 46px
     }
 
-    .no-data-spark {
+    .no-spark {
+      height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 70px;
       font-size: 11px;
-      color: var(--t3)
+      color: var(--fg3)
     }
 
-    .prog-delta {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline
-    }
-
-    .delta-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 500
-    }
-
-    .delta-label {
-      font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .07em
-    }
-
-    .chart-expanded {
-      background: var(--bg2);
-      border: 1px solid var(--b2);
-      border-radius: var(--rl);
-      padding: 20px;
-      margin-bottom: 20px;
+    .chart-expand {
+      background: var(--s1);
+      border: 1px solid var(--ln2);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
       display: none
     }
 
-    .chart-expanded.open {
+    .chart-expand.on {
       display: block
     }
 
-    .chart-exp-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px
+    .ce-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: .02em;
+      margin-bottom: 2px
     }
 
-    .chart-exp-sub {
+    .ce-sub {
       font-size: 11px;
-      color: var(--t3);
-      margin-bottom: 16px
+      color: var(--fg3);
+      margin-bottom: 14px
     }
 
-    .chart-svg-wrap {
-      width: 100%;
+    .chart-scroll {
       overflow-x: auto
     }
 
-    .chart-svg-wrap svg {
-      min-width: 400px
-    }
-
-    .vol-table {
+    .all-tbl {
       width: 100%;
       border-collapse: collapse
     }
 
-    .vol-table th {
+    .all-tbl th {
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 10px;
-      color: var(--t3);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--b1);
+      letter-spacing: .1em;
+      color: var(--fg3);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--ln);
       text-align: left;
       font-weight: 400
     }
 
-    .vol-table th:not(:first-child) {
+    .all-tbl th:not(:first-child) {
       text-align: right
     }
 
-    .vol-table td {
+    .all-tbl td {
       padding: 10px 0;
-      border-bottom: 1px solid var(--b1);
-      font-size: 12px;
-      vertical-align: middle
+      border-bottom: 1px solid var(--ln);
+      font-size: 13px
     }
 
-    .vol-table tr:last-child td {
+    .all-tbl tr:last-child td {
       border-bottom: none
     }
 
-    .vol-table tr:hover td {
-      background: var(--bg3)
-    }
-
-    .vol-table td:not(:first-child) {
+    .all-tbl td:not(:first-child) {
       text-align: right;
-      font-family: 'JetBrains Mono', monospace
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      font-weight: 400
     }
 
-    .vol-name {
-      font-weight: 600;
-      font-size: 12px
+    .all-tbl tr {
+      cursor: pointer
     }
 
-    .vol-sub {
-      font-size: 10px;
-      color: var(--t3);
-      margin-top: 2px
+    .td-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: .02em
     }
 
-    .kg-now {
-      color: var(--t1)
-    }
-
-    .kg-was {
-      color: var(--t3)
-    }
-
-    .kg-up {
-      color: var(--pull);
-      font-size: 11px
-    }
-
-    .kg-down {
-      color: var(--push);
-      font-size: 11px
-    }
-
-    .kg-same {
-      color: var(--t3);
-      font-size: 11px
+    .td-s {
+      font-size: 11px;
+      color: var(--fg3);
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 1px
     }
 
     .hist-list {
@@ -1578,1328 +1389,980 @@
     }
 
     .hist-item {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 14px 18px;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      background: var(--s1);
+      border: 1px solid var(--ln);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
       align-items: center;
-      gap: 14px;
-      transition: border-color .15s
+      gap: 12px;
+      transition: border-color .14s;
     }
 
     .hist-item:hover {
-      border-color: var(--b2)
+      border-color: var(--ln2)
     }
 
-    .hist-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
+    .hist-bar {
+      width: 4px;
+      border-radius: 3px;
+      align-self: stretch;
       flex-shrink: 0
     }
 
     .hist-name {
-      font-size: 13px;
-      font-weight: 600
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: .03em
     }
 
-    .hist-date {
-      font-size: 11px;
-      color: var(--t3);
-      font-family: 'JetBrains Mono', monospace;
+    .hist-d {
+      font-size: 12px;
+      color: var(--fg3);
       margin-top: 2px
     }
 
-    .hist-count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--t2);
-      text-align: right
+    .hist-r {
+      margin-left: auto;
+      text-align: right;
+      flex-shrink: 0
     }
 
-    .hist-done-tag {
+    .hist-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px
+    }
+
+    .hist-ok {
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 10px;
+      letter-spacing: .08em;
       color: var(--pull);
-      font-weight: 700;
-      letter-spacing: .04em;
       margin-top: 2px
     }
 
-    .bw-section {
-      margin-top: 28px
-    }
-
-    .bw-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap
-    }
-
-    .bw-input {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      color: var(--t1);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      width: 80px;
-      padding: 8px 10px;
-      text-align: center;
-      outline: none;
-      transition: border-color .15s
-    }
-
-    .bw-input:focus {
-      border-color: var(--b3)
-    }
-
-    .bw-save {
-      background: var(--bg3);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      color: var(--t1);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em
-    }
-
-    .bw-save:hover {
-      background: var(--bg4);
-      border-color: var(--b2)
-    }
-
-    .bw-label {
-      font-size: 11px;
-      color: var(--t3)
-    }
-
-    .bw-chart-wrap {
-      background: var(--bg2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rl);
-      padding: 18px;
-      margin-bottom: 14px
-    }
-
-    .bw-chart-title {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 14px
-    }
-
-    .data-tools {
+    .tools-row {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px
+      margin-top: 16px
     }
 
-    .data-btn {
+    .tool-btn {
+      flex: 1;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid var(--ln);
+      background: var(--s1);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: .06em;
+      color: var(--fg2);
+      transition: all .14s;
+    }
+
+    .tool-btn:hover {
+      background: var(--s2);
+      color: var(--fg)
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid var(--ln);
       background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      color: var(--t2);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 7px 13px;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em
+      color: var(--fg3);
+      margin-top: 7px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: .06em;
+      transition: all .14s;
     }
 
-    .data-btn:hover {
-      background: var(--bg3);
-      border-color: var(--b2)
-    }
-
-    .data-btn.danger:hover {
+    .logout-btn:hover {
       border-color: var(--push);
       color: var(--push)
     }
 
-    .section-header {
+    .bw-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin-bottom: 4px
+    }
+
+    .bw-inp-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px
+    }
+
+    .bw-field {
+      flex: 1;
+      background: var(--s1);
+      border: 1.5px solid var(--ln);
+      border-radius: 12px;
+      color: var(--fg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      text-align: center;
+      padding: 13px;
+      outline: none;
+      transition: border-color .14s;
+    }
+
+    .bw-field:focus {
+      border-color: var(--ln2)
+    }
+
+    .bw-save {
+      background: var(--pull);
+      color: #000;
+      border-radius: 12px;
+      padding: 13px 18px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      letter-spacing: .04em;
+      transition: opacity .14s;
+    }
+
+    .bw-save:hover {
+      opacity: .85
+    }
+
+    .bw-target {
+      background: rgba(0, 240, 112, .07);
+      border: 1px solid rgba(0, 240, 112, .18);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: var(--fg2);
+    }
+
+    .bw-target b {
+      color: var(--pull)
+    }
+
+    .bw-tbl {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .bw-tbl th {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: .1em;
+      color: var(--fg3);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--ln);
+      text-align: left;
+      font-weight: 400
+    }
+
+    .bw-tbl th:not(:first-child) {
+      text-align: right
+    }
+
+    .bw-tbl td {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--ln);
+      font-size: 13px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px
+    }
+
+    .bw-tbl tr:last-child td {
+      border-bottom: none
+    }
+
+    .bw-tbl td:not(:first-child) {
+      text-align: right
+    }
+
+    .sec-hd {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 10px
+      margin-bottom: 16px
     }
 
-    .section-title {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -.4px
+    .sec-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      letter-spacing: .02em
     }
 
-    .clear-btn {
+    .del-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: var(--fg3);
       background: transparent;
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      color: var(--t3);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 12px;
-      cursor: pointer;
-      transition: all .15s;
-      letter-spacing: .04em
+      border: 1px solid var(--ln);
+      border-radius: 8px;
+      padding: 5px 11px;
+      transition: all .14s
     }
 
-    .clear-btn:hover {
+    .del-btn:hover {
       border-color: var(--push);
       color: var(--push)
     }
 
     .empty {
       text-align: center;
-      padding: 56px 20px;
-      color: var(--t3)
+      padding: 52px 20px
     }
 
-    .empty-icon {
-      font-size: 32px;
-      margin-bottom: 14px;
-      opacity: .5
+    .empty-ic {
+      font-size: 44px;
+      display: block;
+      opacity: .35;
+      margin-bottom: 14px
     }
 
-    .empty-text {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--t2);
-      margin-bottom: 5px
+    .empty-t {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: .03em;
+      color: var(--fg2);
+      margin-bottom: 4px
     }
 
-    .empty-sub {
-      font-size: 12px
+    .empty-s {
+      font-size: 13px;
+      color: var(--fg3)
     }
 
-    .fade-in {
-      animation: fadeIn .25s ease
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(5px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    /* Sezione RPE rapida */
-    .rpe-quick {
+    .pin-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 18px
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      gap: 0;
     }
 
-    .rpe-chip {
-      padding: 5px 11px;
-      border-radius: 99px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      border: 1px solid var(--b1);
-      color: var(--t3)
+    .pin-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      letter-spacing: .04em;
+      line-height: 1
     }
 
-    .rpe-chip.target {
-      background: rgba(45, 204, 122, .08);
-      border-color: rgba(45, 204, 122, .3);
-      color: var(--pull)
+    .pin-logo .dot {
+      color: var(--push)
     }
 
-    @media(max-width:720px) {
-      .topbar {
-        display: flex
-      }
-
-      .bottom-nav {
-        display: grid
-      }
-
-      .shell {
-        grid-template-columns: 1fr
-      }
-
-      .sidebar {
-        display: none
-      }
-
-      .app {
-        grid-template-rows: auto 1fr auto
-      }
-
-      .main-inner {
-        padding: 16px 14px 16px
-      }
-
-      .page-title {
-        font-size: 20px
-      }
-
-      .session-type-bar {
-        padding: 12px 14px
-      }
-
-      .stype-name {
-        font-size: 14px
-      }
-
-      .timer-widget {
-        padding: 13px 14px
-      }
-
-      .timer-display {
-        font-size: 24px
-      }
-
-      .prog-grid {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .ex-note-inline {
-        display: none
-      }
-
-      .ex-main {
-        gap: 8px;
-        padding: 11px 12px
-      }
-
-      .ex-kg {
-        width: 56px
-      }
+    .pin-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: .2em;
+      color: var(--fg3);
+      margin-bottom: 48px
     }
 
-    @media(max-width:400px) {
-      .prog-grid {
-        grid-template-columns: 1fr
-      }
+    .pin-in {
+      width: 100%;
+      max-width: 260px;
+      background: var(--s1);
+      border: 2px solid var(--ln2);
+      border-radius: 14px;
+      color: var(--fg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      letter-spacing: .4em;
+      text-align: center;
+      padding: 16px;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color .2s;
+    }
 
-      .session-selector {
-        gap: 6px
-      }
+    .pin-in:focus {
+      border-color: var(--ln2)
+    }
 
-      .ss-btn {
-        padding: 7px 13px;
-        font-size: 11px
-      }
+    .pin-go {
+      width: 100%;
+      max-width: 260px;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--push);
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: .08em;
+      transition: opacity .14s;
+    }
+
+    .pin-go:hover {
+      opacity: .85
+    }
+
+    .pin-err {
+      height: 16px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: var(--push);
+      margin-top: 10px
     }
   </style>
 </head>
 
 <body>
 
-  <div id="pin-screen"
-    style="display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;">
-    <div style="text-align:center;max-width:300px;width:90%;">
-      <div style="font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;">PPL<span
-          style="color:var(--acc);">.</span></div>
-      <div
-        style="font-size:11px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:40px;">
-        tracker privato</div>
-      <div style="font-size:13px;color:var(--t2);margin-bottom:16px;font-weight:600;">Inserisci il PIN</div>
-      <input id="pin-input" type="password" inputmode="numeric" maxlength="8"
-        style="width:100%;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--rl);color:var(--t1);font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.3em;padding:14px 16px;text-align:center;outline:none;transition:border-color .2s;"
-        onkeydown="if(event.key==='Enter')checkPin()" placeholder="••••">
-      <div id="pin-err"
-        style="height:18px;font-size:11px;color:var(--push);margin-top:10px;font-family:'JetBrains Mono',monospace;">
-      </div>
-      <button onclick="checkPin()"
-        style="width:100%;margin-top:12px;background:var(--acc);color:#fff;border:none;border-radius:var(--r);padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.04em;">Entra</button>
-      <div style="margin-top:24px;font-size:10px;color:var(--t3);">PIN modificabile nel codice — cerca CORRECT_PIN</div>
-    </div>
+  <div class="pin-screen" id="pin-screen" style="display:none">
+    <div class="pin-logo">PPL<span class="dot">.</span></div>
+    <div class="pin-sub">TRACKER PRIVATO</div>
+    <input class="pin-in" id="pin-in" type="password" inputmode="numeric" maxlength="6" placeholder="••••"
+      onkeydown="if(event.key==='Enter')checkPin()">
+    <div class="pin-err" id="pin-err"></div>
+    <button class="pin-go" onclick="checkPin()">ENTRA</button>
   </div>
 
-  <div id="main-app" style="display:none;" class="app">
-    <header class="topbar">
-      <div class="topbar-logo">PPL<span>.</span></div>
-      <div class="topbar-right">
-        <button onclick="toggleDim()"
-          style="background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:4px 8px;cursor:pointer;letter-spacing:.04em;"
-          id="dim-btn-mob">DIM</button>
-        <span class="topbar-streak" id="mob-streak">0 🔥</span>
+  <div class="app" id="app" style="display:none">
+
+    <div class="topbar">
+      <div class="logo">PPL<span class="dot">.</span></div>
+      <div class="topbar-r">
+        <div class="streak-badge">🔥 <span id="streak-n">0</span></div>
+        <button class="theme-btn" id="theme-ic" onclick="toggleTheme()">🌙</button>
       </div>
-    </header>
-
-    <div class="shell">
-      <aside class="sidebar">
-        <div class="sb-logo">
-          <div class="sb-logo-text">PPL<span>.</span></div>
-          <div class="sb-logo-sub" id="sb-dayname">tracker</div>
-        </div>
-        <div class="sb-stats">
-          <div class="sb-stat"><span class="sb-stat-label">Sessioni</span><span class="sb-stat-val"
-              id="sb-total">0</span></div>
-          <div class="sb-stat"><span class="sb-stat-label">Questa sett.</span><span class="sb-stat-val"
-              id="sb-week-count">0</span></div>
-          <div class="sb-stat"><span class="sb-stat-label">Streak</span><span class="sb-stat-val"
-              id="sb-streak">0</span></div>
-        </div>
-        <div class="sb-week">
-          <div class="sb-section-title">Piano settimana</div>
-          <div class="week-days" id="week-days"></div>
-        </div>
-        <div class="sb-nav">
-          <div class="sb-section-title">Navigazione</div>
-          <div class="nav-item active" onclick="nav('today')">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            Oggi
-          </div>
-          <div class="nav-item" onclick="nav('progress')">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-            Progressi
-          </div>
-          <div class="nav-item" onclick="nav('history')">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-            Storico
-          </div>
-          <div class="nav-item" onclick="nav('bodyweight')">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            Peso
-          </div>
-        </div>
-        <div class="sb-footer">
-          <div class="sb-date" id="sb-fulldate"></div>
-          <button onclick="toggleDim()" id="dim-btn-sb"
-            style="margin-top:10px;width:100%;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:5px 10px;cursor:pointer;letter-spacing:.05em;transition:all .15s;">🌑
-            DIM MODE</button>
-          <div class="data-tools" style="margin-top:8px;">
-            <button class="data-btn" onclick="exportData()">↑ Export</button>
-            <button class="data-btn" onclick="importData()">↓ Import</button>
-          </div>
-          <button onclick="logout()"
-            style="margin-top:10px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:10px;font-weight:700;padding:5px 10px;cursor:pointer;letter-spacing:.05em;width:100%;transition:all .15s;"
-            onmouseover="this.style.borderColor='var(--push)';this.style.color='var(--push)'"
-            onmouseout="this.style.borderColor='var(--b1)';this.style.color='var(--t3)'">ESCI / BLOCCA</button>
-        </div>
-      </aside>
-
-      <main class="main">
-        <div class="main-inner">
-          <div id="view-today" class="fade-in"></div>
-          <div id="view-progress" style="display:none" class="fade-in"></div>
-          <div id="view-history" style="display:none" class="fade-in"></div>
-          <div id="view-bodyweight" style="display:none" class="fade-in"></div>
-        </div>
-      </main>
     </div>
 
-    <nav class="bottom-nav">
-      <div class="bn-item active" id="bn-today" onclick="nav('today')">
+    <div class="scroll" id="scroll">
+      <div class="pg on fadein" id="pg-today"></div>
+      <div class="pg" id="pg-progress"></div>
+      <div class="pg" id="pg-history"></div>
+      <div class="pg" id="pg-bw"></div>
+    </div>
+
+    <div class="bnav" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%)">
+      <div class="nav-indicator" id="nav-ind" style="left:0;width:25%"></div>
+      <button class="bni on" id="bn-today" onclick="nav('today')">
         <svg viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="18" rx="2" />
           <line x1="16" y1="2" x2="16" y2="6" />
           <line x1="8" y1="2" x2="8" y2="6" />
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
-        Oggi
-      </div>
-      <div class="bn-item" id="bn-progress" onclick="nav('progress')">
+        OGGI
+      </button>
+      <button class="bni" id="bn-progress" onclick="nav('progress')">
         <svg viewBox="0 0 24 24">
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
         </svg>
-        Progressi
-      </div>
-      <div class="bn-item" id="bn-history" onclick="nav('history')">
+        GRAFICI
+      </button>
+      <button class="bni" id="bn-history" onclick="nav('history')">
         <svg viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" />
           <polyline points="12 6 12 12 16 14" />
         </svg>
-        Storico
-      </div>
-      <div class="bn-item" id="bn-bodyweight" onclick="nav('bodyweight')">
+        LOG
+      </button>
+      <button class="bni" id="bn-bw" onclick="nav('bw')">
         <svg viewBox="0 0 24 24">
           <path
             d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
-        Peso
-      </div>
-    </nav>
+        PESO
+      </button>
+    </div>
   </div>
 
   <script>
-    // ─── PROGRAMMA AGGIORNATO ────────────────────────────────────────────────────
-    const PROG = {
-      colors: { push: '#ff5c35', pull: '#2dcc7a', legs: '#f5a623' },
+    const P = {
+      colors: { push: '#FF2D00', pull: '#00F070', legs: '#FFB400' },
       sessions: {
         push: {
-          label: 'Push', color: 'push',
-          groups: [
+          label: 'Push', color: 'push', groups: [
             {
-              label: 'Petto — priorità assoluta', exercises: [
+              label: 'PETTO — PRIORITÀ', ex: [
                 {
-                  id: 'p1', name: 'Chest press macchina', sets: '4×8-10', defaultKg: 34,
-                  note: 'Prima esercizio — vai a RPE 8-9 ultima serie',
-                  rpe: 'rpe-9', isKey: true,
-                  alts: [
-                    { name: 'Panca piana bilanciere', sets: '4×8-10', note: 'Carico -10% rispetto alla macchina' },
-                    { name: 'Panca manubri', sets: '4×8-10', note: 'Più ROM — ottima alternativa' }
-                  ]
+                  id: 'p1', name: 'Chest Press', sets: '4×8-10', kg: 34, note: 'RPE 9 ultima serie. Priorità assoluta.', prio: true,
+                  alts: [{ n: 'Panca bilanciere', s: '4×8-10', note: 'Carico -10%' }, { n: 'Panca manubri', s: '4×8-10', note: 'Più ROM' }]
                 },
                 {
-                  id: 'p2', name: 'Panca inclinata macchina', sets: '3×10-12', defaultKg: 19,
-                  note: 'Petto alto — non saltare mai',
-                  rpe: 'rpe-8',
-                  alts: [
-                    { name: 'Panca inclinata manubri', sets: '3×10-12', note: 'Quasi sempre libera' },
-                    { name: 'Cavo alto incrociato', sets: '3×12-15', note: 'Ottimo per petto alto con tensione costante' }
-                  ]
+                  id: 'p2', name: 'Panca Inclinata', sets: '3×10-12', kg: 19, note: 'Petto alto. Non saltare mai.',
+                  alts: [{ n: 'Inclinata manubri', s: '3×10-12', note: 'Quasi sempre libera' }, { n: 'Cavo alto incrociato', s: '3×12-15', note: 'Tensione costante' }]
                 },
                 {
-                  id: 'p3', name: 'Croci macchina (pec deck)', sets: '3×12-15', defaultKg: 36,
-                  note: 'Stira bene in basso — pausa 1 sec',
-                  rpe: 'rpe-std',
-                  alts: [
-                    { name: 'Croci cavi bassi (crossover)', sets: '3×12-15', note: 'Tensione costante su tutto il ROM' },
-                    { name: 'Croci manubri su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
-                  ]
+                  id: 'p3', name: 'Croci Macchina', sets: '3×12-15', kg: 36, note: 'Stira in basso — pausa 1 sec.',
+                  alts: [{ n: 'Crossover cavi', s: '3×12-15', note: 'ROM completo' }, { n: 'Croci manubri', s: '3×12-15', note: 'Classico' }]
                 },
               ]
             },
             {
-              label: 'Spalle', exercises: [
+              label: 'SPALLE', ex: [
                 {
-                  id: 'p4', name: 'Shoulder press macchina', sets: '4×10-12', defaultKg: 29,
-                  note: '4 serie — porta sempre al limite',
-                  rpe: 'rpe-8',
-                  alts: [
-                    { name: 'Military press manubri seduto', sets: '4×10-12', note: 'Più stabilizzatori' },
-                    { name: 'Arnold press manubri', sets: '3×10-12', note: 'Più ROM — più volume spalla' }
-                  ]
+                  id: 'p4', name: 'Shoulder Press', sets: '4×10-12', kg: 29, note: '4 serie fisse — spingi.',
+                  alts: [{ n: 'Military press manubri', s: '4×10-12', note: 'Più stabilizzatori' }, { n: 'Arnold press', s: '3×10-12', note: 'Più ROM' }]
                 },
                 {
-                  id: 'p5', name: 'Alzate laterali manubri', sets: '3×12-15', defaultKg: 8,
-                  note: 'Target 8 kg → poi 10 kg. Spalle rotonde vengono da qui',
-                  rpe: 'rpe-std', isIncrease: true,
-                  alts: [
-                    { name: 'Alzate laterali cavo basso', sets: '3×15-20', note: 'Tensione costante — meglio dei manubri' },
-                    { name: 'Alzate laterali macchina', sets: '3×15-20', note: 'Più facile caricare progressivamente' }
-                  ]
+                  id: 'p5', name: 'Alzate Laterali', sets: '3×12-15', kg: 8, note: 'Target 8→10 kg. Spalle rotonde vengono da qui.', isUp: true,
+                  alts: [{ n: 'Alzate cavo basso', s: '3×15-20', note: 'Tensione costante' }, { n: 'Alzate macchina', s: '3×15-20', note: 'Progressione facile' }]
                 },
               ]
             },
             {
-              label: 'Tricipiti', exercises: [
+              label: 'TRICIPITI', ex: [
                 {
-                  id: 'p6', name: 'Pushdown cavi (corda)', sets: '3×12-15', defaultKg: 20,
-                  note: 'Testa lunga — non saltare',
-                  rpe: 'rpe-std', isNew: true,
-                  alts: [
-                    { name: 'French press manubri', sets: '3×12-15', note: 'Testa lunga tricipite — ottimo isolamento' },
-                    { name: 'Dips parallele', sets: '3×10-12', note: 'Sempre disponibile — peso corporeo' }
-                  ]
+                  id: 'p6', name: 'Pushdown Cavi', sets: '3×12-15', kg: 20, note: 'Non saltare i tricipiti.', isNew: true,
+                  alts: [{ n: 'French press manubri', s: '3×12-15', note: 'Testa lunga' }, { n: 'Dips parallele', s: '3×10-12', note: 'Peso corpo' }]
                 },
               ]
             },
-          ],
-          cardio: '15 min spinning — bassa/media intensità'
+          ], cardio: '🚴 15 min spinning — bassa/media intensità'
         },
 
         pull: {
-          label: 'Pull', color: 'pull',
-          groups: [
+          label: 'Pull', color: 'pull', groups: [
             {
-              label: 'Dorsali — V-taper', exercises: [
+              label: 'DORSALI — V-TAPER', ex: [
                 {
-                  id: 'l1', name: 'Lat pulldown (presa larga)', sets: '4×8-10', defaultKg: 40,
-                  note: 'Punta i gomiti verso il pavimento — scapole giù',
-                  rpe: 'rpe-9', isKey: true,
-                  alts: [
-                    { name: 'Lat pulldown presa stretta', sets: '4×8-10', note: 'Stessa macchina — angolazione diversa' },
-                    { name: 'Pull-up assistita', sets: '4×8-10', note: 'Se disponibile — funzionalità extra' }
-                  ]
+                  id: 'l1', name: 'Lat Pulldown', sets: '4×8-10', kg: 40, note: 'Gomiti verso pavimento. Scapole giù.', prio: true,
+                  alts: [{ n: 'Pulldown presa stretta', s: '4×8-10', note: 'Stessa macchina' }, { n: 'Pull-up assistita', s: '4×8-10', note: 'Se disponibile' }]
                 },
                 {
-                  id: 'l2', name: 'Rematore cavo seduto', sets: '4×10-12', defaultKg: 30,
-                  note: 'Pausa 1 sec in contrazione — non rimbalzare',
-                  rpe: 'rpe-8',
-                  alts: [
-                    { name: 'Rematore T-bar', sets: '4×10-12', note: 'Se cavo basso è occupato' },
-                    { name: 'Rematore macchina chest-support', sets: '4×10-12', note: 'Meno stress lombare' }
-                  ]
+                  id: 'l2', name: 'Rematore Cavo', sets: '4×10-12', kg: 30, note: 'Pausa 1 sec in contrazione. Non rimbalzare.',
+                  alts: [{ n: 'Rematore T-bar', s: '4×10-12', note: 'Se cavo occupato' }, { n: 'Chest-support row', s: '4×10-12', note: 'Meno lombare' }]
                 },
                 {
-                  id: 'l3', name: 'Straight arm pulldown (cavo)', sets: '3×12-15', defaultKg: 20,
-                  note: 'Isola dorsali puri — braccia semi-tese, tira verso i fianchi',
-                  rpe: 'rpe-std', isNew: true,
-                  alts: [
-                    { name: 'Pullover macchina', sets: '3×12-15', note: 'Stessa funzione se disponibile' },
-                    { name: 'Pullover manubrio su panca', sets: '3×12-15', note: 'Classico — sempre disponibile' }
-                  ]
+                  id: 'l3', name: 'Straight Arm Pulldown', sets: '3×12-15', kg: 20, note: 'Isola dorsali puri. Braccia semi-tese.', isNew: true,
+                  alts: [{ n: 'Pullover macchina', s: '3×12-15', note: 'Stessa funzione' }, { n: 'Pullover manubrio', s: '3×12-15', note: 'Sempre disponibile' }]
                 },
               ]
             },
             {
-              label: 'Spalla posteriore — rotondità', exercises: [
+              label: 'SPALLA POSTERIORE', ex: [
                 {
-                  id: 'l4', name: 'Alzata a Y / Face pull', sets: '3×12-15', defaultKg: 6,
-                  note: 'Salute della spalla — mai saltare questo',
-                  rpe: 'rpe-std',
-                  alts: [
-                    { name: 'Face pull cavo (corda)', sets: '3×15-20', note: 'Ottimo con cavo alto — tensione costante' },
-                    { name: 'Rear delt fly macchina', sets: '3×15-20', note: 'Stesso muscolo — più isolamento' }
-                  ]
+                  id: 'l4', name: 'Alzata Y / Face Pull', sets: '3×12-15', kg: 6, note: 'Salute spalla. Mai saltare.',
+                  alts: [{ n: 'Face pull corda', s: '3×15-20', note: 'Cavo alto' }, { n: 'Rear delt fly macchina', s: '3×15-20', note: 'Più isolamento' }]
                 },
               ]
             },
             {
-              label: 'Bicipiti', exercises: [
+              label: 'BICIPITI', ex: [
                 {
-                  id: 'l5', name: 'Curl bilanciere / EZ-bar', sets: '3×10-12', defaultKg: 22,
-                  note: 'Eccentrica 3 secondi — non mollare in basso',
-                  rpe: 'rpe-8',
-                  alts: [
-                    { name: 'Curl manubri alternato', sets: '3×10-12', note: 'Sempre disponibile' },
-                    { name: 'Curl cavo basso', sets: '3×12-15', note: 'Tensione costante — ottimo per picco' }
-                  ]
+                  id: 'l5', name: 'Curl Bilanciere', sets: '3×10-12', kg: 22, note: 'Eccentrica 3 sec. Non mollare in basso.',
+                  alts: [{ n: 'Curl manubri alternato', s: '3×10-12', note: 'Sempre disponibile' }, { n: 'Curl cavo basso', s: '3×12-15', note: 'Tensione costante' }]
                 },
               ]
             },
-          ],
-          cardio: '20 min spinning post-workout'
+          ], cardio: '🚴 20 min spinning post-workout'
         },
 
         legs: {
-          label: 'Legs', color: 'legs',
-          groups: [
+          label: 'Legs', color: 'legs', groups: [
             {
-              label: 'Quadricipiti', exercises: [
+              label: 'QUADRICIPITI', ex: [
                 {
-                  id: 'g1', name: 'Leg press orizzontale', sets: '4×10-12', defaultKg: 75,
-                  note: 'Obiettivo 80-90 kg — aumenta subito',
-                  rpe: 'rpe-9', isIncrease: true,
-                  alts: [
-                    { name: 'Hack squat macchina', sets: '4×10-12', note: 'Più ROM — ottimo per quads' },
-                    { name: 'Squat al multipower', sets: '4×10-12', note: 'Sempre disponibile' }
-                  ]
+                  id: 'g1', name: 'Leg Press', sets: '4×10-12', kg: 75, note: 'Obiettivo 80-90 kg — aumenta ora.', prio: true, isUp: true,
+                  alts: [{ n: 'Hack squat macchina', s: '4×10-12', note: 'Più ROM' }, { n: 'Squat multipower', s: '4×10-12', note: 'Sempre disponibile' }]
                 },
                 {
-                  id: 'g2', name: 'Leg extension', sets: '3×12-15', defaultKg: 59,
-                  note: 'Pausa 1 sec in cima — contrazione massima',
-                  rpe: 'rpe-std',
-                  alts: [
-                    { name: 'Sissy squat (peso corpo)', sets: '3×15-20', note: 'Nessun attrezzo — molto efficace' },
-                    { name: 'Hack squat ROM corto', sets: '3×15', note: 'Enfatizza quads se macchina occupata' }
-                  ]
+                  id: 'g2', name: 'Leg Extension', sets: '3×12-15', kg: 59, note: 'Pausa 1 sec in cima. Contrazione massima.',
+                  alts: [{ n: 'Sissy squat', s: '3×15-20', note: 'Nessun attrezzo' }, { n: 'Hack squat ROM corto', s: '3×15', note: 'Quads' }]
                 },
               ]
             },
             {
-              label: 'Ischiocrurali', exercises: [
+              label: 'FEMORALI', ex: [
                 {
-                  id: 'g3', name: 'Leg curl seduto', sets: '3×12-15', defaultKg: 45,
-                  note: 'Eccentrica 3 sec — piede neutro — non saltare femorali',
-                  rpe: 'rpe-8',
-                  alts: [
-                    { name: 'Leg curl sdraiato', sets: '3×12-15', note: 'Stessa macchina — posizione diversa' },
-                    { name: 'Romanian deadlift manubri', sets: '3×12-15', note: 'Ottimo stretch — sempre disponibile' }
-                  ]
+                  id: 'g3', name: 'Leg Curl Seduto', sets: '3×12-15', kg: 45, note: 'Eccentrica 3 sec. Piede neutro. Priorità.',
+                  alts: [{ n: 'Leg curl sdraiato', s: '3×12-15', note: 'Stessa macchina' }, { n: 'Romanian deadlift', s: '3×12-15', note: 'Ottimo stretch' }]
                 },
               ]
             },
             {
-              label: 'Polpacci e accessori', exercises: [
+              label: 'POLPACCI & ACCESSORI', ex: [
                 {
-                  id: 'g4', name: 'Calf raise macchina', sets: '4×15-20', defaultKg: 40,
-                  note: 'ROM completo — pausa 2 sec in basso',
-                  rpe: 'rpe-std', isNew: true,
-                  alts: [
-                    { name: 'Calf raise sulla leg press', sets: '4×15-20', note: 'Sempre disponibile' },
-                    { name: 'Calf raise in piedi (bilanciere)', sets: '4×15-20', note: 'Caricalo e vai' }
-                  ]
+                  id: 'g4', name: 'Calf Raise', sets: '4×15-20', kg: 40, note: 'ROM completo. Pausa 2 sec in basso.', isNew: true,
+                  alts: [{ n: 'Calf raise leg press', s: '4×15-20', note: 'Sempre disponibile' }, { n: 'Calf raise bilanciere', s: '4×15-20', note: 'In piedi' }]
                 },
-                {
-                  id: 'g5', name: 'Adduttori macchina', sets: '2×12', defaultKg: 36,
-                  note: '',
-                  alts: [
-                    { name: 'Sumo squat con manubrio', sets: '3×12', note: 'Adduttori + glutei' },
-                    { name: 'Copenhagen plank', sets: '3×20s', note: 'Corpo libero' }
-                  ]
-                },
-                {
-                  id: 'g6', name: 'Abduttori macchina', sets: '2×12', defaultKg: 36,
-                  note: '',
-                  alts: [
-                    { name: 'Hip abduction con elastico', sets: '3×15', note: 'Sempre disponibile' },
-                    { name: 'Side lying leg raise', sets: '3×15', note: 'A terra — nessun attrezzo' }
-                  ]
-                },
+                { id: 'g5', name: 'Adduttori', sets: '2×12', kg: 36, note: '', alts: [{ n: 'Sumo squat manubrio', s: '3×12', note: '' }, { n: 'Copenhagen plank', s: '3×20s', note: '' }] },
+                { id: 'g6', name: 'Abduttori', sets: '2×12', kg: 36, note: '', alts: [{ n: 'Hip abduction elastico', s: '3×15', note: '' }, { n: 'Side lying leg raise', s: '3×15', note: '' }] },
               ]
             },
-          ],
-          cardio: '10-15 min spinning (opzionale nel leg day)'
-        }
+          ], cardio: '🚴 10-15 min spinning (opzionale)'
+        },
       }
     };
 
-    // Regola doppia progressione: quando aumentare
-    // Completi tutte le reps su tutte le serie → +passo minimo al prossimo allenamento
-
+    const BASE = ['push', 'rest', 'pull', 'rest', 'legs', 'rest', 'push'];
     const DAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
-    // Schema 1 giorno sì / 1 giorno no — rotazione Push→Pull→Legs indipendente dal giorno
-    const BASE_WEEK = ['push', 'rest', 'pull', 'rest', 'legs', 'rest', 'push'];
+    const PIN = '3520'; 
 
-    function gs() { try { return JSON.parse(localStorage.getItem('ppl_v8') || '{}') } catch (e) { return {} } }
-    function ss(s) { localStorage.setItem('ppl_v8', JSON.stringify(s)) }
+    const KEY = 'ppl_v10';
+    function gs() { try { return JSON.parse(localStorage.getItem(KEY) || '{}') } catch { return {} } }
+    function ss(s) { localStorage.setItem(KEY, JSON.stringify(s)) }
     function today() { return new Date().toISOString().slice(0, 10) }
-    function weekStart() { const d = new Date(), day = d.getDay(), diff = (day === 0 ? -6 : 1 - day), m = new Date(d); m.setDate(d.getDate() + diff); return m.toISOString().slice(0, 10) }
-    function dayOfWeek() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1 }
-    function dateOffset(off) { const d = new Date(); d.setDate(d.getDate() + off); return d.toISOString().slice(0, 10) }
-    function fmtDate(iso) { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: '2-digit' }) }
-    function calc1RM(kg, reps) { if (!kg || !reps || reps <= 0) return null; if (reps === 1) return kg; return Math.round(kg * (1 + reps / 30)) }
+    function doff(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10) }
+    function fmt(iso) { return new Date(iso + 'T12:00').toLocaleDateString('it-IT', { day: 'numeric', month: 'short' }) }
+    function dow() { const d = new Date().getDay(); return d === 0 ? 6 : d - 1 }
+    function orm(kg, r) { if (!kg || !r || r <= 0) return null; return r === 1 ? kg : Math.round(kg * (1 + r / 30)) }
 
-    let timerInt = null, timerSec = 0, timerTotal = 0, timerRunning = false;
-    function timerTick() { if (timerSec <= 0) { clearInterval(timerInt); timerRunning = false; timerSec = 0; updateTimerDisplay(); playBeep(); vibrateEnd(); return } timerSec--; updateTimerDisplay(); updateTimerBar() }
-    function startTimer() { if (timerRunning || timerSec <= 0) return; timerRunning = true; timerInt = setInterval(timerTick, 1000); updateTimerDisplay() }
-    function pauseTimer() { clearInterval(timerInt); timerRunning = false; updateTimerDisplay() }
-    function resetTimer(preset) { clearInterval(timerInt); timerRunning = false; timerSec = preset || 0; timerTotal = timerSec; updateTimerBar(); updateTimerDisplay(); if (preset > 0) startTimer() }
-    function updateTimerDisplay() { const el = document.getElementById('timer-display'); if (!el) return; const m = Math.floor(timerSec / 60), s = timerSec % 60; el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; el.className = 'timer-display' + (timerRunning ? ' running' : timerSec > 0 ? ' paused' : '') }
-    function updateTimerBar() { const el = document.getElementById('timer-bar'); if (!el) return; const pct = timerTotal > 0 ? Math.round((timerSec / timerTotal) * 100) : 0; el.style.width = pct + '%'; el.style.background = pct > 33 ? 'var(--pull)' : pct > 10 ? 'var(--legs)' : 'var(--push)' }
-    function playBeep() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)();[0, .15, .3].forEach(t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = 880; g.gain.setValueAtTime(.3, ctx.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + t + .12); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .12) }) } catch (e) { } }
-    function vibrateEnd() { try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 300]) } catch (e) { } }
+    function toggleTheme() {
+      const h = document.documentElement, nx = h.dataset.theme === 'dark' ? 'light' : 'dark';
+      h.dataset.theme = nx; localStorage.setItem('ppl_th', nx);
+      document.getElementById('theme-ic').textContent = nx === 'dark' ? '🌙' : '☀️';
+    }
+    function initTheme() {
+      const t = localStorage.getItem('ppl_th') || 'dark';
+      document.documentElement.dataset.theme = t;
+      const ic = document.getElementById('theme-ic');
+      if (ic) ic.textContent = t === 'dark' ? '🌙' : '☀️';
+    }
 
-    let dimMode = false;
-    function toggleDim() { dimMode = !dimMode; document.body.classList.toggle('dim-mode', dimMode); const btns = [document.getElementById('dim-btn-sb'), document.getElementById('dim-btn-mob')]; btns.forEach(b => { if (b) b.style.color = dimMode ? 'var(--legs)' : 'var(--t3)' }) }
+    let TI = null, TS = 0, TT = 0, TR = false;
+    function tick() { if (TS <= 0) { clearInterval(TI); TR = false; TS = 0; updT(); beep(); vib(); return } TS--; updT(); updTBar() }
+    function startT() { if (TR || TS <= 0) return; TR = true; TI = setInterval(tick, 1000); updT() }
+    function pauseT() { clearInterval(TI); TR = false; updT() }
+    function resetT(p) { clearInterval(TI); TR = false; TS = p || 0; TT = TS; updTBar(); updT(); if (p > 0) startT() }
+    function updT() {
+      const el = document.getElementById('t-num'); if (!el) return;
+      const m = Math.floor(TS / 60), s = TS % 60;
+      el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      el.className = 'timer-num' + (TR ? ' go' : TS > 0 ? ' pause' : '');
+    }
+    function updTBar() {
+      const el = document.getElementById('t-bar'); if (!el) return;
+      const p = TT > 0 ? Math.round(TS / TT * 100) : 0;
+      el.style.width = p + '%';
+      el.style.background = p > 33 ? 'var(--pull)' : p > 10 ? 'var(--legs)' : 'var(--push)';
+    }
+    function beep() { try { const c = new (window.AudioContext || window.webkitAudioContext)();[0, .15, .3].forEach(t => { const o = c.createOscillator(), g = c.createGain(); o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.setValueAtTime(.3, c.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + t + .12); o.start(c.currentTime + t); o.stop(c.currentTime + t + .12) }) } catch { } }
+    function vib() { try { navigator.vibrate && navigator.vibrate([200, 100, 200, 100, 300]) } catch { } }
 
-    let currentView = 'today';
+    const VIEWS = ['today', 'progress', 'history', 'bw'];
+    let curV = 'today', pFilter = 'push', expandEx = null;
+
     function nav(v) {
-      currentView = v;
-      const views = ['today', 'progress', 'history', 'bodyweight'];
-      views.forEach(x => { const el = document.getElementById('view-' + x); if (!el) return; el.style.display = x === v ? 'block' : 'none'; if (x === v) { el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in') } });
-      document.querySelectorAll('.nav-item').forEach((el, i) => { el.classList.toggle('active', views[i] === v) });
-      views.forEach(x => { const b = document.getElementById('bn-' + x); if (b) b.classList.toggle('active', x === v) });
+      curV = v;
+      VIEWS.forEach((x, i) => {
+        const pg = document.getElementById('pg-' + x);
+        if (pg) { pg.style.display = x === v ? 'block' : 'none'; if (x === v) { pg.classList.remove('fadein'); void pg.offsetWidth; pg.classList.add('fadein') } }
+        const bn = document.getElementById('bn-' + x);
+        if (bn) bn.classList.toggle('on', x === v);
+      });
+      const idx = VIEWS.indexOf(v);
+      const ind = document.getElementById('nav-ind');
+      if (ind) { ind.style.left = (idx * 25) + '%'; ind.style.width = '25%' }
+      document.getElementById('scroll').scrollTo(0, 0);
       if (v === 'today') renderToday();
-      if (v === 'progress') renderProgress('push');
+      if (v === 'progress') renderProgress();
       if (v === 'history') renderHistory();
-      if (v === 'bodyweight') renderBodyweight();
+      if (v === 'bw') renderBW();
     }
 
-    function updateSidebar() {
-      const state = gs(), logs = state.logs || {}, ws = weekStart(), all = Object.values(logs);
-      const total = all.length, week = all.filter(l => l.date >= ws).length, streak = calcStreak(state);
-      ['sb-total', 'sb-week-count', 'sb-streak'].forEach((id, i) => { const e = document.getElementById(id); if (e) e.textContent = [total, week, streak][i] });
-      const mob = document.getElementById('mob-streak'); if (mob) mob.textContent = streak + ' 🔥';
-      const now = new Date();
-      const sbDay = document.getElementById('sb-dayname'); if (sbDay) sbDay.textContent = now.toLocaleDateString('it-IT', { weekday: 'long' });
-      const sbFull = document.getElementById('sb-fulldate'); if (sbFull) sbFull.textContent = now.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
-      const todayIdx = dayOfWeek();
-      let whtml = '';
-      for (let i = 0; i < 7; i++) {
-        const dkey = dateOffset(i - todayIdx);
-        const isDone = logs[dkey] && logs[dkey].done;
-        const stype = getScheduledType(i, state);
-        whtml += `<div class="wd ${i === todayIdx ? 'today' : ''} ${isDone ? 'done' : ''}"><span class="wd-name">${DAYS[i]}</span><span class="wd-type type-${stype}">${stype === 'rest' ? '—' : stype.toUpperCase()}</span><span class="wd-done"></span></div>`;
-      }
-      const wdEl = document.getElementById('week-days'); if (wdEl) wdEl.innerHTML = whtml;
-    }
-
-    function calcStreak(state) { const logs = state.logs || {}; let s = 0; for (let i = 0; i < 60; i++) { const d = dateOffset(-i); if (logs[d] && logs[d].done) s++; else if (i > 0) break } return s }
-    function getDefaultForDay(dayIdx) { return BASE_WEEK[dayIdx] || 'rest' }
-    function getScheduledType(dayIdx, state) { const dkey = dateOffset(dayIdx - dayOfWeek()); const log = (state.logs || {})[dkey]; if (log && log.type) return log.type; return getDefaultForDay(dayIdx) }
-    function getTodaySession() { const state = gs(); const log = (state.logs || {})[today()]; if (log && log.type) return log.type; return getDefaultForDay(dayOfWeek()) }
-
-    function checkDeload(state, stype, exId) {
-      const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.weights && l.weights[exId] !== undefined).sort((a, b) => a.date > b.date ? 1 : -1);
-      if (logs.length < 3) return false;
-      const last3 = logs.slice(-3).map(l => l.weights[exId]);
-      return last3[0] === last3[1] && last3[1] === last3[2];
-    }
-
-    function calcWarmup(kg) {
-      if (!kg || kg < 20) return [];
-      return [
-        { pct: 50, reps: 10, kg: Math.round(kg * 0.5 / 2.5) * 2.5 },
-        { pct: 70, reps: 5, kg: Math.round(kg * 0.7 / 2.5) * 2.5 },
-        { pct: 85, reps: 3, kg: Math.round(kg * 0.85 / 2.5) * 2.5 },
-      ];
-    }
-
-    function initSetLog(state, dayKey, exId, stype, defaultKg, numSets) {
+    function streak() { const l = gs().logs || {}; let s = 0; for (let i = 0; i < 60; i++) { const d = doff(-i); if (l[d] && l[d].done) s++; else if (i > 0) break } return s }
+    function updStreak() { const el = document.getElementById('streak-n'); if (el) el.textContent = streak() }
+    function getTodaySess() { const s = gs(); const l = (s.logs || {})[today()]; if (l && l.type) return l.type; return BASE[dow()] || 'rest' }
+    function setTodaySess(t) { const s = gs(); if (!s.logs) s.logs = {}; if (!s.logs[today()]) s.logs[today()] = { date: today(), type: t, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} }; s.logs[today()].type = t; ss(s); renderToday() }
+    function prevKg(state, stype, id) { const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.date !== today() && l.weights && l.weights[id] !== undefined).sort((a, b) => b.date > a.date ? 1 : -1); return logs.length ? logs[0].weights[id] : null }
+    function isDeload(state, stype, id) { const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.weights && l.weights[id] !== undefined).sort((a, b) => a.date > b.date ? 1 : -1); if (logs.length < 3) return false; const l = logs.slice(-3).map(l => l.weights[id]); return l[0] === l[1] && l[1] === l[2] }
+    function warmup(kg) { if (!kg || kg < 20) return []; return [{ p: 50, r: 10, kg: Math.round(kg * .5 / 2.5) * 2.5 }, { p: 70, r: 5, kg: Math.round(kg * .7 / 2.5) * 2.5 }, { p: 85, r: 3, kg: Math.round(kg * .85 / 2.5) * 2.5 }] }
+    function initSets(state, dayKey, id, stype, defKg, nSets) {
       if (!state.logs) state.logs = {};
       if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      const log = state.logs[dayKey];
-      if (!log.setLogs) log.setLogs = {};
-      if (!log.setLogs[exId]) {
-        const n = parseInt(numSets) || 4;
-        log.setLogs[exId] = Array.from({ length: n }, () => ({ kg: defaultKg, reps: '', done: false }));
-      }
-      return log.setLogs[exId];
+      const log = state.logs[dayKey]; if (!log.setLogs) log.setLogs = {};
+      if (!log.setLogs[id]) { const n = parseInt(nSets) || 4; log.setLogs[id] = Array.from({ length: n }, () => ({ kg: defKg, reps: '', done: false })) }
+      return log.setLogs[id];
     }
+    function togPanel(id) { const el = document.getElementById(id); if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block' }
 
-    function saveSetField(dayKey, exId, stype, setIdx, field, val) {
-      const state = gs();
-      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
-      state.logs[dayKey].setLogs[exId][setIdx][field] = field === 'done' ? val : (parseFloat(val) || val);
-      const sets = state.logs[dayKey].setLogs[exId];
-      const doneSets = sets.filter(s => s.done && s.kg);
-      if (doneSets.length > 0) state.logs[dayKey].weights[exId] = doneSets[doneSets.length - 1].kg;
-      ss(state);
-      updateOrmDisplay(exId, state, dayKey);
-    }
-
-    function addSet(dayKey, exId, stype) {
-      const state = gs();
-      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
-      const sets = state.logs[dayKey].setLogs[exId];
-      const lastKg = sets.length > 0 ? sets[sets.length - 1].kg : 0;
-      state.logs[dayKey].setLogs[exId].push({ kg: lastKg, reps: '', done: false });
-      ss(state); renderToday();
-    }
-
-    function toggleSetDone(dayKey, exId, stype, setIdx) {
-      const state = gs();
-      if (!state.logs || !state.logs[dayKey] || !state.logs[dayKey].setLogs || !state.logs[dayKey].setLogs[exId]) return;
-      state.logs[dayKey].setLogs[exId][setIdx].done = !state.logs[dayKey].setLogs[exId][setIdx].done;
-      const sets = state.logs[dayKey].setLogs[exId];
-      const doneSets = sets.filter(s => s.done && s.kg);
-      if (doneSets.length > 0) state.logs[dayKey].weights[exId] = doneSets[doneSets.length - 1].kg;
-      ss(state); renderToday();
-    }
-
-    function updateOrmDisplay(exId, state, dayKey) {
-      const el = document.getElementById('orm-' + exId); if (!el) return;
-      const sets = (state.logs[dayKey]?.setLogs?.[exId] || []).filter(s => s.done && s.kg && s.reps);
-      if (!sets.length) { el.style.display = 'none'; return }
-      const orms = sets.map(s => calc1RM(s.kg, parseInt(s.reps)));
-      const best = Math.max(...orms.filter(Boolean));
-      if (best) { el.textContent = '1RM est. ' + best + 'kg'; el.style.display = 'inline-block' }
-    }
-
-    function toggleSetsPanel(exId) { const p = document.getElementById('sets-panel-' + exId); if (!p) return; p.style.display = p.style.display === 'block' ? 'none' : 'block' }
-    function toggleWarmup(exId) { const p = document.getElementById('warmup-' + exId); if (!p) return; p.style.display = p.style.display === 'block' ? 'none' : 'block' }
-    function toggleAlts(exId) { const panel = document.getElementById('alts-' + exId); if (!panel) return; panel.style.display = panel.style.display === 'block' ? 'none' : 'block' }
-
-    function useAlt(dayKey, exId, stype, altName, altSets, altDefaultKg) {
-      const state = gs();
-      if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      const log = state.logs[dayKey]; if (!log.swaps) log.swaps = {};
-      log.swaps[exId] = { name: altName, sets: altSets, kg: altDefaultKg };
-      ss(state); renderToday();
-    }
-    function clearSwap(dayKey, exId) { const state = gs(); if (state.logs && state.logs[dayKey] && state.logs[dayKey].swaps) { delete state.logs[dayKey].swaps[exId]; ss(state); renderToday() } }
+    function saveKg(dk, id, val, st) { const s = gs(); if (!s.logs) s.logs = {}; if (!s.logs[dk]) s.logs[dk] = { date: dk, type: st, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} }; s.logs[dk].weights[id] = parseFloat(val) || 0; ss(s) }
+    function togEx(dk, id, st) { const s = gs(); if (!s.logs) s.logs = {}; if (!s.logs[dk]) s.logs[dk] = { date: dk, type: st, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} }; const l = s.logs[dk]; if (!l.checked) l.checked = {}; l.checked[id] = !l.checked[id]; ss(s); renderToday() }
+    function markDone(dk, st) { const s = gs(); if (!s.logs) s.logs = {}; if (!s.logs[dk]) s.logs[dk] = { date: dk, type: st, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} }; s.logs[dk].done = true; ss(s); renderToday(); updStreak() }
+    function saveSet(dk, id, st, i, field, val) { const s = gs(); if (!s.logs || !s.logs[dk] || !s.logs[dk].setLogs || !s.logs[dk].setLogs[id]) return; s.logs[dk].setLogs[id][i][field] = field === 'done' ? val : (parseFloat(val) || val); const sets = s.logs[dk].setLogs[id], done = sets.filter(x => x.done && x.kg); if (done.length) s.logs[dk].weights[id] = done[done.length - 1].kg; ss(s) }
+    function togSetDone(dk, id, st, i) { const s = gs(); if (!s.logs || !s.logs[dk] || !s.logs[dk].setLogs || !s.logs[dk].setLogs[id]) return; s.logs[dk].setLogs[id][i].done = !s.logs[dk].setLogs[id][i].done; const sets = s.logs[dk].setLogs[id], done = sets.filter(x => x.done && x.kg); if (done.length) s.logs[dk].weights[id] = done[done.length - 1].kg; ss(s); renderToday() }
+    function addSet(dk, id, st) { const s = gs(); if (!s.logs || !s.logs[dk] || !s.logs[dk].setLogs || !s.logs[dk].setLogs[id]) return; const sets = s.logs[dk].setLogs[id]; sets.push({ kg: sets.length ? sets[sets.length - 1].kg : 0, reps: '', done: false }); ss(s); renderToday() }
+    function useAlt(dk, id, st, name, sets, kg) { const s = gs(); if (!s.logs) s.logs = {}; if (!s.logs[dk]) s.logs[dk] = { date: dk, type: st, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} }; if (!s.logs[dk].swaps) s.logs[dk].swaps = {}; s.logs[dk].swaps[id] = { name, sets, kg }; ss(s); renderToday() }
+    function clearSwap(dk, id) { const s = gs(); if (s.logs && s.logs[dk] && s.logs[dk].swaps) { delete s.logs[dk].swaps[id]; ss(s); renderToday() } }
 
     function renderToday() {
-      updateSidebar();
-      const state = gs();
-      const todayKey = today();
-      const stype = getTodaySession();
-      const container = document.getElementById('view-today');
+      updStreak();
+      const state = gs(), dk = today(), stype = getTodaySess();
+      const el = document.getElementById('pg-today');
       const now = new Date();
-      const dateStr = now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+      let h = '';
 
-      let html = `<div class="page-header"><div class="page-title">Allenamento di oggi</div><div class="page-sub">${dateStr} · Schema giorno sì/giorno no</div></div>`;
-      html += `<div class="session-selector"><span style="font-size:12px;color:var(--t3);align-self:center;margin-right:4px;">Sessione:</span>${['push', 'pull', 'legs'].map(t => `<button class="ss-btn ${stype === t ? 'active-' + t : ''}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div>`;
+      h += `<div class="ph"><div class="ph-title">${now.toLocaleDateString('it-IT', { weekday: 'long' })}</div><div class="ph-sub">${now.toLocaleDateString('it-IT', { day: 'numeric', month: 'long' })} · Giorno sì/giorno no</div></div>`;
+      h += `<div class="sess-tabs">`;
+      const sm = { push: 'ap', pull: 'al', legs: 'ag' };
+      ['push', 'pull', 'legs'].forEach(t => h += `<button class="sess-tab ${stype === t ? sm[t] : ''}" onclick="setTodaySess('${t}')">${P.sessions[t].label.toUpperCase()}</button>`);
+      h += `</div>`;
 
       if (stype === 'rest') {
-        html += `<div class="rest-card"><div class="rest-icon">🌙</div><div class="rest-title">Giorno di riposo</div><div class="rest-sub">Schema giorno sì / giorno no — recupero completo</div><div class="rest-tip">48h di recupero → puoi andare più vicino al cedimento nel prossimo allenamento<br><br>Stretching 10 min · Camminata · Almeno 8h di sonno · Proteine 110-130g</div><div class="sched-pick"><div class="sched-pick-title">Vuoi comunque allenarti?</div><div class="sched-btns">${['push', 'pull', 'legs'].map(t => `<button class="sched-btn sched-btn-${t}" onclick="setTodaySession('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div></div></div>`;
-        container.innerHTML = html; return;
+        h += `<div class="rest-card"><span class="rest-em">🌙</span><div class="rest-h">RIPOSO</div><div class="rest-s">Giorno sì / giorno no · Recupero completo</div></div>`;
+        h += `<div class="rest-tips-box">
+    <div class="rest-tip"><span class="rest-tip-ic">💪</span>48h di recupero → vai al cedimento domani</div>
+    <div class="rest-tip"><span class="rest-tip-ic">🥩</span>Proteine: min 110–130g oggi</div>
+    <div class="rest-tip"><span class="rest-tip-ic">😴</span>8h di sonno — il muscolo cresce qui</div>
+    <div class="rest-tip"><span class="rest-tip-ic">🚶</span>Stretching 10 min + camminata leggera</div>
+    </div>`;
+        h += `<div class="override-lbl">ALLENA COMUNQUE?</div><div class="override-row">`;
+        h += `<button class="ov-btn ov-push" onclick="setTodaySess('push')">PUSH</button>`;
+        h += `<button class="ov-btn ov-pull" onclick="setTodaySess('pull')">PULL</button>`;
+        h += `<button class="ov-btn ov-legs" onclick="setTodaySess('legs')">LEGS</button>`;
+        h += `</div>`;
+        el.innerHTML = h; return;
       }
 
-      const session = PROG.sessions[stype];
-      const todayLog = (state.logs && state.logs[todayKey]) || {};
-      const weights = todayLog.weights || {};
-      const checked = todayLog.checked || {};
-      const swaps = todayLog.swaps || {};
-      const setLogs = todayLog.setLogs || {};
-      const isDone = todayLog.done || false;
-      const allExIds = session.groups.flatMap(g => g.exercises.map(e => e.id));
-      const checkedCount = allExIds.filter(id => checked[id]).length;
-      const pct = allExIds.length > 0 ? Math.round(checkedCount / allExIds.length * 100) : 0;
-      const circ = 2 * Math.PI * 17, offset = circ - (pct / 100) * circ;
-      const colorVar = `var(--${session.color})`;
+      const sess = P.sessions[stype];
+      const log = (state.logs && state.logs[dk]) || {};
+      const weights = log.weights || {}, checked = log.checked || {}, swaps = log.swaps || {}, setLogs = log.setLogs || {}, done = log.done || false;
+      const allIds = sess.groups.flatMap(g => g.ex.map(e => e.id));
+      const cc = allIds.filter(id => checked[id]).length;
+      const pct = allIds.length ? Math.round(cc / allIds.length * 100) : 0;
 
-      // Timer
-      html += `<div class="timer-widget">
-  <div class="timer-top">
-    <div><div class="timer-label">Timer recupero</div><div id="timer-display" class="timer-display">00:00</div></div>
-    <div class="timer-controls">
-      <button class="tbtn tstart" onclick="startTimer()">▶</button>
-      <button class="tbtn" onclick="pauseTimer()">⏸</button>
-      <button class="tbtn tstop" onclick="resetTimer(0)">■</button>
+      h += `<div class="hero hero-${stype}">
+  <div class="hero-head"><span class="hero-tag">${stype.toUpperCase()}</span><span class="hero-count">${cc}/${allIds.length}</span></div>
+  <div class="hero-name">${sess.label.toUpperCase()}</div>
+  <div class="pbar-row"><div class="pbar-track"><div class="pbar-fill" style="width:${pct}%"></div></div><span class="pbar-pct">${pct}%</span></div>
+  </div>`;
+
+      h += `<div class="timer-box">
+  <div class="timer-row">
+    <div id="t-num" class="timer-num">00:00</div>
+    <div class="timer-ctrls">
+      <button class="tc start" onclick="startT()">▶ GO</button>
+      <button class="tc" onclick="pauseT()">⏸</button>
+      <button class="tc stp" onclick="resetT(0)">■</button>
     </div>
   </div>
-  <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
-  <div class="timer-presets">
-    <button class="preset" onclick="resetTimer(60)">1m</button>
-    <button class="preset" onclick="resetTimer(90)">90s</button>
-    <button class="preset" onclick="resetTimer(120)">2m</button>
-    <button class="preset" onclick="resetTimer(180)">3m</button>
+  <div class="t-bar-track"><div class="t-bar" id="t-bar" style="width:0%"></div></div>
+  <div class="t-presets">
+    <button class="tp" onclick="resetT(60)">1 MIN</button>
+    <button class="tp" onclick="resetT(90)">90 SEC</button>
+    <button class="tp" onclick="resetT(120)">2 MIN</button>
+    <button class="tp" onclick="resetT(180)">3 MIN</button>
   </div>
-</div>`;
+  </div>`;
 
-      // RPE quick reference
-      html += `<div class="rpe-quick">
-  <span style="font-size:10px;color:var(--t3);align-self:center;letter-spacing:.06em;text-transform:uppercase;margin-right:4px;">RPE</span>
-  <span class="rpe-chip">6 — troppo facile</span>
-  <span class="rpe-chip">7 — warm-up</span>
-  <span class="rpe-chip target">8 — target serie</span>
-  <span class="rpe-chip target">9 — ultima serie</span>
-  <span class="rpe-chip">10 — cedimento</span>
-</div>`;
+      h += `<div class="rpe-strip">
+  <div class="rpe-chip">6 FACILE</div>
+  <div class="rpe-chip">7 WU</div>
+  <div class="rpe-chip t">8 TARGET</div>
+  <div class="rpe-chip t">9 ULTIMA</div>
+  <div class="rpe-chip r">10 FAIL</div>
+  </div>`;
 
-      // Session bar
-      html += `<div class="session-type-bar">
-  <span class="stype-badge badge-${stype}">${stype}</span>
-  <span class="stype-name">${session.label}</span>
-  <div class="stype-right">
-    <span style="font-size:11px;color:var(--t2)">${checkedCount}/${allExIds.length}</span>
-    <div class="progress-ring-wrap">
-      <svg width="40" height="40" viewBox="0 0 40 40">
-        <circle class="pr-bg" cx="20" cy="20" r="17"/>
-        <circle class="pr-fg" cx="20" cy="20" r="17" stroke="${colorVar}" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/>
-      </svg>
-      <div class="pr-label" style="color:${colorVar}">${pct}%</div>
-    </div>
-  </div>
-</div>`;
-
-      for (const group of session.groups) {
-        html += `<div class="ex-group"><div class="ex-group-label">${group.label}</div>`;
-        for (const ex of group.exercises) {
-          const isChecked = !!checked[ex.id];
-          const swap = swaps[ex.id];
-          const dispName = swap ? swap.name : ex.name;
-          const dispSets = swap ? swap.sets : ex.sets;
-          const dispKg = weights[ex.id] !== undefined ? weights[ex.id] : (swap ? swap.kg : ex.defaultKg);
-          const prev = getPrevKg(state, stype, ex.id, todayKey);
-          const trend = prev !== null ? (dispKg - prev) : null;
-          let trendHtml = '';
-          if (trend !== null && trend !== 0) trendHtml = `<span class="ex-trend ${trend > 0 ? 'trend-up' : 'trend-down'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}kg</span>`;
-          else if (prev !== null) trendHtml = `<span class="ex-trend">=${prev}kg</span>`;
-
-          const exSets = (setLogs[ex.id] || []).filter(s => s.done && s.kg && s.reps);
-          const bestOrm = exSets.length > 0 ? Math.max(...exSets.map(s => calc1RM(s.kg, parseInt(s.reps))).filter(Boolean)) : null;
-          const ormHtml = bestOrm ? `<span class="orm-badge" id="orm-${ex.id}">1RM est. ${bestOrm}kg</span>` : `<span class="orm-badge" id="orm-${ex.id}" style="display:none"></span>`;
-          const isDeload = checkDeload(state, stype, ex.id);
-          const deloadHtml = isDeload ? `<span class="deload-badge">⚠ Stesso peso ×3 — aumenta o varia</span>` : '';
-
-          // Badges
-          let badgeHtml = '';
-          if (ex.isNew) badgeHtml += `<span class="new-tag">Nuovo</span>`;
-          if (ex.isIncrease) badgeHtml += `<span class="increase-tag">↑ Aumenta</span>`;
-          if (ex.isKey) badgeHtml += `<span class="rpe-tag ${ex.rpe || 'rpe-std'}">Priorità</span>`;
-
-          const warmupSets = calcWarmup(dispKg);
-          let warmupHtml = '';
-          if (warmupSets.length > 0) {
-            warmupHtml = `<div class="warmup-panel" id="warmup-${ex.id}" style="display:none"><div class="warmup-title">☀ Riscaldamento suggerito</div><div class="warmup-rows">`;
-            warmupSets.forEach(w => { warmupHtml += `<div class="warmup-row"><span class="warmup-dot"></span><span>${w.pct}% → ${w.kg}kg × ${w.reps} reps</span></div>` });
-            warmupHtml += `</div></div>`;
-          }
-
-          // Tip progressione
-          let progTip = '';
-          if (ex.note) {
-            progTip = `<div class="prog-tip">${ex.note}</div>`;
-          }
-
-          const curSets = initSetLog(state, todayKey, ex.id, stype, dispKg, dispSets.split('×')[0]);
+      for (const grp of sess.groups) {
+        h += `<div class="grp-hd"><div class="grp-title">${grp.label}</div><div class="grp-line"></div></div>`;
+        for (const ex of grp.ex) {
+          const isChk = !!checked[ex.id];
+          const sw = swaps[ex.id];
+          const dName = sw ? sw.name : ex.name;
+          const dSets = sw ? sw.sets : ex.sets;
+          const dKg = weights[ex.id] !== undefined ? weights[ex.id] : (sw ? sw.kg : ex.kg);
+          const prev = prevKg(state, stype, ex.id);
+          const trend = prev !== null ? dKg - prev : null;
+          const deload = isDeload(state, stype, ex.id);
+          const exSets = (setLogs[ex.id] || []).filter(x => x.done && x.kg && x.reps);
+          const bestOrm = exSets.length ? Math.max(...exSets.map(x => orm(x.kg, parseInt(x.reps))).filter(Boolean)) : null;
+          const wu = warmup(dKg);
+          const curSets = initSets(state, dk, ex.id, stype, dKg, dSets.split('×')[0]);
           ss(state);
-          let setLogHtml = `<div class="setlog-area" id="sets-panel-${ex.id}" style="display:none">
-      <div class="setlog-title">Serie dettagliate · doppia progressione</div>
-      <div class="setlog-rows">`;
-          curSets.forEach((s, i) => {
-            setLogHtml += `<div class="setlog-row">
-        <span class="setlog-num">${i + 1}</span>
-        <input type="number" class="setlog-kg" value="${s.kg}" min="0" step="0.5" placeholder="kg"
-          onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'kg',this.value)">
-        <span class="setlog-sep">×</span>
-        <input type="number" class="setlog-reps" value="${s.reps}" min="1" step="1" placeholder="reps"
-          onchange="saveSetField('${todayKey}','${ex.id}','${stype}',${i},'reps',this.value)">
-        <button class="setlog-done ${s.done ? 'ok' : ''}" onclick="toggleSetDone('${todayKey}','${ex.id}','${stype}',${i})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-      </div>`;
-          });
-          setLogHtml += `</div><button class="setlog-add" onclick="addSet('${todayKey}','${ex.id}','${stype}')">+ Serie</button></div>`;
 
-          html += `<div class="ex-card ${isChecked ? 'done' : ''}" id="excard-${ex.id}">
-      <div class="ex-main">
-        <button class="ex-check ${isChecked ? 'checked' : ''}" onclick="toggleEx('${todayKey}','${ex.id}','${stype}')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          let cls = `exc ${isChk ? 'done' : ''}`;
+          if (ex.prio) cls += ` prio-${stype}`;
+          else if (ex.isNew) cls += ' new';
+          else if (ex.isUp) cls += ' up';
+
+          let trendH = '';
+          if (trend !== null && trend !== 0) trendH = `<div class="ex-trend ${trend > 0 ? 'up' : 'dn'}">${trend > 0 ? '+' : ''}${trend.toFixed(1)}</div>`;
+          else if (prev !== null) trendH = `<div class="ex-trend">=${prev}</div>`;
+
+          h += `<div class="${cls}" id="exc-${ex.id}">
+      <div class="ex-top">
+        <button class="ex-chk ${isChk ? 'on' : ''}" onclick="togEx('${dk}','${ex.id}','${stype}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </button>
         <div class="ex-body">
-          <div class="ex-name">${dispName}${swap ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px;">↻</span>` : ''}</div>
-          <div class="ex-meta">
-            <span class="ex-sets">${dispSets}</span>
-            ${badgeHtml}
+          <div class="ex-name">${dName}${sw ? ` <span style="font-size:11px;color:var(--acc)">↻</span>` : ''}</div>
+          <div class="ex-tags">
+            <span class="tag tag-set">${dSets}</span>
+            ${ex.prio ? `<span class="tag tag-${stype}">PRIORITÀ</span>` : ''}
+            ${ex.isNew ? `<span class="tag tag-new">NUOVO</span>` : ''}
+            ${ex.isUp ? `<span class="tag tag-up">↑ AUMENTA</span>` : ''}
           </div>
-          ${ormHtml}
-          ${deloadHtml}
+          ${ex.note ? `<div class="ex-note">${ex.note}</div>` : ''}
+          ${bestOrm ? `<div class="ex-orm">1RM EST. ${bestOrm}KG</div>` : ''}
         </div>
-        <div class="ex-right">
-          <div class="ex-kg-wrap">
-            <input type="number" class="ex-kg" value="${dispKg}" min="0" step="0.5"
-              onchange="saveKg('${todayKey}','${ex.id}',this.value,'${stype}')" onfocus="this.select()">
-            <span class="kg-unit">kg</span>
-          </div>
-          ${trendHtml}
+        <div class="ex-r">
+          <input type="number" class="kg-inp" value="${dKg}" min="0" step="0.5"
+            onchange="saveKg('${dk}','${ex.id}',this.value,'${stype}')" onfocus="this.select()">
+          <span class="kg-lbl">kg</span>
+          ${trendH}
         </div>
-      </div>
-      ${progTip}
-      ${warmupHtml}
-      ${setLogHtml}
-      <div class="ex-actions">
-        <button class="toggle-sets-btn" onclick="toggleSetsPanel('${ex.id}')">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          Serie
-        </button>
-        ${warmupSets.length > 0 ? `<button class="toggle-sets-btn" onclick="toggleWarmup('${ex.id}')">☀ Warm-up</button>` : ''}
-        <button class="swap-btn" onclick="toggleAlts('${ex.id}')">
-          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-          ${swap ? 'Cambia ancora' : 'Macchina occupata?'}
-        </button>
-        ${swap ? `<button class="swap-btn" onclick="clearSwap('${todayKey}','${ex.id}')" style="color:var(--push)">✕ Originale</button>` : ''}
-      </div>
-      <div class="alts-panel" id="alts-${ex.id}" style="display:none">
-        <div class="alts-title">Scegli un'alternativa — palestra piena</div>
-        <div class="alt-options">`;
-          for (const alt of ex.alts) {
-            const san = alt.name.replace(/'/g, "\\'");
-            html += `<div class="alt-opt"><div class="alt-opt-info"><div class="alt-opt-name">${alt.name}</div><div class="alt-opt-meta">${alt.sets} · ${alt.note}</div></div><button class="use-btn" onclick="useAlt('${todayKey}','${ex.id}','${stype}','${san}','${alt.sets}',${dispKg})">Usa</button></div>`;
+      </div>`;
+
+          if (deload) h += `<div class="deload">⚠ STESSO PESO 3× — AUMENTA O VARIA</div>`;
+
+          if (wu.length) {
+            h += `<div class="wu-panel" id="wu-${ex.id}">
+        <div class="wu-inner">
+          <div class="wu-title">☀ RISCALDAMENTO SUGGERITO</div>
+          ${wu.map(w => `<div class="wu-row"><span class="wu-dot"></span>${w.p}% → ${w.kg}kg × ${w.r} reps</div>`).join('')}
+        </div></div>`;
           }
-          html += `</div><span class="alts-close" onclick="toggleAlts('${ex.id}')">✕ Chiudi</span></div>
-    </div>`;
+
+          h += `<div class="sets-panel" id="sets-${ex.id}">
+      <div class="sets-lbl">SERIE · DOPPIA PROGRESSIONE</div>`;
+          curSets.forEach((s, i) => {
+            h += `<div class="set-row">
+        <span class="set-n">${i + 1}</span>
+        <input type="number" class="set-kg" value="${s.kg}" min="0" step="0.5" placeholder="kg" onchange="saveSet('${dk}','${ex.id}','${stype}',${i},'kg',this.value)">
+        <span class="set-x">×</span>
+        <input type="number" class="set-rp" value="${s.reps}" min="1" step="1" placeholder="rp" onchange="saveSet('${dk}','${ex.id}','${stype}',${i},'reps',this.value)">
+        <button class="set-ok ${s.done ? 'on' : ''}" onclick="togSetDone('${dk}','${ex.id}','${stype}',${i})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button></div>`;
+          });
+          h += `<button class="set-add" onclick="addSet('${dk}','${ex.id}','${stype}')">+ SERIE</button></div>`;
+
+          h += `<div class="ex-acts">
+      <button class="act" onclick="togPanel('sets-${ex.id}')">
+        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        SERIE
+      </button>
+      ${wu.length ? `<button class="act" onclick="togPanel('wu-${ex.id}')">☀ WU</button>` : ''}
+      <button class="act" onclick="togPanel('alts-${ex.id}')">
+        <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        ${sw ? 'CAMBIA' : 'OCCUPATA?'}
+      </button>
+      ${sw ? `<button class="act" style="color:var(--push)" onclick="clearSwap('${dk}','${ex.id}')">✕ ORI</button>` : ''}
+      </div>`;
+
+          h += `<div class="alts-panel" id="alts-${ex.id}">
+      <div class="alts-lbl">MACCHINA OCCUPATA — ALTERNATIVA</div>`;
+          for (const alt of ex.alts) {
+            const san = alt.n.replace(/'/g, "\\'");
+            h += `<div class="alt-row"><div><div class="alt-name">${alt.n}</div><div class="alt-sub">${alt.s} · ${alt.note}</div></div><button class="alt-use" onclick="useAlt('${dk}','${ex.id}','${stype}','${san}','${alt.s}',${dKg})">USA</button></div>`;
+          }
+          h += `<span class="alts-close" onclick="togPanel('alts-${ex.id}')">✕ CHIUDI</span></div>`;
+          h += `</div>`;
         }
-        html += `</div>`;
       }
 
-      html += `<div class="cardio-row"><span class="cardio-dot"></span>${session.cardio}</div>`;
-      if (!isDone) {
-        html += `<div class="complete-zone"><button class="complete-btn" onclick="markDone('${todayKey}','${stype}')">Sessione completata ✓</button>${checkedCount < allExIds.length ? `<span class="complete-hint">${allExIds.length - checkedCount} rimanenti</span>` : ''}</div>`;
+      h += `<div class="cardio"><span style="font-size:18px">${sess.cardio.split(' ')[0]}</span><span>${sess.cardio.substring(2)}</span></div>`;
+
+      if (!done) {
+        h += `<button class="cta cta-${stype}" onclick="markDone('${dk}','${stype}')">SESSIONE COMPLETATA ✓</button>`;
+        if (cc < allIds.length) h += `<div class="cta-hint">${allIds.length - cc} esercizi rimanenti</div>`;
       } else {
-        html += `<div class="completed-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ottimo — sessione completata</div>`;
+        h += `<div class="done-banner">✓ OTTIMO — SESSIONE COMPLETATA</div>`;
       }
 
-      container.innerHTML = html;
-      updateTimerDisplay();
-      updateTimerBar();
+      el.innerHTML = h;
+      updT(); updTBar();
     }
 
-    function setTodaySession(stype) {
-      const state = gs(); const todayKey = today();
-      if (!state.logs) state.logs = {};
-      if (!state.logs[todayKey]) state.logs[todayKey] = { date: todayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      state.logs[todayKey].type = stype; ss(state); renderToday();
-    }
+    function renderProgress() {
+      const state = gs();
+      const sess = P.sessions[pFilter];
+      const allLogs = Object.values(state.logs || {}).filter(l => l.type === pFilter).sort((a, b) => a.date > b.date ? 1 : -1);
+      const allEx = sess.groups.flatMap(g => g.ex);
+      const col = P.colors[pFilter];
+      const el = document.getElementById('pg-progress');
+      let h = `<div class="ph"><div class="ph-title">PROGRESSI</div></div>`;
+      h += `<div class="filter-row">`;
+      [{ t: 'push', c: 'f-push' }, { t: 'pull', c: 'f-pull' }, { t: 'legs', c: 'f-legs' }].forEach(f => {
+        h += `<button class="f-btn ${f.c} ${pFilter === f.t ? 'on' : ''}" onclick="pFilter='${f.t}';renderProgress()">${P.sessions[f.t].label.toUpperCase()}</button>`;
+      });
+      h += `</div>`;
 
-    function getPrevKg(state, stype, exId, skipDate) {
-      const logs = Object.values(state.logs || {}).filter(l => l.type === stype && l.date !== skipDate && l.weights && l.weights[exId] !== undefined).sort((a, b) => b.date > a.date ? 1 : -1);
-      return logs.length > 0 ? logs[0].weights[exId] : null;
-    }
-    function toggleEx(dayKey, exId, stype) {
-      const state = gs();
-      if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      const log = state.logs[dayKey]; if (!log.checked) log.checked = {};
-      log.checked[exId] = !log.checked[exId]; ss(state); renderToday();
-    }
-    function saveKg(dayKey, exId, val, stype) {
-      const state = gs();
-      if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      const log = state.logs[dayKey]; if (!log.weights) log.weights = {};
-      log.weights[exId] = parseFloat(val) || 0; ss(state);
-    }
-    function markDone(dayKey, stype) {
-      const state = gs();
-      if (!state.logs) state.logs = {};
-      if (!state.logs[dayKey]) state.logs[dayKey] = { date: dayKey, type: stype, weights: {}, checked: {}, done: false, swaps: {}, setLogs: {} };
-      state.logs[dayKey].done = true; ss(state); renderToday();
-    }
-
-    let progFilter = 'push';
-    let expandedEx = null;
-    function renderProgress(f) {
-      if (f) progFilter = f;
-      const state = gs();
-      const session = PROG.sessions[progFilter];
-      const allLogs = Object.values(state.logs || {}).filter(l => l.type === progFilter).sort((a, b) => a.date > b.date ? 1 : -1);
-      const allEx = session.groups.flatMap(g => g.exercises);
-      const color = PROG.colors[progFilter];
-      const container = document.getElementById('view-progress');
-      let html = `<div class="section-header"><div class="section-title">Progressi</div><div class="prog-filter">${['push', 'pull', 'legs'].map(t => `<button class="pf-btn ${progFilter === t ? 'active' : ''}" onclick="renderProgress('${t}')">${PROG.sessions[t].label}</button>`).join('')}</div></div>`;
-      html += `<div class="chart-expanded ${expandedEx ? 'open' : ''}" id="chart-expanded">`;
-      if (expandedEx) {
-        const ex = allEx.find(e => e.id === expandedEx);
+      h += `<div class="chart-expand ${expandEx ? 'on' : ''}" id="ce">`;
+      if (expandEx) {
+        const ex = allEx.find(e => e.id === expandEx);
         if (ex) {
           const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
-          html += `<div class="chart-exp-title">${ex.name}</div><div class="chart-exp-sub">${ex.sets} · ${pts.length} sessioni tracciate</div>`;
-          if (pts.length >= 2) {
-            html += `<div class="chart-svg-wrap">${bigChart(pts, color)}</div>`;
-            html += `<div style="margin-top:14px;overflow-x:auto"><table class="vol-table"><thead><tr><th>Data</th><th>Kg</th><th>1RM est.</th></tr></thead><tbody>`;
-            pts.slice().reverse().slice(0, 10).forEach(p => {
-              const orm = calc1RM(p.v, 8);
-              html += `<tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(p.d)}</td><td class="kg-now">${p.v}kg</td><td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td></tr>`;
-            });
-            html += `</tbody></table></div>`;
-          } else { html += `<div class="no-data-spark" style="height:120px">Dati insufficienti per il grafico</div>`; }
-          html += `<button onclick="expandedEx=null;renderProgress()" style="margin-top:14px;background:transparent;border:1px solid var(--b1);border-radius:var(--r);color:var(--t3);font-size:11px;font-weight:700;padding:5px 12px;cursor:pointer;">✕ Chiudi</button>`;
+          h += `<div class="ce-title">${ex.name}</div><div class="ce-sub">${ex.sets} · ${pts.length} sessioni tracciate</div>`;
+          if (pts.length >= 2) h += `<div class="chart-scroll">${bigChart(pts, col)}</div>`;
+          else h += `<div style="font-size:13px;color:var(--fg3);padding:16px 0">Dati insufficienti</div>`;
+          h += `<button onclick="expandEx=null;renderProgress()" style="margin-top:14px;background:transparent;border:1px solid var(--ln);border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.08em;color:var(--fg3);padding:6px 14px;cursor:pointer;">✕ CHIUDI</button>`;
         }
       }
-      html += `</div>`;
-      html += `<div class="prog-grid">`;
+      h += `</div>`;
+
+      h += `<div class="prog-grid">`;
       for (const ex of allEx.slice(0, 4)) {
         const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined).map(l => ({ d: l.date, v: l.weights[ex.id] }));
-        const first = pts.length > 0 ? pts[0].v : ex.defaultKg;
-        const last = pts.length > 0 ? pts[pts.length - 1].v : ex.defaultKg;
-        const delta = last - first;
-        const isDeload = checkDeload(state, progFilter, ex.id);
-        html += `<div class="prog-card" onclick="expandedEx='${ex.id}';renderProgress()">
-    <div class="prog-card-title">${ex.name}</div>
-    <div class="prog-card-sub">${ex.sets}${isDeload ? ' · ⚠ plateau' : ''}</div>
-    <div class="chart-wrap">${pts.length >= 2 ? sparkline(pts, color) : `<div class="no-data-spark">Dati insufficienti</div>`}</div>
-    <div class="prog-delta">
-      <div><div class="delta-val" style="color:${color}">${last}kg</div><div class="delta-label">ultimo</div></div>
-      <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta > 0 ? 'var(--pull)' : delta < 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
-    </div>
-  </div>`;
+        const last = pts.length ? pts[pts.length - 1].v : ex.kg, first = pts.length ? pts[0].v : ex.kg, d = last - first;
+        h += `<div class="prog-card" onclick="expandEx='${ex.id}';renderProgress()">
+    <div class="pc-name">${ex.name}</div><div class="pc-sub">${ex.sets}</div>
+    ${pts.length >= 2 ? `<svg class="sparkline" viewBox="0 0 120 46" preserveAspectRatio="none">${spark(pts, col, 120, 46)}</svg>` : `<div class="no-spark">—</div>`}
+    <div class="pc-kg" style="color:${col}">${last}kg</div>
+    <div class="pc-delta" style="color:${d > 0 ? 'var(--pull)' : d < 0 ? 'var(--push)' : 'var(--fg3)'}">${d > 0 ? '+' : ''}${d.toFixed(1)}kg</div>
+    </div>`;
       }
-      html += `</div>`;
-      if (allLogs.length === 0) {
-        html += `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Nessun dato ancora</div><div class="empty-sub">Completa alcune sessioni ${progFilter.toUpperCase()}</div></div>`;
-      } else {
-        html += `<div style="margin-bottom:12px;font-size:14px;font-weight:700">Tutti i carichi</div>`;
-        html += `<table class="vol-table"><thead><tr><th>Esercizio</th><th>Serie</th><th>Primo</th><th>Ultimo</th><th>Δ</th><th>1RM</th><th>N</th></tr></thead><tbody>`;
-        for (const group of session.groups) {
-          for (const ex of group.exercises) {
-            const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined);
-            if (!pts.length) continue;
-            const first = pts[0].weights[ex.id], last = pts[pts.length - 1].weights[ex.id], delta = last - first;
-            const orm = calc1RM(last, 8);
-            const isDeload = checkDeload(state, progFilter, ex.id);
-            html += `<tr style="cursor:pointer" onclick="expandedEx='${ex.id}';renderProgress()">
-        <td><div class="vol-name">${ex.name}${isDeload ? ' <span style="color:var(--legs);font-size:10px">⚠</span>' : ''}</div>${ex.note ? `<div class="vol-sub">${ex.note}</div>` : ''}</td>
-        <td><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3)">${ex.sets}</span></td>
-        <td class="kg-was">${first}kg</td>
-        <td class="kg-now">${last}kg</td>
-        <td class="${delta > 0 ? 'kg-up' : delta < 0 ? 'kg-down' : 'kg-same'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</td>
-        <td style="color:var(--acc);font-size:11px">${orm ? orm + 'kg' : '—'}</td>
-        <td style="color:var(--t3)">${pts.length}</td>
+      h += `</div>`;
+
+      if (allLogs.length) {
+        h += `<div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;margin-bottom:12px">TUTTI I CARICHI</div>`;
+        h += `<table class="all-tbl"><thead><tr><th>ESERCIZIO</th><th>INIZIO</th><th>ORA</th><th>Δ</th><th>1RM</th></tr></thead><tbody>`;
+        for (const ex of allEx) {
+          const pts = allLogs.filter(l => l.weights && l.weights[ex.id] !== undefined); if (!pts.length) continue;
+          const first = pts[0].weights[ex.id], last = pts[pts.length - 1].weights[ex.id], d = last - first;
+          const o = orm(last, 8); const dl = isDeload(state, pFilter, ex.id);
+          h += `<tr onclick="expandEx='${ex.id}';renderProgress()">
+      <td><div class="td-n">${ex.name}${dl ? ' <span style="color:var(--legs)">⚠</span>' : ''}</div><div class="td-s">${ex.sets}</div></td>
+      <td style="color:var(--fg3)">${first}</td><td>${last}</td>
+      <td style="color:${d > 0 ? 'var(--pull)' : d < 0 ? 'var(--push)' : 'var(--fg3)'}">${d > 0 ? '+' : ''}${d.toFixed(1)}</td>
+      <td style="color:var(--acc)">${o ? o : '—'}</td>
       </tr>`;
-          }
         }
-        html += `</tbody></table>`;
+        h += `</tbody></table>`;
+      } else {
+        h += `<div class="empty"><span class="empty-ic">📊</span><div class="empty-t">NESSUN DATO</div><div class="empty-s">Completa sessioni ${pFilter.toUpperCase()}</div></div>`;
       }
-      container.innerHTML = html;
+      el.innerHTML = h;
     }
 
-    function sparkline(pts, color) {
-      const vals = pts.map(p => p.v);
-      const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
-      const W = 300, H = 65, P = 4;
-      const points = pts.map((p, i) => `${(P + i * (W - P * 2) / (pts.length - 1)).toFixed(1)},${(H - P - (p.v - min) / range * (H - P * 2)).toFixed(1)}`).join(' ');
-      const lastX = P + (pts.length - 1) * (W - P * 2) / (pts.length - 1);
-      const lastY = H - P - (pts[pts.length - 1].v - min) / range * (H - P * 2);
-      return `<svg class="sparkline" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-  <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
-  <polygon fill="${color}" fill-opacity="0.07" points="${P},${H} ${points} ${lastX.toFixed(1)},${H}"/>
-  <circle cx="${lastX.toFixed(1)}" cy="${lastY.toFixed(1)}" r="3" fill="${color}"/>
-</svg>`;
+    function spark(pts, col, W, H) {
+      const vals = pts.map(p => p.v), min = Math.min(...vals), max = Math.max(...vals), rng = max - min || 1, P2 = 3;
+      const points = pts.map((p, i) => `${(P2 + i * (W - P2 * 2) / (pts.length - 1)).toFixed(1)},${(H - P2 - (p.v - min) / rng * (H - P2 * 2)).toFixed(1)}`).join(' ');
+      const lx = P2 + (pts.length - 1) * (W - P2 * 2) / (pts.length - 1), ly = H - P2 - (pts[pts.length - 1].v - min) / rng * (H - P2 * 2);
+      return `<polyline fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
+  <polygon fill="${col}" fill-opacity="0.1" points="${P2},${H} ${points} ${lx.toFixed(1)},${H}"/>
+  <circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="3" fill="${col}"/>`;
     }
 
-    function bigChart(pts, color) {
-      const vals = pts.map(p => p.v);
-      const min = Math.min(...vals) - 2, max = Math.max(...vals) + 2, range = max - min || 1;
-      const W = 600, H = 160, PX = 40, PY = 12;
-      const iW = W - PX * 2, iH = H - PY * 2;
+    function bigChart(pts, col) {
+      const vals = pts.map(p => p.v), min = Math.min(...vals) - 1, max = Math.max(...vals) + 1, rng = max - min || 1;
+      const W = 380, H = 110, PX = 32, PY = 8, iW = W - PX * 2, iH = H - PY * 2;
       const x = i => PX + i * (iW / (pts.length - 1));
-      const y = v => PY + iH - (v - min) / range * iH;
+      const y = v => PY + iH - (v - min) / rng * iH;
       const points = pts.map((p, i) => `${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
-      const yLabels = [min, min + range / 2, max].map(v => ({ v: Math.round(v * 10) / 10, y: y(v) }));
-      let yHtml = ''; yLabels.forEach(l => { yHtml += `<text x="${PX - 4}" y="${l.y.toFixed(1)}" text-anchor="end" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${l.v}</text>` });
-      let xHtml = '';
-      const step = Math.ceil(pts.length / 5);
-      pts.forEach((p, i) => { if (i % step === 0 || i === pts.length - 1) { xHtml += `<text x="${x(i).toFixed(1)}" y="${H - 1}" text-anchor="middle" fill="var(--t3)" font-family="JetBrains Mono,monospace" font-size="9">${p.d.slice(5)}</text>` } });
-      let dots = ''; pts.forEach((p, i) => { dots += `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3.5" fill="${color}" opacity="0.8"><title>${p.d}: ${p.v}kg</title></circle>` });
-      return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:400px">
-  <line x1="${PX}" y1="${PY}" x2="${PX}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
-  <line x1="${PX}" y1="${PY + iH}" x2="${PX + iW}" y2="${PY + iH}" stroke="var(--b1)" stroke-width="1"/>
-  ${yHtml}${xHtml}
-  <polyline fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
-  <polygon fill="${color}" fill-opacity="0.06" points="${PX},${PY + iH} ${points} ${x(pts.length - 1).toFixed(1)},${PY + iH}"/>
-  ${dots}
-</svg>`;
+      const step = Math.max(1, Math.ceil(pts.length / 4));
+      let xH = ''; pts.forEach((p, i) => { if (i % step === 0 || i === pts.length - 1) xH += `<text x="${x(i).toFixed(1)}" y="${H - 1}" text-anchor="middle" fill="var(--fg3)" font-family="Bebas Neue,sans-serif" font-size="10" font-weight="400">${p.d.slice(5)}</text>` });
+      let yH = '';[min, max].forEach(v => { yH += `<text x="${PX - 3}" y="${y(v).toFixed(1)}" text-anchor="end" fill="var(--fg3)" font-family="Bebas Neue,sans-serif" font-size="10" dominant-baseline="middle">${Math.round(v)}</text>` });
+      let dots = ''; pts.forEach((p, i) => { dots += `<circle cx="${x(i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="4" fill="${col}" opacity=".8"><title>${p.d}: ${p.v}kg</title></circle>` });
+      return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:340px">
+  <line x1="${PX}" y1="${PY}" x2="${PX}" y2="${PY + iH}" stroke="var(--ln)" stroke-width="1"/>
+  <line x1="${PX}" y1="${PY + iH}" x2="${PX + iW}" y2="${PY + iH}" stroke="var(--ln)" stroke-width="1"/>
+  ${yH}${xH}
+  <polyline fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="${points}"/>
+  <polygon fill="${col}" fill-opacity="0.07" points="${PX},${PY + iH} ${points} ${x(pts.length - 1).toFixed(1)},${PY + iH}"/>
+  ${dots}</svg>`;
     }
 
     function renderHistory() {
-      const state = gs();
-      const logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
-      const container = document.getElementById('view-history');
-      let html = `<div class="section-header"><div class="section-title">Storico</div>${logs.length > 0 ? `<button class="clear-btn" onclick="clearAll()">Cancella tutto</button>` : ''}</div>`;
-      if (!logs.length) { html += `<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nessuna sessione ancora</div><div class="empty-sub">Le sessioni completate appariranno qui</div></div>`; container.innerHTML = html; return }
-      html += `<div class="hist-list">`;
+      const state = gs(), logs = Object.values(state.logs || {}).sort((a, b) => b.date > a.date ? 1 : -1);
+      const el = document.getElementById('pg-history');
+      let h = `<div class="sec-hd"><div class="sec-title">LOG</div>${logs.length ? `<button class="del-btn" onclick="clearAll()">CANCELLA</button>` : ''}</div>`;
+      if (!logs.length) { h += `<div class="empty"><span class="empty-ic">📋</span><div class="empty-t">NESSUNA SESSIONE</div><div class="empty-s">Le sessioni completate appariranno qui</div></div>`; el.innerHTML = h; return }
+      h += `<div class="hist-list">`;
       for (const log of logs) {
-        if (!log.type || !PROG.sessions[log.type]) continue;
-        const sess = PROG.sessions[log.type];
-        const allEx = sess.groups.flatMap(g => g.exercises);
+        if (!log.type || !P.sessions[log.type]) continue;
+        const sess = P.sessions[log.type];
+        const allEx = sess.groups.flatMap(g => g.ex);
         const cc = Object.values(log.checked || {}).filter(Boolean).length;
-        const swapCount = Object.keys(log.swaps || {}).length;
-        let totalVol = 0;
-        if (log.setLogs) { Object.values(log.setLogs).forEach(sets => { sets.filter(s => s.done && s.kg && s.reps).forEach(s => { totalVol += s.kg * parseInt(s.reps) || 0 }) }) }
-        html += `<div class="hist-item">
-    <span class="hist-dot" style="background:${PROG.colors[log.type]}"></span>
-    <div>
-      <div class="hist-name">${sess.label}${swapCount > 0 ? ` <span style="font-size:10px;color:var(--acc);margin-left:4px">${swapCount} sost.</span>` : ''}</div>
-      <div class="hist-date">${fmtDate(log.date)}${totalVol > 0 ? ` · <span style="color:var(--t2)">${totalVol.toLocaleString('it-IT')}kg vol.</span>` : ''}</div>
+        const sw = Object.keys(log.swaps || {}).length;
+        let vol = 0; if (log.setLogs) Object.values(log.setLogs).forEach(s => s.filter(x => x.done && x.kg && x.reps).forEach(x => vol += x.kg * (parseInt(x.reps) || 0)));
+        h += `<div class="hist-item">
+    <div class="hist-bar" style="background:${P.colors[log.type]}"></div>
+    <div style="flex:1;min-width:0">
+      <div class="hist-name">${sess.label.toUpperCase()}${sw ? ` <span style="font-size:11px;color:var(--acc)">${sw}↻</span>` : ''}</div>
+      <div class="hist-d">${fmt(log.date)}${vol > 0 ? ` · ${vol.toLocaleString('it-IT')}kg` : ''}</div>
     </div>
-    <div>
-      <div class="hist-count">${cc}/${allEx.length}</div>
-      ${log.done ? '<div class="hist-done-tag">✓ COMPLETA</div>' : ''}
-    </div>
-  </div>`;
+    <div class="hist-r"><div class="hist-n">${cc}/${allEx.length}</div>${log.done ? '<div class="hist-ok">✓ OK</div>' : ''}</div>
+    </div>`;
       }
-      html += `</div>`;
-      container.innerHTML = html;
+      h += `</div>`;
+      h += `<div class="tools-row"><button class="tool-btn" onclick="expData()">↑ EXPORT</button><button class="tool-btn" onclick="impData()">↓ IMPORT</button></div>`;
+      h += `<button class="logout-btn" onclick="logout()">ESCI / BLOCCA</button>`;
+      el.innerHTML = h;
     }
+    function clearAll() { if (confirm('Cancellare tutto? Irreversibile.')) { localStorage.removeItem(KEY); renderHistory(); updStreak() } }
 
-    function clearAll() { if (confirm('Cancellare tutto lo storico? Operazione irreversibile.')) { localStorage.removeItem('ppl_v8'); renderHistory(); updateSidebar() } }
-
-    function renderBodyweight() {
-      const state = gs();
-      const bwLog = state.bwLog || {};
-      const container = document.getElementById('view-bodyweight');
-      const entries = Object.entries(bwLog).sort((a, b) => a[0] > b[0] ? 1 : -1);
-      const latestEntry = entries.length > 0 ? entries[entries.length - 1] : null;
-      let html = `<div class="page-header"><div class="page-title">Peso corporeo</div><div class="page-sub">Obiettivo: 65-67 kg · composizione, non solo peso</div></div>`;
-      html += `<div style="background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:18px 20px;margin-bottom:20px">
-  <div style="font-size:12px;font-weight:700;margin-bottom:12px">Misurazione di oggi</div>
-  <div class="bw-row">
-    <input type="number" class="bw-input" id="bw-new" value="${latestEntry ? latestEntry[1] : ''}" min="30" max="200" step="0.1" placeholder="kg" onkeydown="if(event.key==='Enter')saveBW()">
-    <span class="bw-label">kg</span>
-    <button class="bw-save" onclick="saveBW()">Salva oggi</button>
-  </div>
-  ${latestEntry ? `<div style="font-size:11px;color:var(--t3);margin-top:4px">Ultima: ${fmtDate(latestEntry[0])} — ${latestEntry[1]} kg</div>` : ''}
-  <div style="margin-top:12px;background:var(--bg3);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--t2);">
-    Zona target: <b style="color:var(--pull)">65–67 kg</b> · Se sale oltre 68 kg taglia 100-200 kcal · Se scende sotto 65 aumenta leggermente · Proteine: min <b style="color:var(--pull)">110g/giorno</b>
-  </div>
-</div>`;
+    function renderBW() {
+      const state = gs(), bw = state.bwLog || {};
+      const entries = Object.entries(bw).sort((a, b) => a[0] > b[0] ? 1 : -1);
+      const latest = entries.length ? entries[entries.length - 1] : null;
+      const el = document.getElementById('pg-bw');
+      let h = `<div class="ph"><div class="ph-title">PESO</div><div class="ph-sub">Obiettivo: 65–67 kg</div></div>`;
+      if (latest) {
+        const v = latest[1], inZ = v >= 65 && v <= 67;
+        h += `<div class="bw-big" style="color:${inZ ? 'var(--pull)' : v > 67 ? 'var(--push)' : 'var(--legs)'}">${v}<span style="font-size:28px"> KG</span></div>`;
+        h += `<div style="font-size:13px;color:var(--fg3);margin-bottom:16px">${fmt(latest[0])} · ${inZ ? '✓ In zona target' : v > 67 ? '↑ Sopra — taglia 100/200 kcal' : '↓ Sotto — mangia di più'}</div>`;
+      }
+      h += `<div class="bw-inp-row">
+  <input class="bw-field" type="number" id="bw-in" value="${latest ? latest[1] : ''}" min="30" max="300" step="0.1" placeholder="68.0" onkeydown="if(event.key==='Enter')saveBW()">
+  <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--fg3)">KG</span>
+  <button class="bw-save" onclick="saveBW()">SALVA</button>
+  </div>`;
+      h += `<div class="bw-target">Zona target: <b>65–67 kg</b> · Proteine min <b>110–130g/giorno</b> · Pesati ogni mattina a digiuno</div>`;
       if (entries.length >= 2) {
         const pts = entries.map(([d, v]) => ({ d, v }));
-        const first = pts[0].v, last = pts[pts.length - 1].v, delta = last - first;
-        html += `<div class="bw-chart-wrap">
-    <div class="bw-chart-title">Trend peso corporeo</div>
-    <div class="chart-svg-wrap">${bigChart(pts, '#7c6ef5')}</div>
-    <div class="prog-delta" style="margin-top:14px">
-      <div><div class="delta-val" style="color:var(--acc)">${last}kg</div><div class="delta-label">attuale</div></div>
-      <div style="text-align:right"><div class="delta-val" style="font-size:14px;color:${delta < 0 ? 'var(--pull)' : delta > 0 ? 'var(--push)' : 'var(--t3)'}">${delta > 0 ? '+' : ''}${delta.toFixed(1)}</div><div class="delta-label">variazione</div></div>
-    </div>
-  </div>`;
+        h += `<div style="background:var(--s1);border:1px solid var(--ln);border-radius:14px;padding:16px;margin-bottom:18px">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.04em;margin-bottom:12px">TREND PESO</div>
+    <div class="chart-scroll">${bigChart(pts, 'var(--acc)')}</div>
+    </div>`;
       }
-      if (entries.length > 0) {
-        html += `<div style="margin-top:20px;margin-bottom:10px;font-size:14px;font-weight:700">Storico misurazioni</div>`;
-        html += `<table class="vol-table"><thead><tr><th>Data</th><th>Peso</th><th>Δ</th></tr></thead><tbody>`;
+      if (entries.length) {
+        h += `<table class="bw-tbl"><thead><tr><th>DATA</th><th>PESO</th><th>Δ</th></tr></thead><tbody>`;
         entries.slice().reverse().slice(0, 20).forEach(([d, v], i, arr) => {
-          const prev = arr[i + 1] ? arr[i + 1][1] : null;
-          const delta = prev !== null ? v - prev : null;
-          html += `<tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3)">${fmtDate(d)}</td><td class="kg-now">${v}kg</td><td class="${delta === null ? 'kg-same' : delta < 0 ? 'kg-up' : delta > 0 ? 'kg-down' : 'kg-same'}">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1) + 'kg'}</td></tr>`;
+          const prev = arr[i + 1] ? arr[i + 1][1] : null, delta = prev !== null ? v - prev : null;
+          h += `<tr><td style="color:var(--fg3)">${fmt(d)}</td><td>${v}kg</td><td style="color:${delta === null ? 'var(--fg3)' : delta < 0 ? 'var(--pull)' : delta > 0 ? 'var(--push)' : 'var(--fg3)'}">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1)}</td></tr>`;
         });
-        html += `</tbody></table>`;
+        h += `</tbody></table>`;
       } else {
-        html += `<div class="empty"><div class="empty-icon">⚖</div><div class="empty-text">Nessuna misurazione ancora</div><div class="empty-sub">Inserisci il tuo peso sopra ogni mattina a digiuno</div></div>`;
+        h += `<div class="empty"><span class="empty-ic">⚖️</span><div class="empty-t">NESSUNA MISURAZIONE</div><div class="empty-s">Inserisci il peso ogni mattina</div></div>`;
       }
-      container.innerHTML = html;
+      el.innerHTML = h;
     }
-
     function saveBW() {
-      const input = document.getElementById('bw-new'); if (!input) return;
-      const val = parseFloat(input.value); if (!val || val < 30 || val > 300) { input.style.borderColor = 'var(--push)'; setTimeout(() => input.style.borderColor = '', 1500); return }
-      const state = gs(); if (!state.bwLog) state.bwLog = {};
-      state.bwLog[today()] = val; ss(state); renderBodyweight();
+      const inp = document.getElementById('bw-in'); if (!inp) return;
+      const v = parseFloat(inp.value); if (!v || v < 30 || v > 300) { inp.style.borderColor = 'var(--push)'; setTimeout(() => inp.style.borderColor = '', 1500); return }
+      const s = gs(); if (!s.bwLog) s.bwLog = {}; s.bwLog[today()] = v; ss(s); renderBW();
     }
 
-    function exportData() {
-      const state = gs();
-      const json = JSON.stringify(state, null, 2);
-      const blob = new Blob([json], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'ppl-backup-' + today() + '.json'; a.click(); URL.revokeObjectURL(url);
-    }
+    function expData() { const blob = new Blob([JSON.stringify(gs(), null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'ppl-' + today() + '.json'; a.click(); URL.revokeObjectURL(url) }
+    function impData() { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json'; inp.onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = ev => { try { const d = JSON.parse(ev.target.result); if (d && confirm('Importare? I dati attuali saranno sovrascritti.')) { localStorage.setItem(KEY, JSON.stringify(d)); nav('today'); alert('Import ✓') } } catch (err) { alert('Errore: ' + err.message) } }; r.readAsText(f) }; inp.click() }
+    function logout() { localStorage.removeItem('ppl_auth'); document.getElementById('pin-screen').style.display = 'flex'; document.getElementById('app').style.display = 'none'; setTimeout(() => { const i = document.getElementById('pin-in'); if (i) { i.value = ''; i.focus() } }, 80) }
 
-    function importData() {
-      const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json';
-      input.onchange = e => {
-        const file = e.target.files[0]; if (!file) return;
-        const reader = new FileReader();
-        reader.onload = ev => {
-          try {
-            const data = JSON.parse(ev.target.result);
-            if (data && typeof data === 'object') {
-              if (confirm('Importare il backup? I dati attuali verranno sovrascritti.')) {
-                localStorage.setItem('ppl_v8', JSON.stringify(data));
-                renderToday(); updateSidebar();
-                alert('Import completato ✓');
-              }
-            } else { alert('File non valido') }
-          } catch (err) { alert('Errore nel file: ' + err.message) }
-        };
-        reader.readAsText(file);
-      };
-      input.click();
-    }
-
-    function logout() {
-      localStorage.removeItem('ppl_auth');
-      document.getElementById('pin-screen').style.display = 'flex';
-      document.getElementById('main-app').style.display = 'none';
-      setTimeout(() => { const i = document.getElementById('pin-input'); if (i) { i.value = ''; i.focus() } }, 100);
-    }
-
-    const CORRECT_PIN = '3520'; // ← cambia il PIN qui
     function checkPin() {
-      const input = document.getElementById('pin-input'); const err = document.getElementById('pin-err'); if (!input) return;
-      if (input.value === CORRECT_PIN) {
+      const inp = document.getElementById('pin-in'), err = document.getElementById('pin-err');
+      if (!inp) return;
+      if (inp.value === PIN) {
         localStorage.setItem('ppl_auth', '1');
         document.getElementById('pin-screen').style.display = 'none';
-        document.getElementById('main-app').style.display = 'grid';
-        renderToday();
+        document.getElementById('app').style.display = 'flex';
+        boot();
       } else {
-        err.textContent = 'PIN errato — riprova'; input.value = ''; input.focus();
-        input.style.borderColor = 'var(--push)'; setTimeout(() => { input.style.borderColor = ''; err.textContent = '' }, 1500);
+        err.textContent = 'PIN ERRATO'; inp.value = ''; inp.focus();
+        inp.style.borderColor = 'var(--push)';
+        setTimeout(() => { inp.style.borderColor = ''; err.textContent = '' }, 1600);
       }
     }
+    function boot() {
+      initTheme();
+      const ind = document.getElementById('nav-ind'); if (ind) { ind.style.left = '0'; ind.style.width = '25%' }
+      nav('today');
+    }
 
-    (function init() {
-      const authed = localStorage.getItem('ppl_auth') === '1';
-      if (authed) {
+    (function () {
+      initTheme();
+      if (localStorage.getItem('ppl_auth') === '1') {
         document.getElementById('pin-screen').style.display = 'none';
-        document.getElementById('main-app').style.display = 'grid';
-        renderToday();
+        document.getElementById('app').style.display = 'flex';
+        boot();
       } else {
         document.getElementById('pin-screen').style.display = 'flex';
-        document.getElementById('main-app').style.display = 'none';
-        setTimeout(() => { const i = document.getElementById('pin-input'); if (i) i.focus() }, 100);
+        document.getElementById('app').style.display = 'none';
+        setTimeout(() => { const i = document.getElementById('pin-in'); if (i) i.focus() }, 80);
       }
     })();
   </script>
